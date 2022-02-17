@@ -26,6 +26,8 @@ import com.google.android.material.button.MaterialButton;
 
 public class MainActivity extends AppCompatActivity {
 
+private Button RegisterButton;
+
 
 
     @Override
@@ -33,7 +35,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Login();
-
+        RegisterButton = (Button) findViewById(R.id.signUp);
+        RegisterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                register();
+            }
+        });
 
     }
 
@@ -47,16 +55,18 @@ public class MainActivity extends AppCompatActivity {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if(Email.getText().toString().equals("bla")
                         && Password.getText().toString().equals("123")){
                     //correct password
                     Toast.makeText(MainActivity.this,"Login Successful", Toast.LENGTH_SHORT).show();
-
                     openCamera();
 
                 }else
                     //incorrect password
-                    Toast.makeText(MainActivity.this,"Login Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"Login Failed, try again or click on Go to Registration Page " +
+                                    "to register",
+                            Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -64,6 +74,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openCamera(){
         Intent intent = new Intent(this, Camera.class );
+        startActivity(intent);
+    }
+
+    public void register(){
+        Intent intent = new Intent(this, Register.class );
         startActivity(intent);
     }
 }
