@@ -10,13 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OurWardrobe">
         <activity
+            android:name=".shirts"
+            android:exported="false" />
+        <activity
             android:name=".mainscreen"
             android:exported="false"
             android:label="@string/title_activity_mainscreen"
             android:theme="@style/Theme.OurWardrobe.NoActionBar" />
         <activity
-            android:name=".loginscreen"
-            android:exported="true">
+            android:name=".SplashScreen"
+            android:exported="true"
+            android:theme="@style/splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,8 +32,10 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
+        <activity
+            android:name=".loginscreen"
+            android:exported="false" />
     </application>
 
 </manifest>

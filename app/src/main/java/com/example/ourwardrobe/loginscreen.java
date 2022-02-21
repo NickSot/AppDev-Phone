@@ -60,7 +60,7 @@ private Button RegisterButton;
 
 
     public void openCategory(){
-        Intent intent = new Intent(this, MainActivity.class );
+        Intent intent = new Intent(this, mainscreen.class );
         startActivity(intent);
     }
 
