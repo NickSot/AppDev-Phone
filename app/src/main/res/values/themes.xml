@@ -22,4 +22,9 @@
     <style name="Theme.OurWardrobe.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.OurWardrobe.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/ic_splashscreenapp</item>
+        <item name="android:statusBarColor">@color/white</item>
+    </style>
 </resources>
