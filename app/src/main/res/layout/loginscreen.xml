@@ -62,6 +62,7 @@
         android:layout_margin="20dp"
         android:text="LOGIN"
         android:textColor="@color/white"
+        android:backgroundTint="@color/black"
         android:fontFamily="@font/nexaregular"
         style="?attr/materialButtonOutlinedStyle"/>
     <TextView
@@ -89,5 +90,6 @@
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/nexaregular"
         android:textColor="@color/white"
+        android:backgroundTint="@color/black"
         android:text="Go to Registration Page" />
 </RelativeLayout>
