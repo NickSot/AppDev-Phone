@@ -8,143 +8,147 @@
     android:background="@color/whitesmoke">
 
     <RelativeLayout
+        android:id="@+id/nav_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/nav_top"
-        android:layout_margin="8dp">
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/top_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="2dp"
             android:layout_marginTop="5dp"
             app:cardCornerRadius="30dp"
             app:cardElevation="8dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/logo"
+            android:orientation="horizontal">>
+
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:background="@drawable/logo">
+                android:background="@color/transparent"
+                android:orientation="horizontal"></LinearLayout>
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/rosmatika"
-                    android:text="   OUR WARDROBE   "
-                    android:textColor="@color/white"
-                    android:textSize="30sp"
-                    android:gravity="center"
-                    android:layout_gravity="center"></TextView>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/right_button"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            app:cardCornerRadius="30dp"
-            app:cardElevation="8dp"
-            android:layout_toEndOf="@+id/top_bar">
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/rosmatika"
+            android:gravity="center"
+            android:text=" OUR WARDROBE "
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            ></TextView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:background="@color/dark_blue">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/menu"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_gravity="center">
-                </ImageView>
-            </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+
+        <ImageButton
+            android:id="@+id/outfit_creator_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="54dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/circle"
+            android:src="@drawable/ic_clothes_hanger"></ImageButton>
+
+        <ImageButton
+            android:id="@+id/settings_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/circle"
+            android:src="@drawable/menu"></ImageButton>
+
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/family"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/nav_top"
-        android:id="@+id/family">
+        android:layout_below="@+id/nav_top">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/familybar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
             app:cardCornerRadius="30dp"
             app:cardElevation="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="85dp"
-                android:orientation="horizontal"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_gravity="center">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
                     android:background="@drawable/circle"
-                    android:text="F"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="35sp"
                     android:fontFamily="@font/rosmatika"
-                    android:layout_margin="4dp">
-                </TextView>
+                    android:gravity="center"
+                    android:text="F"
+                    android:textColor="@color/white"
+                    android:textSize="35sp"></TextView>
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
                     android:background="@drawable/circle"
-                    android:text="F"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="35sp"
                     android:fontFamily="@font/rosmatika"
-                    android:layout_margin="4dp">
-                </TextView>
+                    android:gravity="center"
+                    android:text="F"
+                    android:textColor="@color/white"
+                    android:textSize="35sp"></TextView>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
                     android:background="@drawable/circle"
-                    android:text="F"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="35sp"
                     android:fontFamily="@font/rosmatika"
-                    android:layout_margin="4dp">
-                </TextView>
+                    android:gravity="center"
+                    android:text="F"
+                    android:textColor="@color/white"
+                    android:textSize="35sp"></TextView>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
                     android:background="@drawable/circle"
-                    android:text="F"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="35sp"
                     android:fontFamily="@font/rosmatika"
-                    android:layout_margin="4dp">
-                </TextView>
+                    android:gravity="center"
+                    android:text="F"
+                    android:textColor="@color/white"
+                    android:textSize="35sp"></TextView>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
