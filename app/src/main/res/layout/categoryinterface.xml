@@ -25,33 +25,32 @@
             app:cardCornerRadius="30dp"
             app:cardElevation="8dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/logo"
-            android:orientation="horizontal">>
-
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:background="@color/transparent"
-                android:orientation="horizontal"></LinearLayout>
-        </LinearLayout>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/logo"
+                android:orientation="horizontal">>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            android:fontFamily="@font/rosmatika"
-            android:gravity="center"
-            android:text=" OUR WARDROBE "
-            android:textColor="@color/white"
-            android:textSize="30sp"
-            ></TextView>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:background="@color/transparent"
+                    android:orientation="horizontal"></LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/rosmatika"
+                android:gravity="center"
+                android:text=" OUR WARDROBE "
+                android:textColor="@color/white"
+                android:textSize="30sp"></TextView>
 
         </androidx.cardview.widget.CardView>
 
