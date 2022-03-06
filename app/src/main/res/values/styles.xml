@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="rounded_logo">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+        <item name="background">@drawable/logo</item>
+        <item name="color">@color/dark_blue</item>
+    </style>
+</resources>
