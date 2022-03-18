@@ -73,18 +73,19 @@ public class Register extends AppCompatActivity {
                         return;
                     }
 
-                    url = new URL("http://192.168.1.49:3000/users/register");
+                    url = new URL("http://131.155.197.124:3000/users/register");
 
                     try {
                         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
+                        connection.setRequestProperty("Accept", "*");
                         connection.setRequestProperty("User-Agent", "Chrome");
                         connection.setRequestProperty("Content-Type", "application/json");
                         connection.setDoOutput(true);
                         connection.setRequestMethod("POST");
                         connection.setConnectTimeout(15000);
                         connection.setReadTimeout(15000);
-//                        connection.connect();
+//                      connection.connect();
 
                         DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
                         wr.writeBytes(request.toString());
@@ -93,8 +94,8 @@ public class Register extends AppCompatActivity {
 
                         int responseCode = connection.getResponseCode();
 
-                        //Response code of 200 means OK
-                        if (responseCode == 200) {
+                        //Response code of 201 means CREATED
+                        if (responseCode == 201) {
                             Toast.makeText(Register.this, "Successfully Registered" ,Toast.LENGTH_SHORT).show();
                             return;
                         }
@@ -107,6 +108,7 @@ public class Register extends AppCompatActivity {
 //                        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 //                        String inputLine;
 //                        StringBuffer response = new StringBuffer();
+
                     } catch (IOException e) {
                         Toast.makeText(Register.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
                     }

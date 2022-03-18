@@ -29,7 +29,6 @@ public class Camera extends AppCompatActivity {
                         requestCameraPermission();
 
                     }
-
                 }
                 else{
                     if(!checkStoragePermission()){

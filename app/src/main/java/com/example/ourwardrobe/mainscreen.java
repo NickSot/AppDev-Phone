@@ -1,5 +1,7 @@
 package com.example.ourwardrobe;
 
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 
@@ -31,5 +33,23 @@ public class mainscreen extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
+    }
+
+    private class Request extends AsyncTask<Void, Void, Void> {
+
+        Request() {
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            return null;
+        }
+    }
+
+    public void openCategory()  {
+        Intent intent = new Intent(this,Camera.class);
     }
 }
