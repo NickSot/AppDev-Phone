@@ -2,6 +2,8 @@ package ourwardrobemodels;
 
 import android.graphics.Bitmap;
 
+import java.util.ArrayList;
+
 public class User {
     private Long uId;
     private String nickname;
@@ -9,6 +11,7 @@ public class User {
     private Bitmap avatar;
     private String OAuthToken;
     private String gender;
+    private ArrayList<Wardrobe> wardrobes;
 
     public User(Long uId, String nickname, String password, Bitmap avatar, String OAuthToken, String gender) {
         this.uId = uId;
@@ -49,5 +52,13 @@ public class User {
 
     public String getOAuthToken() {
         return OAuthToken;
+    }
+
+    public ArrayList<Wardrobe> getWardrobes() {
+        return wardrobes;
+    }
+
+    public String getGender() {
+        return gender;
     }
 }

@@ -1,16 +1,23 @@
 package ourwardrobemodels;
 
+import java.util.ArrayList;
+
 public class Wardrobe {
     private Long wId;
     private String nickname;
     private String creationTime;
     private String wardrobeType;
+    private ArrayList<Clothe> clothes;
 
     public Wardrobe(Long wId, String nickname, String creationTime, String wardrobeType) {
         this.wId = wId;
         this.nickname = nickname;
         this.creationTime = creationTime;
         this.wardrobeType = wardrobeType;
+    }
+
+    public ArrayList<Clothe> getClothes() {
+        return clothes;
     }
 
     public void setNickname(String nickname) {
