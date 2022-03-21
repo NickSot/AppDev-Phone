@@ -1,9 +1,13 @@
 package com.example.ourwardrobe;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -17,11 +21,17 @@ import com.google.android.material.button.MaterialButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.Base64;
+
+import ourwardrobemodels.User;
 
 public class loginscreen extends AppCompatActivity {
 
@@ -68,7 +78,7 @@ public class loginscreen extends AppCompatActivity {
             URL url = null;
 
             try {
-                url = new URL("http://131.155.197.124:3000/users/login");
+                url = new URL("http://192.168.56.1:3000/users/login");
 
                 try {
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -87,7 +97,7 @@ public class loginscreen extends AppCompatActivity {
                     Log.println(Log.DEBUG, "req", request.toString());
 
                     responseCode = connection.getResponseCode();
-                    responseMessage = connection.getResponseMessage();
+                    responseMessage = new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine();
 
                 } catch (IOException e) {
 //                    Toast.makeText(loginscreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -100,8 +110,32 @@ public class loginscreen extends AppCompatActivity {
             return null;
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         protected void onPostExecute(Void param) {
             if (responseCode == 200) {
+
+                JSONObject userObject = null;
+
+                try {
+                    userObject = new JSONObject(responseMessage);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                User user = null;
+
+                try {
+                    byte[] bytes = Base64.getDecoder().decode(userObject.get("avatar").toString());
+
+                    // [13, 14, 15, 188, -19]
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+                    user = new User(Long.getLong(userObject.get("uId").toString()), userObject.get("nickname").toString(), userObject.get("password").toString(), bitmap, userObject.get("oauthToken").toString(), userObject.get("gender").toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Log.println(Log.DEBUG, "shit", responseMessage);
+//                                Toast.makeText(loginscreen.this, responseMessage, Toast.LENGTH_SHORT).show();
                 Toast.makeText(loginscreen.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
                 openCategory();
             } else {

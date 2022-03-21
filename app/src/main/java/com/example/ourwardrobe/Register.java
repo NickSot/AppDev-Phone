@@ -65,7 +65,26 @@ public class Register extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+//                    "uNickname": "somebullfuck",
+//                    "uPassword": "Il0veGirls",
+//                    "nickname": "smth1",
+//                    "creationTime": null,
+//                    "wardrobeType": "Personal"
+
+                JSONObject wardrobeRequest = new JSONObject();
+
+                try {
+                    wardrobeRequest.put("uNickname", username.getText().toString());
+                    wardrobeRequest.put("uPassword", Password.getText().toString());
+                    wardrobeRequest.put("nickname", "First Wardrobe");
+                    wardrobeRequest.put("creationTime", null);
+                    wardrobeRequest.put("wardrobeType", "Personal");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 URL url = null;
+                URL wardrobeUrl = null;
 
                 try {
                     if (!Password.getText().toString().equals(RePassword.getText().toString())) {
@@ -73,7 +92,8 @@ public class Register extends AppCompatActivity {
                         return;
                     }
 
-                    url = new URL("http://131.155.197.124:3000/users/register");
+                    url = new URL("http://192.168.56.1:3000/users/register");
+                    wardrobeUrl = new URL("http://192.168.56.1:3000/wardrobes/register");
 
                     try {
                         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -85,7 +105,6 @@ public class Register extends AppCompatActivity {
                         connection.setRequestMethod("POST");
                         connection.setConnectTimeout(15000);
                         connection.setReadTimeout(15000);
-//                      connection.connect();
 
                         DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
                         wr.writeBytes(request.toString());
@@ -94,8 +113,25 @@ public class Register extends AppCompatActivity {
 
                         int responseCode = connection.getResponseCode();
 
+                        connection = (HttpURLConnection) wardrobeUrl.openConnection();
+
+                        connection.setRequestProperty("Accept", "*");
+                        connection.setRequestProperty("User-Agent", "Chrome");
+                        connection.setRequestProperty("Content-Type", "application/json");
+                        connection.setDoOutput(true);
+                        connection.setRequestMethod("POST");
+                        connection.setConnectTimeout(15000);
+                        connection.setReadTimeout(15000);
+
+                        wr = new DataOutputStream(connection.getOutputStream());
+                        wr.writeBytes(wardrobeRequest.toString());
+                        wr.flush();
+                        wr.close();
+
+                        int responseCodeWardrobe = connection.getResponseCode();
+
                         //Response code of 201 means CREATED
-                        if (responseCode == 201) {
+                        if (responseCode == 201 && responseCodeWardrobe == 201) {
                             Toast.makeText(Register.this, "Successfully Registered" ,Toast.LENGTH_SHORT).show();
                             return;
                         }
