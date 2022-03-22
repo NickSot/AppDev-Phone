@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/accset"
+        android:icon="@drawable/ic_baseline_manage_accounts_24"
+        android:title="Account Settings"
+        app:showAsAction="never">
+    </item>
+    <item android:id="@+id/wardset"
+        android:title="Wardrobe Settings"
+        android:icon="@drawable/ic_baseline_dry_cleaning_24">
+    </item>
+    <item android:id="@+id/logout"
+        android:title="Log Out"
+        android:icon="@drawable/ic_baseline_logout_24">
+    </item>
+
+</menu>
