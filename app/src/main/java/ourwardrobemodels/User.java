@@ -34,6 +34,10 @@ public class User {
         this.avatar = avatar;
     }
 
+    public void setWardrobes(ArrayList<Wardrobe> wardrobes) {
+        this.wardrobes = wardrobes;
+    }
+
     public Long getId() {
         return uId;
     }

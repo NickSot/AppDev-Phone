@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,9 +30,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Base64;
 
 import ourwardrobemodels.User;
+import ourwardrobemodels.Wardrobe;
 
 public class loginscreen extends AppCompatActivity {
 
@@ -100,11 +103,11 @@ public class loginscreen extends AppCompatActivity {
                     responseMessage = new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine();
 
                 } catch (IOException e) {
-//                    Toast.makeText(loginscreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(loginscreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
             } catch (MalformedURLException e) {
-//                Toast.makeText(loginscreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(loginscreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
             return null;
@@ -124,6 +127,35 @@ public class loginscreen extends AppCompatActivity {
 
                 User user = null;
 
+                JSONArray wardrobesObject = null;
+
+                try {
+                    wardrobesObject = userObject.getJSONArray("wardList");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                ArrayList<Wardrobe> wardrobes = new ArrayList<Wardrobe>();
+
+                for (int i = 0; i < wardrobesObject.length(); i++) {
+                    JSONObject obj = null;
+
+                    try {
+                        obj = wardrobesObject.getJSONObject(i);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    Wardrobe w = null;
+
+                    try {
+                        w = new Wardrobe(Long.getLong(obj.get("wId").toString()), obj.get("Nickname").toString(), obj.get("CreationTime").toString(), obj.get("WardrobeType").toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    wardrobes.add(w);
+                }
+
                 try {
                     byte[] bytes = Base64.getDecoder().decode(userObject.get("avatar").toString());
 
@@ -131,6 +163,9 @@ public class loginscreen extends AppCompatActivity {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
                     user = new User(Long.getLong(userObject.get("uId").toString()), userObject.get("nickname").toString(), userObject.get("password").toString(), bitmap, userObject.get("oauthToken").toString(), userObject.get("gender").toString());
+                    user.setWardrobes(wardrobes);
+
+                    Log.println(Log.DEBUG, "debug", "debug");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
