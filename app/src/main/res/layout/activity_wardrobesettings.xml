@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".wardrobesettings"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30dp"
+        android:elevation="3dp"
+        android:background="@drawable/settingsbackground"
+        android:clipToOutline="true">
+
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_new_24">
+
+        </ImageView>
+
+        <LinearLayout
+            android:id="@+id/joinFamily"
+            android:layout_width="250dp"
+            android:layout_height="200dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bluegradient"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:elevation="3dp">
+
+            <TextView
+                android:id="@+id/textJoin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/whitesmoke"
+                android:text="Join Family"
+                android:fontFamily="@font/rosmatika"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:layout_margin="8dp">
+            </TextView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:counterEnabled="true"
+                app:counterMaxLength="6"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/token"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Token"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp">
+                </EditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/submitBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:text="SUBMIT"
+                android:textColor="@color/sapphire"
+                android:fontFamily="@font/nexaregular"
+                android:textStyle="bold"
+                android:background="@drawable/submitbtn">
+            </androidx.appcompat.widget.AppCompatButton>
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/leaveFamily"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/joinFamily"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/delete_button"
+            android:fontFamily="@font/nexaregular"
+            android:text="Leave Family"
+            android:textColor="@color/whitesmoke"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:elevation="3dp">
+        </androidx.appcompat.widget.AppCompatButton>
+    </RelativeLayout>
+
+</LinearLayout>
