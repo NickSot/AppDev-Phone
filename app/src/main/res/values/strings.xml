@@ -14,6 +14,7 @@
     <string name="title_activity_basic">basic</string>
 
     <string-array name="Outfits">
+        <item>Select an option</item>
         <item>Shirts</item>
         <item>Dresses</item>
         <item>Pants</item>

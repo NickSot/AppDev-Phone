@@ -36,7 +36,9 @@
             android:exported="false" />
         <activity
             android:name=".shirts"
-            android:exported="false" />
+            android:exported="false"
+            >
+        </activity>
         <activity
             android:name=".SplashScreen"
             android:exported="true"

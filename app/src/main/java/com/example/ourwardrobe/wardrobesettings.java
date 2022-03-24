@@ -17,9 +17,9 @@ import org.w3c.dom.Text;
 
 public class wardrobesettings extends AppCompatActivity {
 
-    EditText editText;
+    EditText editCreateText, editJoinText;
     TextView textView;
-    Button leaveBtn, submitBtn;
+    Button leaveBtn, submitBtnJoin, submitBtnInit;
     private ImageView backBtn;
 
     @Override
@@ -28,15 +28,24 @@ public class wardrobesettings extends AppCompatActivity {
         setContentView(R.layout.activity_wardrobesettings);
 
         textView = (TextView) findViewById(R.id.textJoin);
-        editText = (EditText) findViewById(R.id.token);
+        editCreateText = (EditText) findViewById(R.id.createWard);
+        editJoinText = (EditText) findViewById(R.id.joinWard);
         leaveBtn = (Button) findViewById(R.id.leaveFamily);
-        submitBtn = (Button) findViewById(R.id.submitBtn);
+        submitBtnJoin = (Button) findViewById(R.id.submitBtnJoin);
+        submitBtnInit = (Button) findViewById(R.id.submitBtnInit);
         backBtn = (ImageView) findViewById(R.id.backBtn);
 
-        submitBtn.setOnClickListener(new View.OnClickListener() {
+        submitBtnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(wardrobesettings.this, "Family Joined", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        submitBtnInit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(wardrobesettings.this, "Family Created", Toast.LENGTH_SHORT).show();
             }
         });
 
