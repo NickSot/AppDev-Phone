@@ -47,7 +47,13 @@ public class Camera extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
-                Toast.makeText(parent.getContext(), "Selected " + item, Toast.LENGTH_SHORT).show();
+                if (parent.getItemAtPosition(position).equals("Choose")){
+
+                }
+                else{
+                    Toast.makeText(parent.getContext(), "Selected " + item, Toast.LENGTH_SHORT).show();
+                }
+
 
             }
 
