@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
@@ -35,6 +36,7 @@ public class Gallery extends AppCompatActivity {
     ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
     Uri mImageUri;
     private static final String FRAGMENT_NAME = "imageFragment";
+    Button bt2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,8 @@ public class Gallery extends AppCompatActivity {
         btn = findViewById(R.id.btn);
         gvGallery = (GridView) findViewById(R.id.gv);
 
+        bt2 = findViewById(R.id.SubmitGallery);
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +73,48 @@ public class Gallery extends AppCompatActivity {
             mArrayUri = (ArrayList<Uri>) savedInstanceState.getSerializable("array");
         }
 
+        bt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(Gallery.this,"Successfully Submitted ", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                if (parent.getItemAtPosition(position).equals("Choose")){
+
+                }
+                else{
+                    String item = parent.getItemAtPosition(position).toString();
+                    Toast.makeText(parent.getContext(), "Selected " + item, Toast.LENGTH_SHORT).show();
+
+
+
+
+
+
+                }
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
