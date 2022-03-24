@@ -27,6 +27,7 @@ public class Camera extends AppCompatActivity {
 
     ImageView img;
     Button bt;
+    Button bt2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +46,8 @@ public class Camera extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                Toast.makeText(parent.getContext(), "Selected " + item, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -57,6 +60,7 @@ public class Camera extends AppCompatActivity {
 
         img = findViewById(R.id.image_view);
         bt = findViewById(R.id.open_Camera);
+        bt2 = findViewById(R.id.Submit);
 
         if(ContextCompat.checkSelfPermission(Camera.this,
                 Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED){
@@ -73,7 +77,16 @@ public class Camera extends AppCompatActivity {
             }
         });
 
+        bt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(Camera.this,"Successfully Submitted ", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
