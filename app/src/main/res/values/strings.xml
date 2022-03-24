@@ -14,7 +14,7 @@
     <string name="title_activity_basic">basic</string>
 
     <string-array name="Outfits">
-        <item>Select an option</item>
+        <item>Choose</item>
         <item>Shirts</item>
         <item>Dresses</item>
         <item>Pants</item>
@@ -22,4 +22,5 @@
         <item>Shoes</item>
         <item>Jackets</item>
     </string-array>
+    <string name="title_activity_spinner">activity_spinner</string>
 </resources>

@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OurWardrobe">
         <activity
+            android:name=".SpinnerNew"
+            android:exported="false" />
+        <activity
             android:name=".wardrobesettings"
             android:exported="false" />
         <activity
@@ -33,12 +36,12 @@
             android:exported="false" />
         <activity
             android:name=".Camera"
-            android:exported="false" />
+            android:exported="false"
+            android:configChanges="orientation|screenSize"/>
         <activity
             android:name=".shirts"
             android:exported="false"
-            >
-        </activity>
+            android:configChanges="orientation|screenSize"/>
         <activity
             android:name=".SplashScreen"
             android:exported="true"

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Gallery.class);
+                Intent intent = new Intent(MainActivity.this, SpinnerNew.class);
                 startActivity(intent);
             }
         });
