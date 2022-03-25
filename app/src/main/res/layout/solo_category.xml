@@ -95,7 +95,7 @@
         android:layout_below="@+id/nav_top"
         android:background="@drawable/solo"
         android:layout_margin="10dp"
-        android:text="Enter Wardrobe Family"
+        android:text="Change Wardrobe"
         android:textColor="@color/whitesmoke"
         android:fontFamily="@font/rosmatika"
         android:textSize="27dp">
