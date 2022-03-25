@@ -1,6 +1,5 @@
 package com.example.ourwardrobe;
 
-<<<<<<< Updated upstream
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -13,7 +12,7 @@ import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-=======
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,7 +20,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
->>>>>>> Stashed changes
+
 
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.categoryinterface);
 
-<<<<<<< Updated upstream
+
         camera = findViewById(R.id.fabcamera);
         gallery = findViewById(R.id.fabgallery);
         camera.bringToFront();
@@ -69,12 +68,12 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 startActivity(intent);
             }
         });
-=======
+
         ImageButton oButton = (ImageButton) findViewById(R.id.outfit_creator_button);
 
         oButton.setOnClickListener(view -> startActivity
                 (new Intent(this, OutfitCreator.class)));
->>>>>>> Stashed changes
+
     }
 
     public void showPopup(View v) {

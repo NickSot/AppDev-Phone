@@ -27,9 +27,7 @@
             android:name=".gv_item"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
-        <activity
-            android:name=".OutfitCreator"
-            android:exported="false" />
+
         <activity
             android:name=".Gallery"
             android:configChanges="orientation|screenSize"
