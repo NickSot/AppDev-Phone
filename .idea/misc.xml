@@ -4,9 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.176" />
-        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/buttondesign.xml" value="0.176" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/buttondesign.xml" value="0.152" />
         <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/camera.xml" value="0.176" />
         <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/circle.xml" value="0.176" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/filler_tshirt.xml" value="0.2315" />
         <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/ic_baseline_arrow_forward_ios_24.xml" value="0.176" />
         <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.176" />
         <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/ic_clothes_hanger.xml" value="0.2775" />
@@ -14,17 +15,18 @@
         <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/ic_splashscreenapp.xml" value="0.204" />
         <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/logo.xml" value="0.2775" />
         <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/menu.xml" value="0.2775" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/font/headline.xml" value="1.4964285714285714" />
         <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/activity_camera.xml" value="0.17831813576494426" />
-        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/activity_outfitcreator.xml" value="0.4" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/activity_outfitcreator.xml" value="0.25" />
         <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/activity_register.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/activity_settingspriv.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/activity_shirts.xml" value="0.17831813576494426" />
-        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/categoryinterface.xml" value="0.4" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/categoryinterface.xml" value="0.1" />
         <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/fab.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/fragment_first.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/fragment_second.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/layout_outfircreator.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/loginscreen.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/loginscreen.xml" value="0.264" />
         <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/popup_settingspriv.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/20201077/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/drawable/camera.xml" value="0.2265" />
         <entry key="..\:/Users/20201077/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/layout/activity_camera.xml" value="0.1" />
