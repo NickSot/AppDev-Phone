@@ -102,10 +102,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/signu"
-        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< Updated upstream
         android:layout_below="@id/clicktoSign"
         android:text="Sign In"
         android:layout_centerHorizontal="true"

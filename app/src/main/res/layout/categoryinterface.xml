@@ -56,7 +56,6 @@
                 android:text=" OUR WARDROBE "
                 android:textColor="@color/white"
                 android:textSize="30sp"></TextView>
-
         </androidx.cardview.widget.CardView>
 
 
@@ -94,17 +93,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/nav_top">
 
-        <androidx.appcompat.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/wardrobespinner"
+            android:entries="@style/spinnerTextStyle"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:text="Enter Wardrobe Family"
-            android:textSize="26dp"
-            android:fontFamily="@font/rosmatika"
-            android:background="@drawable/solo"
-            android:layout_margin="5dp"
-            android:textColor="@color/whitesmoke"
-            android:elevation="3dp">
-        </androidx.appcompat.widget.AppCompatButton>
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/solo"></androidx.appcompat.widget.AppCompatSpinner>
     </RelativeLayout>
 
         <androidx.appcompat.widget.AppCompatButton
