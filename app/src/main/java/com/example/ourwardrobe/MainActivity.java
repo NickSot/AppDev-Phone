@@ -1,10 +1,12 @@
 package com.example.ourwardrobe;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,8 +32,11 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     FloatingActionButton camera, gallery;
     String[] wardrobeFamilies = {"Personal Wardrobe", "Wardrobe Family 1", "Wardrobe Family 2", "Wardrobe Family 3"};
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        wardrobeFamilies = ((String[]) ApplicationContext.getInstance().getUser().getWardrobes().stream().map(w -> w.getNickname()).toArray());
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.categoryinterface);
 

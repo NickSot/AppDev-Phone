@@ -168,7 +168,7 @@ private Button RegisterButton;
                     user = new User(Long.getLong(userObject.get("uId").toString()), userObject.get("nickname").toString(), userObject.get("password").toString(), bitmap, userObject.get("oauthToken").toString(), userObject.get("gender").toString());
                     user.setWardrobes(wardrobes);
 
-                    Log.println(Log.DEBUG, "debug", "debug");
+                    ApplicationContext.getInstance().setUser(user);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
