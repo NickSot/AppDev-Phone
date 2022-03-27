@@ -106,11 +106,11 @@ private Button RegisterButton;
                     responseMessage = new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine();
 
                 } catch (IOException e) {
-                    Toast.makeText(loginscreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(loginscreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
             } catch (MalformedURLException e) {
-                Toast.makeText(loginscreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(loginscreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
             return null;

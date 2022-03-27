@@ -26,6 +26,8 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener, AdapterView.OnItemSelectedListener {
 
     private Button shirts, pants, dresses, shoes, jackets, skirts;
@@ -35,7 +37,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        wardrobeFamilies = ((String[]) ApplicationContext.getInstance().getUser().getWardrobes().stream().map(w -> w.getNickname()).toArray());
+        Object [] wardrobeNicknames = ApplicationContext.getInstance().getUser().getWardrobes().stream().map(w -> w.getNickname()).toArray();
+
+        wardrobeFamilies = (Arrays.copyOf(wardrobeNicknames, wardrobeNicknames.length, String[].class));
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.categoryinterface);

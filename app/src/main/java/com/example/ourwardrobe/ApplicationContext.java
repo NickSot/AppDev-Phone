@@ -20,7 +20,7 @@ public class ApplicationContext {
 
     public static ApplicationContext getInstance() {
         if (instance == null)
-            return new ApplicationContext();
+            instance = new ApplicationContext();
 
         return instance;
     }
