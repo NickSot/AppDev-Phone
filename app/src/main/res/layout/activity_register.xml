@@ -123,15 +123,4 @@
             android:textColor="@color/white"
             />
     </RelativeLayout>
-=======
-        android:layout_below="@id/RePassword"
-        android:layout_marginHorizontal="250dp"
-        android:layout_marginVertical="2dp"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/black"
-        android:fontFamily="@font/nexaregular"
-        android:text="Sign In"
-        android:textColor="@color/white" />
->>>>>>> Stashed changes
-
 </ScrollView>
