@@ -100,8 +100,6 @@ private Button RegisterButton;
                     wr.flush();
                     wr.close();
 
-                    Log.println(Log.DEBUG, "req", request.toString());
-
                     responseCode = connection.getResponseCode();
                     responseMessage = new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine();
 
@@ -186,8 +184,6 @@ private Button RegisterButton;
         TextView Email = (TextView) findViewById(R.id.userEmail);
         TextView Password = (TextView) findViewById(R.id.password);
         MaterialButton Login = (MaterialButton) findViewById(R.id.Login);
-
-
 
         //admin 123
         Login.setOnClickListener(new View.OnClickListener() {

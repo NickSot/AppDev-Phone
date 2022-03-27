@@ -127,11 +127,12 @@ public class Register extends AppCompatActivity {
         protected void onPostExecute(Void _) {
             if (responseCode == 201 && responseCodeWardrobe == 201) {
                 Toast.makeText(Register.this, "Successfully Registered" ,Toast.LENGTH_SHORT).show();
+                Register.this.Login();
             }
-            else if (responseCode == -1){
+            else if (responseCode == -1) {
                 Toast.makeText(Register.this, "Passwords don't match..." ,Toast.LENGTH_SHORT).show();
             }
-            else{
+            else {
                 Toast.makeText(Register.this, "Could not register, something wrong with the server: " + responseCode ,Toast.LENGTH_SHORT).show();
             }
         }

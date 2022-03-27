@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Application;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -95,6 +96,7 @@ public class accountSettings extends AppCompatActivity {
         protected void onPostExecute(Void param) {
             if (responseCode == 200) {
                 Toast.makeText(accountSettings.this, "Successfully deleted account", Toast.LENGTH_SHORT).show();
+                ApplicationContext.getInstance().setUser(null);
             }
         }
     }
@@ -142,6 +144,7 @@ public class accountSettings extends AppCompatActivity {
                         request.execute();
                         Intent intent = new Intent(accountSettings.this, loginscreen.class);
                         startActivity(intent);
+                        finishActivity(0);
                     }
                 })
                 .setNegativeButton("No", null);
