@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.176" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/buttondesign.xml" value="0.176" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/camera.xml" value="0.176" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/circle.xml" value="0.176" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/ic_baseline_arrow_forward_ios_24.xml" value="0.176" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.176" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/ic_clothes_hanger.xml" value="0.2775" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/ic_launcher_background.xml" value="0.176" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/ic_splashscreenapp.xml" value="0.204" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/logo.xml" value="0.2775" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/drawable/menu.xml" value="0.2775" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/activity_camera.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/activity_outfitcreator.xml" value="0.4" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/activity_register.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/activity_settingspriv.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/activity_shirts.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/categoryinterface.xml" value="0.4" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/fab.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/fragment_first.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/fragment_second.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/layout_outfircreator.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/loginscreen.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/20200733/Documents/GitHub/AppDev-Phone/app/src/main/res/layout/popup_settingspriv.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/20201077/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/drawable/camera.xml" value="0.2265" />
+        <entry key="..\:/Users/20201077/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/layout/activity_camera.xml" value="0.1" />
+        <entry key="..\:/Users/20201077/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/layout/activity_details.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/20201077/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/layout/activity_gallery.xml" value="0.2" />
+        <entry key="..\:/Users/20201077/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/layout/activity_gv_item.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/20201077/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/layout/activity_outfitcreator.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/20201077/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/layout/activity_register.xml" value="0.1" />
+        <entry key="..\:/Users/20201077/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/layout/activity_shirts.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/20201077/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/layout/categoryinterface.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/20201077/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/layout/loginscreen.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/20201077/AndroidStudioProjects/AppDev-Phone-master_Poyraz/app/src/main/res/layout/activity_gallery.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/20201077/AndroidStudioProjects/AppDev-Phone-master_Poyraz/app/src/main/res/layout/activity_outfitcreator.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/20201077/AndroidStudioProjects/AppDev-Phone-master_Poyraz/app/src/main/res/layout/fab.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/drawable/spinnerstyle.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/drawable/togglebtn.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/activity_camera.xml" value="0.128125" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/activity_fullview.xml" value="0.1265625" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/activity_gallery.xml" value="0.264" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/activity_register.xml" value="0.264" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/activity_shirts.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/activity_wardrobesettings.xml" value="0.4" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/categoryinterface.xml" value="0.264" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/color_spinner_dropdown.xml" value="0.16" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/color_spinner_layout.xml" value="0.2" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/dialog.xml" value="0.264" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/fab.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/fullimg.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/shirts.xml" value="0.176" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/solo_category.xml" value="0.264" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/drawable/bluegradient.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/drawable/btndesign.xml" value="0.16" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/drawable/delete_button.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/drawable/ic_baseline_arrow_back_ios_new_24.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/drawable/logo.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/drawable/roundeddb.xml" value="0.16" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/drawable/settingsbackground.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/drawable/solo.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/drawable/submitbtn.xml" value="0.16" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/layout/account_settings.xml" value="0.2375" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/layout/activity_basic.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/layout/activity_shirtscategory.xml" value="0.12760416666666666" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/layout/activity_wardrobesettings.xml" value="0.264" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/layout/categoryinterface.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/layout/fab.xml" value="0.11296296296296296" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/layout/shirts.xml" value="0.2" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/layout/solo_category.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/menu/menu.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/menu/popup_menu.xml" value="0.264" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.137" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/drawable/buttondesign.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/drawable/circle.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.279" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/drawable/logo.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/drawable/menu.xml" value="0.137" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/font/rosmatika.xml" value="0.15677083333333333" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/layout/activity_camera.xml" value="0.264" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/layout/activity_mainscreen.xml" value="0.2604166666666667" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/layout/activity_register.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/layout/activity_shirts.xml" value="0.16983695652173914" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/layout/activity_splash.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/layout/category_shirt.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/layout/categoryinterface.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/layout/content_mainscreen.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/layout/fab.xml" value="0.4" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/layout/fragment_first.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/layout/fragment_second.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/layout/loginscreen.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/OurWardrobe/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

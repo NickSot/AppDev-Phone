@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.ourwardrobe">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.OurWardrobe">
+        <activity
+            android:name=".SpinnerNew"
+            android:exported="false" />
+        <activity
+            android:name=".wardrobesettings"
+            android:exported="false" />
+        <activity
+            android:name=".accountSettings"
+            android:exported="false" />
+        <activity
+            android:name=".gv_item"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+        <activity
+            android:name=".Gallery"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+        <activity
+            android:name=".Camera"
+            android:exported="false"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".shirts"
+            android:exported="false"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".SplashScreen"
+            android:exported="true"
+            android:theme="@style/splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Register"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.OurWardrobe.NoActionBar"
+            android:exported="false"/>
+        <activity
+            android:name=".loginscreen"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="false" />
+        <activity
+            android:name=".OutfitCreator"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.OurWardrobe.NoActionBar"
+            android:exported="false"/>
+    </application>
+
+</manifest>

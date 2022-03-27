@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_blue">#8AB9B5</color>
+    <color name="light_blue">#7BC6BD</color>
+    <color name="mid_blue">#396874</color>
+    <color name="dark_blue">#264653</color>
+    <color name="beige">#C8C2AE</color>
+    <color name="brown">#815E5B</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="gray">#a6a6a6</color>
+    <color name="whitesmoke">#F5F5F5</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000 </color>
+    <color name="redPink">#E35A60</color>
+    <color name="pink">#F0AFAD</color>
+    <color name="gold">#EBC47B</color>
+    <color name="tan">#C89F76</color>
+    <color name="vanilla">#DBC6A5</color>
+    <color name="bluegreen">#209BBA</color>
+    <color name="clearblue">#86C9D6</color>
+    <color name="sapphire">#0F6988</color>
+</resources>

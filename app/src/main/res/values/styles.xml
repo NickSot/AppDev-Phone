@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="rounded_logo">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+        <item name="background">@drawable/logo</item>
+        <item name="color">@color/dark_blue</item>
+    </style>
+
+    <style name="fullViewTheme">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+        <item name="background">@drawable/logo</item>
+        <item name="color">@color/dark_blue</item>
+    </style>
+
+    <style name="spinnerTextStyle">
+        <item name="android:textColor">@color/whitesmoke</item>
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/nexaregular</item>
+    </style>
+</resources>
