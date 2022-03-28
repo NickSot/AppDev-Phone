@@ -7,48 +7,53 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn"
-        android:text="Select Multiple Images"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        />
+        <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn"
+                    android:text="Select Multiple Images"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    />
 
-    <GridView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/gv"
-        android:numColumns="3"
-        android:layout_weight="1">
-    </GridView>
+                <GridView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:id="@+id/gv"
+                    android:numColumns="3"
+                    android:layout_weight="1">
+                </GridView>
 
-  <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="Please select the type of the Category of the Picture that Uploaded "
-      >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Please select the type of the Category of the Picture that Uploaded "
+                    >
 
-  </TextView>
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/OutfitCattegory"
-        >
+                </TextView>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/OutfitCattegory"
+                    >
 
-    </Spinner>
+                </Spinner>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/SubmitGallery"
-        android:text="Submit the clothing category"
-        android:layout_marginTop="10dp"
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/SubmitGallery"
+                    android:text="Submit the clothing category"
+                    android:layout_marginTop="10dp"
 
-        />
+                    />
 
 
 
-</LinearLayout>
+    </LinearLayout>
+
+
+
+
+
