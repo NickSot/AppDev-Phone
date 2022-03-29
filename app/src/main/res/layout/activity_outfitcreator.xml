@@ -84,7 +84,29 @@
 
     </RelativeLayout>
 
-    <ImageView
+    <Button
+        android:id="@+id/deleteAllButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:layout_alignBottom="@id/OCGrid"
+        android:layout_centerHorizontal="true"
+        android:text="Delete All" />
+
+    <GridView
+        android:id="@+id/OCGrid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/nav_top"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="0dp"
+        android:columnWidth="100dp"
+        android:horizontalSpacing="10dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"></GridView>
+
+
+    <!--<ImageView
         android:id="@+id/imageView1"
         android:layout_width="160dp"
         android:layout_height="160dp"
@@ -178,6 +200,6 @@
         android:layout_marginTop="6dp"
         android:layout_marginRight="120dp"
         android:layout_marginBottom="6dp"
-        tools:src="@tools:sample/avatars" />
+        tools:src="@tools:sample/avatars" />-->
 
 </RelativeLayout>
