@@ -1,6 +1,7 @@
 package com.example.ourwardrobe;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,8 +17,87 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import outwardrobemodels.User;
 
 public class wardrobesettings extends AppCompatActivity {
+
+    private class CreateWardrobeRequest extends AsyncTask<Void, Void, Void> {
+        private String wardrobeName;
+        private int responseCode;
+
+        public CreateWardrobeRequest(String wardrobeName) {
+            this.wardrobeName = wardrobeName;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            JSONObject wardrobeRequest = new JSONObject();
+
+            try {
+                User user = ApplicationContext.getInstance().getUser();
+
+                wardrobeRequest.put("uNickname", user.getNickname());
+                wardrobeRequest.put("uPassword", user.getPassword());
+                wardrobeRequest.put("nickname", wardrobeName);
+                wardrobeRequest.put("creationTime", null);
+                wardrobeRequest.put("wardrobeType", "Shared");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            URL wardrobeUrl = null;
+
+            try {
+                wardrobeUrl = new URL("http://192.168.56.1:3000/wardrobes/register");
+
+                try {
+
+                    HttpURLConnection connection = (HttpURLConnection) wardrobeUrl.openConnection();
+
+                    connection.setRequestProperty("Accept", "*");
+                    connection.setRequestProperty("User-Agent", "Chrome");
+                    connection.setRequestProperty("Content-Type", "application/json");
+                    connection.setDoOutput(true);
+                    connection.setRequestMethod("POST");
+                    connection.setConnectTimeout(15000);
+                    connection.setReadTimeout(15000);
+
+                    DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+                    wr.writeBytes(wardrobeRequest.toString());
+                    wr.flush();
+                    wr.close();
+
+                    responseCode = connection.getResponseCode();
+
+                } catch (IOException e) {
+//                    Toast.makeText(Register.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
+                }
+            } catch (MalformedURLException e) {
+//                Toast.makeText(Register.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void unused) {
+            if (responseCode == 201) {
+                ApplicationContext.getInstance().getUserInfo();
+
+                Toast.makeText(wardrobesettings.this, "Family Created", Toast.LENGTH_SHORT).show();
+                wardrobesettings.this.startActivity(new Intent(wardrobesettings.this, MainActivity.class));
+            }
+        }
+    }
 
     EditText editCreateText, editJoinText;
     TextView textView, createFamily;
@@ -57,6 +137,9 @@ public class wardrobesettings extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(wardrobesettings.this, "Family Created", Toast.LENGTH_SHORT).show();
                 createFamily.setText("ID: " + editCreateText.getText());
+
+                CreateWardrobeRequest request = new CreateWardrobeRequest(editCreateText.getText().toString());
+                request.execute();
             }
         });
 

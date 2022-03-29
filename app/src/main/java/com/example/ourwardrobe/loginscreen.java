@@ -1,7 +1,5 @@
 package com.example.ourwardrobe;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,8 +9,6 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -115,7 +111,6 @@ private Button RegisterButton;
         @RequiresApi(api = Build.VERSION_CODES.O)
         protected void onPostExecute(Void param) {
             if (responseCode == 200) {
-
                 JSONObject userObject = null;
 
                 try {

@@ -48,9 +48,6 @@ public class SpinnerNew extends AppCompatActivity {
 
                     Intent intent = new Intent(SpinnerNew.this, Gallery.class);
                     startActivity(intent);
-
-
-
                 }
 
 
