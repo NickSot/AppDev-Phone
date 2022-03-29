@@ -34,6 +34,8 @@ public class ApplicationContext {
 
         @Override
         protected Void doInBackground(Void... voids) {
+            ApplicationContext.this.user = null;
+
             JSONObject request = new JSONObject();
 
             try {

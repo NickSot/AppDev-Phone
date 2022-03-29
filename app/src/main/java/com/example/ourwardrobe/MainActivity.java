@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Object [] wardrobeNicknames = ApplicationContext.getInstance().getUser().getWardrobes().stream().map(w -> w.getNickname()).toArray();
+        Object [] wardrobeNicknames = ApplicationContext.getInstance().getUser().getWardrobes().stream().map(w -> w.getNickname() + ", ID: " + w.getwId().toString()).toArray();
 
         wardrobeFamilies = (Arrays.copyOf(wardrobeNicknames, wardrobeNicknames.length, String[].class));
 

@@ -3,6 +3,7 @@ package com.example.ourwardrobe;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -93,7 +94,78 @@ public class wardrobesettings extends AppCompatActivity {
             if (responseCode == 201) {
                 ApplicationContext.getInstance().getUserInfo();
 
+                while (ApplicationContext.getInstance().getUser() == null) {  }
+                User user = ApplicationContext.getInstance().getUser();
+
                 Toast.makeText(wardrobesettings.this, "Family Created", Toast.LENGTH_SHORT).show();
+                wardrobesettings.this.startActivity(new Intent(wardrobesettings.this, MainActivity.class));
+            }
+        }
+    }
+
+    private class JoinWardrobeRequest extends AsyncTask<Void, Void, Void>{
+        private int responseCode;
+        private int wId;
+
+        public JoinWardrobeRequest(int wId) {
+            this.wId = wId;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            JSONObject wardrobeRequest = new JSONObject();
+
+            try {
+                User user = ApplicationContext.getInstance().getUser();
+
+                wardrobeRequest.put("uNickname", user.getNickname());
+                wardrobeRequest.put("uPassword", user.getPassword());
+                wardrobeRequest.put("wId", wId);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            URL wardrobeUrl = null;
+
+            try {
+                wardrobeUrl = new URL("http://192.168.56.1:3000/users/register/addWardrobe");
+
+                try {
+
+                    HttpURLConnection connection = (HttpURLConnection) wardrobeUrl.openConnection();
+
+                    connection.setRequestProperty("Accept", "*");
+                    connection.setRequestProperty("User-Agent", "Chrome");
+                    connection.setRequestProperty("Content-Type", "application/json");
+                    connection.setDoOutput(true);
+                    connection.setRequestMethod("POST");
+                    connection.setConnectTimeout(15000);
+                    connection.setReadTimeout(15000);
+
+                    DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+                    wr.writeBytes(wardrobeRequest.toString());
+                    wr.flush();
+                    wr.close();
+
+                    responseCode = connection.getResponseCode();
+
+                } catch (IOException e) {
+//                    Toast.makeText(Register.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
+                }
+            } catch (MalformedURLException e) {
+//                Toast.makeText(Register.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void unused) {
+            if (responseCode == 201) {
+                ApplicationContext.getInstance().getUserInfo();
+
+                while (ApplicationContext.getInstance().getUser() == null) {  }
+                Toast.makeText(wardrobesettings.this, "Family Joined", Toast.LENGTH_SHORT).show();
                 wardrobesettings.this.startActivity(new Intent(wardrobesettings.this, MainActivity.class));
             }
         }
@@ -128,14 +200,15 @@ public class wardrobesettings extends AppCompatActivity {
         submitBtnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(wardrobesettings.this, "Family Joined", Toast.LENGTH_SHORT).show();
+                Log.println(Log.ERROR, "debug", editJoinText.getText().toString());
+                JoinWardrobeRequest request = new JoinWardrobeRequest(Integer.valueOf(editJoinText.getText().toString()));
+                request.execute();
             }
         });
 
         submitBtnInit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(wardrobesettings.this, "Family Created", Toast.LENGTH_SHORT).show();
                 createFamily.setText("ID: " + editCreateText.getText());
 
                 CreateWardrobeRequest request = new CreateWardrobeRequest(editCreateText.getText().toString());
