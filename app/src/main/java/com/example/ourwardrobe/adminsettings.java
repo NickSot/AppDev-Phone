@@ -17,27 +17,29 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class wardrobesettings extends AppCompatActivity {
+public class adminsettings extends AppCompatActivity {
 
     EditText editCreateText, editJoinText;
-    TextView textView, createFamily;
-    Button leaveBtn, submitBtnJoin, submitBtnInit;
+    TextView textView;
+    TextView createFamily;
+    Button leaveBtn, submitBtnJoin, submitBtnInit, deleteBtn;
     private ImageView backBtn;
     RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wardrobesettings);
+        setContentView(R.layout.activity_adminsettings);
 
         textView = (TextView) findViewById(R.id.textJoin);
+        createFamily = (TextView) findViewById(R.id.textCreate);
         editCreateText = (EditText) findViewById(R.id.createWard);
         editJoinText = (EditText) findViewById(R.id.joinWard);
         leaveBtn = (Button) findViewById(R.id.leaveFamily);
         submitBtnJoin = (Button) findViewById(R.id.submitBtnJoin);
         submitBtnInit = (Button) findViewById(R.id.submitBtnInit);
         backBtn = (ImageView) findViewById(R.id.backBtn);
-        createFamily = (TextView) findViewById(R.id.textCreate);
+        deleteBtn = (Button) findViewById(R.id.deleteFamily);
 
         recyclerView = findViewById(R.id.familyRecycler);
         List<userModel> userModelList = new ArrayList<>();
@@ -48,14 +50,14 @@ public class wardrobesettings extends AppCompatActivity {
         submitBtnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(wardrobesettings.this, "Family Joined", Toast.LENGTH_SHORT).show();
+                Toast.makeText(adminsettings.this, "Family Joined", Toast.LENGTH_SHORT).show();
             }
         });
 
         submitBtnInit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(wardrobesettings.this, "Family Created", Toast.LENGTH_SHORT).show();
+                Toast.makeText(adminsettings.this, "Family Created", Toast.LENGTH_SHORT).show();
                 createFamily.setText("ID: " + editCreateText.getText());
             }
         });
@@ -63,14 +65,21 @@ public class wardrobesettings extends AppCompatActivity {
         leaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(wardrobesettings.this, "Family Left", Toast.LENGTH_SHORT).show();
+                Toast.makeText(adminsettings.this, "Family Left", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(adminsettings.this, "Family Deleted", Toast.LENGTH_SHORT).show();
             }
         });
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(wardrobesettings.this, MainActivity.class );
+                Intent intent = new Intent(adminsettings.this, MainActivity.class );
                 startActivity(intent);
             }
         });

@@ -1,391 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".solocategory"
     android:background="@color/whitesmoke">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         >
 
-    <RelativeLayout
-        android:id="@+id/nav_top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/top_bar"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/nav_top"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="5dp"
-            app:cardCornerRadius="30dp"
-            app:cardElevation="8dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/logo"
-                android:orientation="horizontal">>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:orientation="horizontal">
-                </LinearLayout>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="4dp"
-                android:fontFamily="@font/rosmatika"
-                android:gravity="center"
-                android:text=" OUR WARDROBE "
-                android:textColor="@color/white"
-                android:textSize="30sp"></TextView>
-
-        </androidx.cardview.widget.CardView>
-
-
-        <ImageButton
-            android:id="@+id/outfit_creator_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="4dp"
-            android:layout_marginRight="54dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/circle"
-            android:src="@drawable/ic_clothes_hanger"></ImageButton>
-
-        <ImageButton
-            android:id="@+id/settings_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="4dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/circle"
-            android:src="@drawable/menu"
-            android:onClick="showPopup">
-        </ImageButton>
-
-    </RelativeLayout>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/family"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_below="@+id/nav_top"
-        android:background="@drawable/solo"
-        android:layout_margin="10dp"
-        android:text="Change Wardrobe"
-        android:textColor="@color/whitesmoke"
-        android:fontFamily="@font/rosmatika"
-        android:textSize="27dp">
-    </androidx.appcompat.widget.AppCompatButton>
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/family"
-        android:columnCount="1"
-        android:rowCount="7">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/shirts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_rowWeight="1"
-            android:layout_column="0"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:fontFamily="@font/nexaregular"
-                    android:text="SHIRTS"
-                    android:textColor="@color/gray"
-                    android:textSize="30sp"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true">
-                </TextView>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="14dp"
-                    android:gravity="center_vertical"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"></ImageView>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/pants"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_rowWeight="1"
-            android:layout_column="0"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+            android:layout_marginBottom="8dp">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:fontFamily="@font/nexaregular"
-                    android:gravity="center"
-                    android:text="PANTS"
-                    android:textColor="@color/gray"
-                    android:textSize="30sp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"></TextView>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="14dp"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"></ImageView>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/dresses"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="2"
-            android:layout_rowWeight="1"
-            android:layout_column="0"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:fontFamily="@font/nexaregular"
-                    android:gravity="center"
-                    android:text="DRESSES"
-                    android:textColor="@color/gray"
-                    android:textSize="30sp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"></TextView>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="14dp"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"></ImageView>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/jackets"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="3"
-            android:layout_rowWeight="1"
-            android:layout_column="0"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:fontFamily="@font/nexaregular"
-                    android:gravity="center"
-                    android:text="JACKETS"
-                    android:textColor="@color/gray"
-                    android:textSize="30sp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"></TextView>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="14dp"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"></ImageView>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/skirts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="4"
-            android:layout_rowWeight="1"
-            android:layout_column="0"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:fontFamily="@font/nexaregular"
-                    android:gravity="center"
-                    android:text="SKIRTS"
-                    android:textColor="@color/gray"
-                    android:textSize="30sp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"></TextView>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="14dp"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"></ImageView>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/shoes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="5"
-            android:layout_rowWeight="1"
-            android:layout_column="0"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:fontFamily="@font/nexaregular"
-                    android:gravity="center"
-                    android:text="SHOES"
-                    android:textColor="@color/gray"
-                    android:textSize="30sp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"></TextView>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="14dp"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"></ImageView>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
+            <androidx.cardview.widget.CardView
+                android:id="@+id/top_bar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="5dp"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="8dp">
 
-            </TextView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/logo"
+                    android:orientation="horizontal">>
 
-        </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:background="@color/transparent"
+                        android:orientation="horizontal"></LinearLayout>
+                </LinearLayout>
 
-    </GridLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/rosmatika"
+                    android:gravity="center"
+                    android:text=" OUR WARDROBE "
+                    android:textColor="@color/white"
+                    android:textSize="30sp"></TextView>
+            </androidx.cardview.widget.CardView>
+
+
+            <ImageButton
+                android:id="@+id/outfit_creator_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="54dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/circle"
+                android:src="@drawable/ic_clothes_hanger"></ImageButton>
+
+            <ImageButton
+                android:id="@+id/settings_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/circle"
+                android:src="@drawable/menu"
+                android:onClick="showPopup">
+            </ImageButton>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/family"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nav_top">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/familyRecycler"
+                android:layout_below="@+id/nav_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="10dp">
+            </androidx.recyclerview.widget.RecyclerView>
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/shirts"
+            android:layout_below="@+id/family"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/categorybtn"
+            android:fontFamily="@font/nexaregular"
+            android:text="Shirts"
+            android:textSize="25dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/gray"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="15dp">
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/pants"
+            android:layout_below="@+id/shirts"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/categorybtn"
+            android:fontFamily="@font/nexaregular"
+            android:text="Pants"
+            android:textSize="25dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/gray"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="15dp">
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/skirts"
+            android:layout_below="@+id/pants"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/categorybtn"
+            android:fontFamily="@font/nexaregular"
+            android:text="Skirts"
+            android:textSize="25dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/gray"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="15dp">
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dresses"
+            android:layout_below="@+id/skirts"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/categorybtn"
+            android:fontFamily="@font/nexaregular"
+            android:text="Dresses"
+            android:textSize="25dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/gray"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="15dp">
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/shoes"
+            android:layout_below="@+id/dresses"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/categorybtn"
+            android:fontFamily="@font/nexaregular"
+            android:text="Shoes"
+            android:textSize="25dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/gray"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="15dp">
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/jackets"
+            android:layout_below="@+id/shoes"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/categorybtn"
+            android:fontFamily="@font/nexaregular"
+            android:text="Jackets"
+            android:textSize="25dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/gray"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="15dp">
+        </androidx.appcompat.widget.AppCompatButton>
+
     </RelativeLayout>
 
-</ScrollView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabgallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@android:drawable/ic_menu_gallery"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabcamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="100dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@android:drawable/ic_menu_camera"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

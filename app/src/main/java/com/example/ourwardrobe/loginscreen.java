@@ -41,8 +41,6 @@ public class loginscreen extends AppCompatActivity {
 
 private Button RegisterButton;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

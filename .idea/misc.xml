@@ -41,11 +41,18 @@
         <entry key="..\:/Users/20201077/AndroidStudioProjects/AppDev-Phone-master_Poyraz/app/src/main/res/layout/fab.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/drawable/spinnerstyle.xml" value="0.1" />
         <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/drawable/togglebtn.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/drawable/userbackground.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/activity_adminsettings.xml" value="0.1" />
         <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/activity_camera.xml" value="0.128125" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/activity_dresses.xml" value="0.11666666666666667" />
         <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/activity_fullview.xml" value="0.1265625" />
         <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/activity_gallery.xml" value="0.264" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/activity_jackets.xml" value="0.11666666666666667" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/activity_pants.xml" value="0.1265625" />
         <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/activity_register.xml" value="0.264" />
         <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/activity_shirts.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/activity_shoes.xml" value="0.11666666666666667" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/activity_skirts.xml" value="0.11666666666666667" />
         <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/activity_wardrobesettings.xml" value="0.4" />
         <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/categoryinterface.xml" value="0.264" />
         <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/color_spinner_dropdown.xml" value="0.16" />
@@ -53,6 +60,8 @@
         <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/dialog.xml" value="0.264" />
         <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/fab.xml" value="0.1" />
         <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/fullimg.xml" value="0.1" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/layout_listitem.xml" value="0.536" />
+        <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/loginscreen.xml" value="0.11666666666666667" />
         <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/shirts.xml" value="0.176" />
         <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-ilse/app/src/main/res/layout/solo_category.xml" value="0.264" />
         <entry key="..\:/Users/20201801/AndroidStudioProjects/AppDev-Phone-master/app/src/main/res/drawable/bluegradient.xml" value="0.1" />
