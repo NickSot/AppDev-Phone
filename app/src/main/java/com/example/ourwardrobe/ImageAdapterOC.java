@@ -12,17 +12,17 @@ import java.util.List;
 
 public class ImageAdapterOC extends BaseAdapter {
 
-    private List<Integer> mThumbIds;
+    private List<Integer> mThumbIdsOC;
     private Context mContext;
 
-    public ImageAdapterOC(List<Integer> mThumbIds, Context mContext) {
-        this.mThumbIds = mThumbIds;
+    public ImageAdapterOC(List<Integer> mThumbIdsOC, Context mContext) {
+        this.mThumbIdsOC = mThumbIdsOC;
         this.mContext = mContext;
     }
 
     @Override
     public int getCount() {
-        return mThumbIds.size();
+        return mThumbIdsOC.size();
     }
 
     @Override
@@ -32,7 +32,7 @@ public class ImageAdapterOC extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return mThumbIds.get(position);
+        return mThumbIdsOC.get(position);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ImageAdapterOC extends BaseAdapter {
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
 
-        imageView.setImageResource(mThumbIds.get(position));
+        imageView.setImageResource(mThumbIdsOC.get(position));
 
         return imageView;
     }
