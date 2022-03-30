@@ -7,13 +7,15 @@ public class Wardrobe {
     private String nickname;
     private String creationTime;
     private String wardrobeType;
+    private Long adminId;
     private ArrayList<Clothe> clothes;
 
-    public Wardrobe(Long wId, String nickname, String creationTime, String wardrobeType) {
+    public Wardrobe(Long wId, String nickname, String creationTime, String wardrobeType, Long adminId) {
         this.wId = wId;
         this.nickname = nickname;
         this.creationTime = creationTime;
         this.wardrobeType = wardrobeType;
+        this.adminId = adminId;
     }
 
     public ArrayList<Clothe> getClothes() {

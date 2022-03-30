@@ -92,12 +92,8 @@ public class wardrobesettings extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void unused) {
             if (responseCode == 201) {
-                ApplicationContext.getInstance().getUserInfo();
-
-                while (ApplicationContext.getInstance().getUser() == null) {  }
-                User user = ApplicationContext.getInstance().getUser();
-
                 Toast.makeText(wardrobesettings.this, "Family Created", Toast.LENGTH_SHORT).show();
+
                 wardrobesettings.this.startActivity(new Intent(wardrobesettings.this, MainActivity.class));
             }
         }
@@ -162,9 +158,6 @@ public class wardrobesettings extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void unused) {
             if (responseCode == 201) {
-                ApplicationContext.getInstance().getUserInfo();
-
-                while (ApplicationContext.getInstance().getUser() == null) {  }
                 Toast.makeText(wardrobesettings.this, "Family Joined", Toast.LENGTH_SHORT).show();
                 wardrobesettings.this.startActivity(new Intent(wardrobesettings.this, MainActivity.class));
             }

@@ -143,7 +143,7 @@ private Button RegisterButton;
                     Wardrobe w = null;
 
                     try {
-                        w = new Wardrobe(Long.valueOf(obj.get("wId").toString()), obj.get("Nickname").toString(), obj.get("CreationTime").toString(), obj.get("WardrobeType").toString());
+                        w = new Wardrobe(Long.valueOf(obj.get("wId").toString()), obj.get("Nickname").toString(), obj.get("CreationTime").toString(), obj.get("WardrobeType").toString(), Long.valueOf(obj.get("AdminId").toString()));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

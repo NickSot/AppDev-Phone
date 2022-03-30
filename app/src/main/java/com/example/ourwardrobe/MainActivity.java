@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import android.annotation.SuppressLint;
+import android.app.Application;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,6 +38,8 @@ import java.util.List;
 
 import java.util.Arrays;
 
+import outwardrobemodels.User;
+
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener, AdapterView.OnItemSelectedListener {
 
     private Button shirts, pants, dresses, shoes, jackets, skirts;
@@ -41,14 +47,23 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     String[] wardrobeFamilies = {"Personal Wardrobe", "Wardrobe Family 1", "Wardrobe Family 2", "Wardrobe Family 3"};
     RecyclerView recyclerView;
 
+    @SuppressLint("NewApi")
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Object [] wardrobeNicknames = ApplicationContext.getInstance().getUser().getWardrobes().stream().map(w -> w.getNickname() + ", ID: " + w.getwId().toString()).toArray();
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        ApplicationContext.getInstance().getUserInfo();
+
+        User user = ApplicationContext.getInstance().getUser();
+
+        Object [] wardrobeNicknames = user.getWardrobes().stream().map(w -> w.getNickname() + ", ID: " + w.getwId().toString()).toArray();
 
         wardrobeFamilies = (Arrays.copyOf(wardrobeNicknames, wardrobeNicknames.length, String[].class));
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.categoryinterface);
 
         camera = findViewById(R.id.fabcamera);

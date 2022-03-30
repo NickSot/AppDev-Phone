@@ -132,6 +132,9 @@ public class Register extends AppCompatActivity {
             else if (responseCode == -1) {
                 Toast.makeText(Register.this, "Passwords don't match..." ,Toast.LENGTH_SHORT).show();
             }
+            else if (responseCode == 404){
+                Toast.makeText(Register.this, "Email does not exist." ,Toast.LENGTH_SHORT).show();
+            }
             else {
                 Toast.makeText(Register.this, "Could not register, something wrong with the server: " + responseCode ,Toast.LENGTH_SHORT).show();
             }
