@@ -82,9 +82,9 @@ public abstract class AbstractClothActivity extends Activity {
         });
 
         if (ApplicationContext.getInstance().getOutfitImages().contains(item_pos))
-            btnAdd.setChecked(false);
-        else
             btnAdd.setChecked(true);
+        else
+            btnAdd.setChecked(false);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
