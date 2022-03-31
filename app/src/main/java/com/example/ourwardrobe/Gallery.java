@@ -3,11 +3,15 @@ package com.example.ourwardrobe;
 import android.content.ClipData;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.PersistableBundle;
 import android.provider.MediaStore;
 
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,19 +26,106 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import outwardrobemodels.User;
+import outwardrobemodels.Wardrobe;
+
 public class Gallery extends AppCompatActivity {
+    private class CreateClotheRequest extends AsyncTask<Void, Void, Void> {
+        private int responseCode;
+        private Bitmap image;
+        private String clotheType;
+        private Long originalWardrobeId;
+
+        public CreateClotheRequest(Bitmap image, String clotheType, Long originalWardrobeId) {
+            this.image = image;
+            this.clotheType = clotheType;
+            this.originalWardrobeId = originalWardrobeId;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            JSONObject wardrobeRequest = new JSONObject();
+
+            try {
+                User user = ApplicationContext.getInstance().getUser();
+
+                wardrobeRequest.put("uNickname", user.getNickname());
+                wardrobeRequest.put("uPassword", user.getPassword());
+                wardrobeRequest.put("originalWardrobeId", originalWardrobeId);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                wardrobeRequest.put("image", Base64.encodeToString(stream.toByteArray(), 1));
+                wardrobeRequest.put("clothType", clotheType);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            URL wardrobeUrl = null;
+
+            try {
+                wardrobeUrl = new URL("http://192.168.56.1:3000/clothes/register");
+
+                try {
+
+                    HttpURLConnection connection = (HttpURLConnection) wardrobeUrl.openConnection();
+
+                    connection.setRequestProperty("Accept", "*");
+                    connection.setRequestProperty("User-Agent", "Chrome");
+                    connection.setRequestProperty("Content-Type", "application/json");
+                    connection.setDoOutput(true);
+                    connection.setRequestMethod("POST");
+                    connection.setConnectTimeout(15000);
+                    connection.setReadTimeout(15000);
+
+                    DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+                    wr.writeBytes(wardrobeRequest.toString());
+                    wr.flush();
+                    wr.close();
+
+                    responseCode = connection.getResponseCode();
+
+                } catch (IOException e) {
+//                    Toast.makeText(Register.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
+                }
+            } catch (MalformedURLException e) {
+//                Toast.makeText(Register.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void unused) {
+            if (responseCode == 201) {
+                Toast.makeText(Gallery.this,"Successfully Submitted ", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Log.println(Log.ERROR, "important!", String.valueOf(responseCode));
+            }
+        }
+    }
 
     private Button btn;
     int PICK_IMAGE_MULTIPLE = 1;
-    String imageEncoded;
-    List<String> imagesEncodedList;
+    Bitmap clotheImage;
+    List<Bitmap> imagesEncodedList;
     private GridView gvGallery;
     private gv_item galleryAdapter;
     ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
     Uri mImageUri;
+
     private static final String FRAGMENT_NAME = "imageFragment";
     Button bt2;
 
@@ -65,8 +156,6 @@ public class Gallery extends AppCompatActivity {
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_MULTIPLE);
-
-
             }
         });
         if (savedInstanceState != null) {
@@ -76,9 +165,36 @@ public class Gallery extends AppCompatActivity {
         bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Gallery.this,"Successfully Submitted ", Toast.LENGTH_SHORT).show();
+                // Work on submitting clothe to the wardrobe
 
+                CreateClotheRequest request = null;
 
+                switch (spinner.getSelectedItem().toString()) {
+                    case "Shirts":
+                        request = new CreateClotheRequest(clotheImage, "Shirt", ApplicationContext.getInstance().getWardrobe().getwId());
+                        break;
+                    case "Skirts":
+                        request = new CreateClotheRequest(clotheImage, "Skirt", ApplicationContext.getInstance().getWardrobe().getwId());
+                        break;
+                    case "Dresses":
+                        request = new CreateClotheRequest(clotheImage, "Dress", ApplicationContext.getInstance().getWardrobe().getwId());
+                        break;
+                    case "Shoes":
+                        Wardrobe w = ApplicationContext.getInstance().getWardrobe();
+                        request = new CreateClotheRequest(clotheImage, "Shoe", ApplicationContext.getInstance().getWardrobe().getwId());
+                        break;
+                    case "Pants":
+                        request = new CreateClotheRequest(clotheImage, "Pants", ApplicationContext.getInstance().getWardrobe().getwId());
+                        break;
+                    case "Jackets":
+                        request = new CreateClotheRequest(clotheImage, "Jacket", ApplicationContext.getInstance().getWardrobe().getwId());
+                        break;
+                    default:
+                        Toast.makeText(Gallery.this, "Choose a cloth type, please!", Toast.LENGTH_SHORT).show();
+                        return;
+                }
+
+                request.execute();
             }
         });
 
@@ -93,15 +209,7 @@ public class Gallery extends AppCompatActivity {
                 else{
                     String item = parent.getItemAtPosition(position).toString();
                     Toast.makeText(parent.getContext(), "Selected " + item, Toast.LENGTH_SHORT).show();
-
-
-
-
-
-
                 }
-
-
             }
 
             @Override
@@ -110,11 +218,7 @@ public class Gallery extends AppCompatActivity {
 
             }
         });
-
-
     }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -125,7 +229,8 @@ public class Gallery extends AppCompatActivity {
                 // Get the Image from data
 
                 String[] filePathColumn = {MediaStore.Images.Media.DATA};
-                imagesEncodedList = new ArrayList<String>();
+                imagesEncodedList = new ArrayList<>();
+
                 if (data.getData() != null) {
 
                     mImageUri = data.getData();
@@ -137,7 +242,8 @@ public class Gallery extends AppCompatActivity {
                     cursor.moveToFirst();
 
                     int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    imageEncoded = cursor.getString(columnIndex);
+                    String imageFile = cursor.getString(columnIndex);
+                    clotheImage = BitmapFactory.decodeFile(imageFile);
                     cursor.close();
 
 //                    ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
@@ -164,8 +270,8 @@ public class Gallery extends AppCompatActivity {
                             cursor.moveToFirst();
 
                             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                            imageEncoded = cursor.getString(columnIndex);
-                            imagesEncodedList.add(imageEncoded);
+                            clotheImage = BitmapFactory.decodeFile(cursor.getString(columnIndex));
+                            imagesEncodedList.add(clotheImage);
                             cursor.close();
 
                             galleryAdapter = new gv_item(getApplicationContext(), mArrayUri);

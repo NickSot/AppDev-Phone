@@ -174,9 +174,43 @@ public class Camera extends AppCompatActivity {
         });
 
         bt2.setOnClickListener(new View.OnClickListener() {
+
+//            <item>Choose</item>
+//        <item>Shirts</item>
+//        <item>Dresses</item>
+//        <item>Pants</item>
+//        <item>Skirts</item>
+//        <item>Shoes</item>
+//        <item>Jackets</item>
+
             @Override
             public void onClick(View view) {
-                CreateClotheRequest request = new CreateClotheRequest(clotheImage, "Shirt", ApplicationContext.getInstance().getWardrobe().getwId());
+                CreateClotheRequest request = null;
+
+                switch (spinner.getSelectedItem().toString()) {
+                    case "Shirts":
+                        request = new CreateClotheRequest(clotheImage, "Shirt", ApplicationContext.getInstance().getWardrobe().getwId());
+                        break;
+                    case "Skirts":
+                        request = new CreateClotheRequest(clotheImage, "Skirt", ApplicationContext.getInstance().getWardrobe().getwId());
+                        break;
+                    case "Dresses":
+                        request = new CreateClotheRequest(clotheImage, "Dress", ApplicationContext.getInstance().getWardrobe().getwId());
+                        break;
+                    case "Shoes":
+                        request = new CreateClotheRequest(clotheImage, "Shoe", ApplicationContext.getInstance().getWardrobe().getwId());
+                        break;
+                    case "Pants":
+                        request = new CreateClotheRequest(clotheImage, "Pants", ApplicationContext.getInstance().getWardrobe().getwId());
+                        break;
+                    case "Jackets":
+                        request = new CreateClotheRequest(clotheImage, "Jacket", ApplicationContext.getInstance().getWardrobe().getwId());
+                        break;
+                    default:
+                        Toast.makeText(Camera.this, "Choose a cloth type, please!", Toast.LENGTH_SHORT).show();
+                        return;
+                }
+
                 request.execute();
             }
         });

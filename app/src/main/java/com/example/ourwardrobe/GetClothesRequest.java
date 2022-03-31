@@ -119,9 +119,11 @@ public class GetClothesRequest extends AsyncTask<Void, Void, Void> {
 
                     Long ogId = Long.valueOf(obj.get("OriginalWardrobeId").toString());
                     String clotheType = obj.get("ClothType").toString();
-                    Long cId = Long.valueOf(obj.get("cId").toString());
 
-                    obj.get("Image");
+                    if (!clotheType.equals(this.clotheType))
+                        continue;
+
+                    Long cId = Long.valueOf(obj.get("cId").toString());
 
                     byte[] imageBytes = Base64.decode(obj.get("Image").toString(), 1);
                     Bitmap image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);

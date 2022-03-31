@@ -22,33 +22,34 @@ import java.util.stream.Collectors;
 
 public class jackets extends AppCompatActivity {
 
-//    ArrayList<Integer> mImageIds = new ArrayList<>(Arrays.asList(
-//            R.drawable.shirt1, R.drawable.shirt2, R.drawable.shirt3, R.drawable.shirt4
-//    ));
-
-
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_jackets);
 
-        ArrayList<Bitmap> mImageIds = (ArrayList<Bitmap>) ApplicationContext.getInstance()
-                .getWardrobe().getClothes()
-                .stream().map(p -> p.getImage()).collect(Collectors.toList());
+        GetClothesRequest request = new GetClothesRequest(ApplicationContext.getInstance().getWardrobe().getwId(), "Jacket");
 
-        GridView gridView = findViewById(R.id.gridjackets);
-        gridView.setAdapter(new ImageAdapter(mImageIds,this));
+        request.setCallback(() -> {
+            setContentView(R.layout.shirts);
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Bitmap item_pos = mImageIds.get(position);
+            ArrayList<Bitmap> mImageIds = (ArrayList<Bitmap>) ApplicationContext.getInstance()
+                    .getWardrobe().getClothes()
+                    .stream().map(p -> p.getImage()).collect(Collectors.toList());
 
-                ShowDialogBox(item_pos);
-            }
+            GridView gridView = findViewById(R.id.gridshirts);
+            gridView.setAdapter(new ImageAdapter(mImageIds,this));
+
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                    Bitmap item_pos = mImageIds.get(position);
+
+                    ShowDialogBox(item_pos);
+                }
+            });
         });
+
+        request.execute();
     }
 
     public void ShowDialogBox(Bitmap item_pos){
