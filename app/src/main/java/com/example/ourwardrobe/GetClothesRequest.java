@@ -30,6 +30,16 @@ public class GetClothesRequest extends AsyncTask<Void, Void, Void> {
 
     private ArrayList<Clothe> clothes = new ArrayList<>();
 
+    public interface Callback {
+        void function();
+    }
+
+    private Callback cb;
+
+    public void setCallback(Callback cb) {
+        this.cb = cb;
+    }
+
     public GetClothesRequest(Long wId, String clotheType) {
         this.wId = wId;
         this.clotheType = clotheType;
@@ -100,14 +110,18 @@ public class GetClothesRequest extends AsyncTask<Void, Void, Void> {
                 e.printStackTrace();
             }
 
+            int length = clotheObjectArray.length();
+
             for (int i = 0; i < clotheObjectArray.length(); i++) {
 
                 try {
                     JSONObject obj = clotheObjectArray.getJSONObject(i);
 
                     Long ogId = Long.valueOf(obj.get("OriginalWardrobeId").toString());
-                    String clotheType = obj.get("ClotheType").toString();
+                    String clotheType = obj.get("ClothType").toString();
                     Long cId = Long.valueOf(obj.get("cId").toString());
+
+                    obj.get("Image");
 
                     byte[] imageBytes = Base64.decode(obj.get("Image").toString(), 1);
                     Bitmap image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
@@ -121,6 +135,8 @@ public class GetClothesRequest extends AsyncTask<Void, Void, Void> {
 
             ApplicationContext.getInstance().getWardrobe().getClothes().clear();
             ApplicationContext.getInstance().getWardrobe().getClothes().addAll(clothes);
+
+            cb.function();
         }
     }
 }

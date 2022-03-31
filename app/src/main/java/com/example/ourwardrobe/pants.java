@@ -28,7 +28,7 @@ public class pants extends AppCompatActivity {
         setContentView(R.layout.activity_pants);
 
         GridView gridView = findViewById(R.id.gridpants);
-        gridView.setAdapter(new ImageAdapter(mImageIds,this));
+//        gridView.setAdapter(new ImageAdapter(mImageIds,this));
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

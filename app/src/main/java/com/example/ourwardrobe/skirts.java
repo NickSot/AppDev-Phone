@@ -28,7 +28,7 @@ public class skirts extends AppCompatActivity {
         setContentView(R.layout.activity_skirts);
 
         GridView gridView = findViewById(R.id.gridskirts);
-        gridView.setAdapter(new ImageAdapter(mImageIds,this));
+//        gridView.setAdapter(new ImageAdapter(mImageIds,this));
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

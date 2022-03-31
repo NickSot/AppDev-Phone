@@ -1,6 +1,7 @@
 package com.example.ourwardrobe;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.media.Image;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,10 @@ import java.util.List;
 
 public class ImageAdapter extends BaseAdapter {
 
-    private List<Integer> mThumbIds;
+    private List<Bitmap> mThumbIds;
     private Context mContext;
 
-    public ImageAdapter(List<Integer> mThumbIds, Context mContext) {
+    public ImageAdapter(List<Bitmap> mThumbIds, Context mContext) {
         this.mContext = mContext;
         this.mThumbIds = mThumbIds;
     }
@@ -27,12 +28,12 @@ public class ImageAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return mThumbIds.get(position);
     }
 
     @Override
-    public long getItemId(int position) {
-        return mThumbIds.get(position);
+    public long getItemId(int i) {
+        return 0;
     }
 
     @Override
@@ -45,7 +46,7 @@ public class ImageAdapter extends BaseAdapter {
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
 
-        imageView.setImageResource(mThumbIds.get(position));
+        imageView.setImageBitmap(mThumbIds.get(position));
 
         return imageView;
     }

@@ -28,7 +28,7 @@ public class shoes extends AppCompatActivity {
         setContentView(R.layout.activity_shoes);
 
         GridView gridView = findViewById(R.id.gridshoes);
-        gridView.setAdapter(new ImageAdapter(mImageIds,this));
+//        gridView.setAdapter(new ImageAdapter(mImageIds,this));
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
