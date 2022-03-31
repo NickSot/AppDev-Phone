@@ -27,129 +27,18 @@ import outwardrobemodels.Wardrobe;
 public class ApplicationContext {
     private static ApplicationContext instance;
     private User user;
-
-    private class UserInfoRequest extends AsyncTask<Void, Void, Void> {
-
-        private int responseCode;
-        private String responseMessage;
-        private Wardrobe currentWardrobe;
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            JSONObject request = new JSONObject();
-
-            try {
-                request.put("uNickname", ApplicationContext.getInstance().getUser().getNickname());
-                request.put("uPassword", ApplicationContext.getInstance().getUser().getPassword());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            URL url = null;
-
-            try {
-                url = new URL("http://192.168.56.1:3000/users/getInfo");
-
-                try {
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestProperty("User-Agent", "Chrome");
-                    connection.setRequestProperty("Content-type", "application/json");
-                    connection.setRequestMethod("POST");
-                    connection.setDoOutput(true);
-                    connection.setConnectTimeout(15000);
-                    connection.setReadTimeout(15000);
-
-                    DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-                    wr.writeBytes(request.toString());
-                    wr.flush();
-                    wr.close();
-
-                    responseCode = connection.getResponseCode();
-                    responseMessage = new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine();
-
-                } catch (IOException e) {
-//                    Toast.makeText(loginscreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-
-            } catch (MalformedURLException e) {
-//                Toast.makeText(loginscreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-
-            return null;
-        }
-
-        @RequiresApi(api = Build.VERSION_CODES.O)
-        @Override
-        protected void onPostExecute(Void unused) {
-            if (responseCode == 200) {
-                JSONObject userObject = null;
-
-                try {
-                    userObject = new JSONObject(responseMessage);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                User user = null;
-
-                JSONArray wardrobesObject = null;
-
-                try {
-                    wardrobesObject = userObject.getJSONArray("wardList");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                ArrayList<Wardrobe> wardrobes = new ArrayList<Wardrobe>();
-
-                for (int i = 0; i < wardrobesObject.length(); i++) {
-                    JSONObject obj = null;
-
-                    try {
-                        obj = wardrobesObject.getJSONObject(i);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    Wardrobe w = null;
-
-                    try {
-                        w = new Wardrobe(Long.getLong(obj.get("wId").toString()), obj.get("Nickname").toString(), obj.get("CreationTime").toString(), obj.get("WardrobeType").toString(), Long.valueOf(obj.get("AdminId").toString()));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    wardrobes.add(w);
-                }
-
-                try {
-                    byte[] bytes = Base64.getDecoder().decode(userObject.get("avatar").toString());
-
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-
-                    user = new User(Long.getLong(userObject.get("uId").toString()), userObject.get("nickname").toString(), userObject.get("password").toString(), bitmap, userObject.get("oauthToken").toString(), userObject.get("gender").toString());
-                    user.setWardrobes(wardrobes);
-
-                    ApplicationContext.this.user = user;
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
+    private Wardrobe currentWardrobe;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void getUserInfo() {
-//        UserInfoRequest request = new UserInfoRequest();
-//        AsyncTask a = request.execute();
-
         int responseCode = -1;
         String responseMessage = "";
 
         JSONObject request = new JSONObject();
 
         try {
-            request.put("uNickname", ApplicationContext.getInstance().getUser().getNickname());
-            request.put("uPassword", ApplicationContext.getInstance().getUser().getPassword());
+            request.put("uNickname", user.getNickname());
+            request.put("uPassword", user.getPassword());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -259,8 +148,11 @@ public class ApplicationContext {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public Wardrobe getWardrobe(long wardrobeId) {
+    public void setWardrobe(long wardrobeId) {
         currentWardrobe = user.getWardrobes().stream().filter(p -> p.getwId() == wardrobeId).findFirst().get();
+    }
+
+    public Wardrobe getWardrobe() {
         return currentWardrobe;
     }
 }

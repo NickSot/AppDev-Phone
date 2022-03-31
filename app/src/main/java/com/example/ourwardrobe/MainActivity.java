@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -39,6 +40,7 @@ import java.util.List;
 import java.util.Arrays;
 
 import outwardrobemodels.User;
+import outwardrobemodels.Wardrobe;
 
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener, AdapterView.OnItemSelectedListener {
 
@@ -84,6 +86,10 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.color_spinner_layout, wardrobeFamilies);
         arrayAdapter.setDropDownViewResource(R.layout.color_spinner_dropdown);
         spin.setAdapter(arrayAdapter);
+        if (spin.isSelected())
+            ApplicationContext.getInstance().setWardrobe(Long.valueOf(spin.getSelectedItem().toString().split("ID: ")[1]));
+
+        Wardrobe w = ApplicationContext.getInstance().getWardrobe();
 
         recyclerView = findViewById(R.id.familyRecycler);
         List<userModel> userModelList = new ArrayList<>();
@@ -203,27 +209,20 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         final Intent intent;
-        switch (position){
-            case 1:
-                intent = new Intent(MainActivity.this, MainActivity.class);
-                startActivity(intent);
-                break;
-            case 2:
-                intent = new Intent(MainActivity.this, MainActivity.class);
-                startActivity(intent);
-                break;
-            case 3:
-                intent = new Intent(MainActivity.this, MainActivity.class);
-                startActivity(intent);
-                break;
-            case 4:
-                intent = new Intent(MainActivity.this, MainActivity.class);
-                startActivity(intent);
-                break;
-        }
+
+        ApplicationContext.getInstance().setWardrobe(Long.valueOf(adapterView.getSelectedItem().toString().split("ID: ")[1]));
+        Wardrobe w = ApplicationContext.getInstance().getWardrobe();
+
+//        switch (position){
+//            case 1:
+//                intent = new Intent(MainActivity.this, MainActivity.class);
+//                startActivity(intent);
+//                break;
+//        }
     }
 
     @Override

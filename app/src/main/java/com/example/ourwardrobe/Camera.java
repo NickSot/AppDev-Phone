@@ -12,9 +12,12 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,7 +26,94 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import outwardrobemodels.User;
+
 public class Camera extends AppCompatActivity {
+    private class CreateClotheRequest extends AsyncTask<Void, Void, Void> {
+        private int responseCode;
+        private Bitmap image;
+        private String clotheType;
+        private Long originalWardrobeId;
+
+        public CreateClotheRequest(Bitmap image, String clotheType, Long originalWardrobeId) {
+            this.image = image;
+            this.clotheType = clotheType;
+            this.originalWardrobeId = originalWardrobeId;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            JSONObject wardrobeRequest = new JSONObject();
+
+            try {
+                User user = ApplicationContext.getInstance().getUser();
+
+                wardrobeRequest.put("uNickname", user.getNickname());
+                wardrobeRequest.put("uPassword", user.getPassword());
+                wardrobeRequest.put("originalWardrobeId", originalWardrobeId);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                wardrobeRequest.put("image", Base64.encodeToString(stream.toByteArray(), 1));
+                wardrobeRequest.put("clothType", clotheType);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            URL wardrobeUrl = null;
+
+            try {
+                wardrobeUrl = new URL("http://192.168.56.1:3000/clothes/register");
+
+                try {
+
+                    HttpURLConnection connection = (HttpURLConnection) wardrobeUrl.openConnection();
+
+                    connection.setRequestProperty("Accept", "*");
+                    connection.setRequestProperty("User-Agent", "Chrome");
+                    connection.setRequestProperty("Content-Type", "application/json");
+                    connection.setDoOutput(true);
+                    connection.setRequestMethod("POST");
+                    connection.setConnectTimeout(15000);
+                    connection.setReadTimeout(15000);
+
+                    DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+                    wr.writeBytes(wardrobeRequest.toString());
+                    wr.flush();
+                    wr.close();
+
+                    responseCode = connection.getResponseCode();
+
+                } catch (IOException e) {
+//                    Toast.makeText(Register.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
+                }
+            } catch (MalformedURLException e) {
+//                Toast.makeText(Register.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void unused) {
+            if (responseCode == 201) {
+                Toast.makeText(Camera.this,"Successfully Submitted ", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Log.println(Log.ERROR, "important!", String.valueOf(responseCode));
+            }
+        }
+    }
+
 
     ImageView img;
     Button bt;
@@ -86,19 +176,21 @@ public class Camera extends AppCompatActivity {
         bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Camera.this,"Successfully Submitted ", Toast.LENGTH_SHORT).show();
+                CreateClotheRequest request = new CreateClotheRequest(clotheImage, "Shirt", ApplicationContext.getInstance().getWardrobe().getwId());
+                request.execute();
             }
         });
-
     }
 
-
+    private Bitmap clotheImage = null;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==101){
-            Bitmap bitmap= (Bitmap) data.getExtras().get("data");
+            clotheImage = (Bitmap) data.getExtras().get("data");
+            Bitmap bitmap= clotheImage;
+
             img.setImageBitmap(bitmap);
         }
     }

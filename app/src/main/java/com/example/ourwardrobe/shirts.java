@@ -25,6 +25,10 @@ public class shirts extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        GetClothesRequest request = new GetClothesRequest(ApplicationContext.getInstance().getWardrobe().getwId(), "Shirt");
+        request.execute();
+
         setContentView(R.layout.shirts);
 
         GridView gridView = findViewById(R.id.gridshirts);
