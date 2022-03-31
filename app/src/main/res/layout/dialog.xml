@@ -6,56 +6,66 @@
     android:layout_margin="10dp"
     android:background="@color/whitesmoke">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/userID"
-        android:text="User ID"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:fontFamily="@font/nexaregular"
-        android:textStyle="bold">
-    </TextView>
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_below="@+id/userID"
-        android:scaleType="centerCrop"
-        android:id="@+id/img"
-        android:src="@mipmap/ic_launcher_round">
-    </ImageView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/img">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/userID"
+                android:text="User ID"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:fontFamily="@font/nexaregular"
+                android:textStyle="bold">
+            </TextView>
 
-        <androidx.appcompat.widget.AppCompatToggleButton
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/btnadd"
-            android:textOff="Add To Outfit"
-            android:textOn="Remove From Outfit"
-            android:drawableStart="@drawable/togglebtn"
-            android:fontFamily="@font/nexaregular"
-            android:textColor="@color/gray"
-            android:textStyle="bold">
-        </androidx.appcompat.widget.AppCompatToggleButton>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_below="@+id/userID"
+                android:scaleType="centerCrop"
+                android:id="@+id/img"
+                android:src="@mipmap/ic_launcher_round">
+            </ImageView>
 
-        <androidx.appcompat.widget.AppCompatButton
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/close"
-            android:text="Close"
-            android:fontFamily="@font/nexaregular"
-            android:textColor="@color/gray"
-            android:textStyle="bold">
-        </androidx.appcompat.widget.AppCompatButton>
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/img">
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/btnadd"
+                    android:textOff="Add To Outfit"
+                    android:textOn="Remove From Outfit"
+                    android:drawableStart="@drawable/togglebtn"
+                    android:fontFamily="@font/nexaregular"
+                    android:textColor="@color/gray"
+                    android:textStyle="bold">
+                </androidx.appcompat.widget.AppCompatToggleButton>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/close"
+                    android:text="Close"
+                    android:fontFamily="@font/nexaregular"
+                    android:textColor="@color/gray"
+                    android:textStyle="bold">
+                </androidx.appcompat.widget.AppCompatButton>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
