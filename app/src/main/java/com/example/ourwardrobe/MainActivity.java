@@ -192,18 +192,31 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+
             case R.id.accset:
                 Intent a = new Intent(this, accountSettings.class);
+
                 this.startActivity(a);
                 return true;
+
             case R.id.wardset:
                 Intent b = new Intent(this, wardrobesettings.class);
+
+                User user = ApplicationContext.getInstance().getUser();
+                Wardrobe currWardrobe = ApplicationContext.getInstance().getWardrobe();
+
+                if (currWardrobe.getAdminId() == user.getId() && !currWardrobe.getWardrobeType().equals("Personal"))
+                    b = new Intent(this, adminsettings.class);
+
                 this.startActivity(b);
                 return true;
+
             case R.id.logout:
                 Intent c = new Intent(this, loginscreen.class);
+
                 this.startActivity(c);
                 return true;
+
             default:
                 return false;
         }

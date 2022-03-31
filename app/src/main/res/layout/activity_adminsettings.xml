@@ -179,16 +179,18 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/leaveFamily"
                 android:layout_centerInParent="true"
-                android:layout_margin="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/delete_button"
+                android:elevation="3dp"
                 android:fontFamily="@font/nexaregular"
                 android:text="Delete Family"
                 android:textColor="@color/whitesmoke"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintVertical_chainStyle="packed"
-                android:elevation="3dp">
-            </androidx.appcompat.widget.AppCompatButton>
+                app:layout_constraintVertical_chainStyle="packed"></androidx.appcompat.widget.AppCompatButton>
         </RelativeLayout>
     </ScrollView>
 

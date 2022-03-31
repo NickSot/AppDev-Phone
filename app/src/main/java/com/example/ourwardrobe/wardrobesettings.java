@@ -237,13 +237,14 @@ public class wardrobesettings extends AppCompatActivity {
     EditText editCreateText, editJoinText;
     TextView textView, createFamily;
     Button leaveBtn, submitBtnJoin, submitBtnInit;
+    protected Button deleteBtn;
     private ImageView backBtn;
     RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wardrobesettings);
+        setContentView(R.layout.activity_adminsettings);
 
         textView = (TextView) findViewById(R.id.textJoin);
         editCreateText = (EditText) findViewById(R.id.createWard);
@@ -253,6 +254,10 @@ public class wardrobesettings extends AppCompatActivity {
         submitBtnInit = (Button) findViewById(R.id.submitBtnInit);
         backBtn = (ImageView) findViewById(R.id.backBtn);
         createFamily = (TextView) findViewById(R.id.textCreate);
+        deleteBtn = (Button) findViewById(R.id.deleteFamily);
+
+        deleteBtn.setVisibility(View.INVISIBLE);
+        deleteBtn.setEnabled(false);
 
         recyclerView = findViewById(R.id.familyRecycler);
         List<userModel> userModelList = new ArrayList<>();

@@ -9,6 +9,7 @@ public class Wardrobe {
     private String wardrobeType;
     private Long adminId;
     private ArrayList<Clothe> clothes = new ArrayList<>();
+    private ArrayList<User> users = new ArrayList<>();
 
     public Wardrobe(Long wId, String nickname, String creationTime, String wardrobeType, Long adminId) {
         this.wId = wId;
@@ -49,4 +50,10 @@ public class Wardrobe {
     public String getWardrobeType() {
         return wardrobeType;
     }
+
+    public Long getAdminId() {
+        return adminId;
+    }
+
+    public ArrayList<User> getUsers() { return users; }
 }
