@@ -110,8 +110,6 @@ public class GetClothesRequest extends AsyncTask<Void, Void, Void> {
                 e.printStackTrace();
             }
 
-            int length = clotheObjectArray.length();
-
             for (int i = 0; i < clotheObjectArray.length(); i++) {
 
                 try {

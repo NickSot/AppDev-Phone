@@ -65,8 +65,9 @@ public class Gallery extends AppCompatActivity {
                 wardrobeRequest.put("uPassword", user.getPassword());
                 wardrobeRequest.put("originalWardrobeId", originalWardrobeId);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                image.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                wardrobeRequest.put("image", Base64.encodeToString(stream.toByteArray(), 1));
+                image.compress(Bitmap.CompressFormat.PNG, 1, stream);
+                String compressedImage = Base64.encodeToString(stream.toByteArray(), 1);
+                wardrobeRequest.put("image", compressedImage);
                 wardrobeRequest.put("clothType", clotheType);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -116,6 +117,25 @@ public class Gallery extends AppCompatActivity {
             }
         }
     }
+
+    private static Bitmap reduceBitmapSize(Bitmap bitmap, int MAX_SIZE) {
+        double ratioSquare;
+        int bitmapHeight, bitmapWidth;
+
+        bitmapHeight = bitmap.getHeight();
+        bitmapWidth = bitmap.getWidth();
+        ratioSquare = (bitmapHeight * bitmapWidth) / MAX_SIZE;
+
+        if (ratioSquare <= 1)
+            return bitmap;
+        double ratio = Math.sqrt(ratioSquare);
+
+        int requiredHeight = (int) Math.round(bitmapHeight / ratio);
+        int requiredWidth = (int) Math.round(bitmapWidth / ratio);
+
+        return Bitmap.createScaledBitmap(bitmap, requiredWidth, requiredHeight, true);
+    }
+
 
     private Button btn;
     int PICK_IMAGE_MULTIPLE = 1;
@@ -234,19 +254,8 @@ public class Gallery extends AppCompatActivity {
                 if (data.getData() != null) {
 
                     mImageUri = data.getData();
-
-                    // Get the cursor
-                    Cursor cursor = getContentResolver().query(mImageUri,
-                            filePathColumn, null, null, null);
-                    // Move to first row
-                    cursor.moveToFirst();
-
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    String imageFile = cursor.getString(columnIndex);
-                    clotheImage = BitmapFactory.decodeFile(imageFile);
-                    cursor.close();
-
-//                    ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
+                    clotheImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), mImageUri);
+                    clotheImage = reduceBitmapSize(clotheImage, 16000);
                     mArrayUri.add(mImageUri);
                     galleryAdapter = new gv_item(getApplicationContext(), mArrayUri);
                     gvGallery.setAdapter(galleryAdapter);
@@ -263,16 +272,10 @@ public class Gallery extends AppCompatActivity {
 
                             ClipData.Item item = mClipData.getItemAt(i);
                             Uri uri = item.getUri();
-                            mArrayUri.add(uri);
-                            // Get the cursor
-                            Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
-                            // Move to first row
-                            cursor.moveToFirst();
 
-                            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                            clotheImage = BitmapFactory.decodeFile(cursor.getString(columnIndex));
+                            clotheImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                            clotheImage = reduceBitmapSize(clotheImage, 16000);
                             imagesEncodedList.add(clotheImage);
-                            cursor.close();
 
                             galleryAdapter = new gv_item(getApplicationContext(), mArrayUri);
                             gvGallery.setAdapter(galleryAdapter);
@@ -296,7 +299,4 @@ public class Gallery extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
-
-
-
 }
