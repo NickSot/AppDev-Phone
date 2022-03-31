@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,56 +7,61 @@
     tools:context=".accountSettings"
     android:background="@color/white">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="30dp"
-        android:elevation="3dp"
-        android:background="@drawable/settingsbackground"
-        android:clipToOutline="true">
+        android:layout_margin="30dp">
 
-        <ImageView
-            android:id="@+id/backBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/ic_baseline_arrow_back_ios_new_24">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:elevation="3dp"
+            android:background="@drawable/settingsbackground"
+            android:clipToOutline="true"
+            android:gravity="center">
 
-        </ImageView>
+            <ImageView
+                android:id="@+id/backBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_baseline_arrow_back_ios_new_24">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/changePassword"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/btndesign"
-            android:fontFamily="@font/nexaregular"
-            android:text="Change Password"
-            android:textColor="@color/whitesmoke"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintVertical_chainStyle="packed">
-        </androidx.appcompat.widget.AppCompatButton>
+            </ImageView>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/deleteButton"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
-            android:layout_below="@id/changePassword"
-            android:layout_centerInParent="true"
-            android:layout_margin="20dp"
-            android:background="@drawable/delete_button"
-            android:fontFamily="@font/nexaregular"
-            android:text="Delete Account"
-            android:textColor="@color/whitesmoke"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintVertical_chainStyle="packed">
-        </androidx.appcompat.widget.AppCompatButton>
-    </RelativeLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/changePassword"
+                android:layout_below="@+id/backBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/btndesign"
+                android:fontFamily="@font/nexaregular"
+                android:text="Change Password"
+                android:textColor="@color/whitesmoke"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_margin="20dp"
+                app:layout_constraintVertical_chainStyle="packed">
+            </androidx.appcompat.widget.AppCompatButton>
 
-</LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/deleteButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/changePassword"
+                android:layout_centerInParent="true"
+                android:background="@drawable/delete_button"
+                android:fontFamily="@font/nexaregular"
+                android:text="Delete Account"
+                android:textColor="@color/whitesmoke"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_margin="20dp"
+                app:layout_constraintVertical_chainStyle="packed">
+            </androidx.appcompat.widget.AppCompatButton>
+        </RelativeLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
