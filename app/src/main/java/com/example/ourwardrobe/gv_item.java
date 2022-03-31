@@ -13,8 +13,6 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 public class gv_item extends BaseAdapter {
-
-
     private Context ctx;
     private int pos;
     private LayoutInflater inflater;
@@ -56,6 +54,4 @@ public class gv_item extends BaseAdapter {
 
         return itemView;
     }
-
-
 }

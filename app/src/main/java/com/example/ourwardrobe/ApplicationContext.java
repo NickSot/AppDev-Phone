@@ -29,6 +29,8 @@ public class ApplicationContext {
     private User user;
     private Wardrobe currentWardrobe;
 
+    private ArrayList<Bitmap> outfitCreatorImages = new ArrayList<>();
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void getUserInfo() {
         int responseCode = -1;
@@ -154,5 +156,18 @@ public class ApplicationContext {
 
     public Wardrobe getWardrobe() {
         return currentWardrobe;
+    }
+
+    public void addImageToOutfit(Bitmap image) {
+        if (outfitCreatorImages.size() <= 9)
+            outfitCreatorImages.add(image);
+    }
+
+    public void removeImageFromOutfit(Bitmap image) {
+        outfitCreatorImages.remove(image);
+    }
+
+    public ArrayList<Bitmap> getOutfitImages() {
+        return outfitCreatorImages;
     }
 }

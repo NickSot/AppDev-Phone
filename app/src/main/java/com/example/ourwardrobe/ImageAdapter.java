@@ -15,10 +15,14 @@ public class ImageAdapter extends BaseAdapter {
 
     private List<Bitmap> mThumbIds;
     private Context mContext;
+    private int width;
+    private int height;
 
-    public ImageAdapter(List<Bitmap> mThumbIds, Context mContext) {
+    public ImageAdapter(List<Bitmap> mThumbIds, Context mContext, int width, int height) {
         this.mContext = mContext;
         this.mThumbIds = mThumbIds;
+        this.width = width;
+        this.height = height;
     }
 
     @Override
@@ -42,7 +46,8 @@ public class ImageAdapter extends BaseAdapter {
 
         if(imageView == null) {
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new ViewGroup.LayoutParams(525, 650));
+//            imageView.setLayoutParams(new ViewGroup.LayoutParams(525, 650));
+            imageView.setLayoutParams(new ViewGroup.LayoutParams(width, height));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
 
