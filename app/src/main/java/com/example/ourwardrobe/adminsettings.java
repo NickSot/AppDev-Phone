@@ -87,7 +87,7 @@ public class adminsettings extends wardrobesettings {
         }
     }
 
-    @Overrides
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
