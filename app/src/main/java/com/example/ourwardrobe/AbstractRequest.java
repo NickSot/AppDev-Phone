@@ -17,6 +17,8 @@ import java.net.URL;
 public abstract class AbstractRequest extends AsyncTask <Void, Void, Void> {
 //    192.168.56.1:3000
 //    192.168.0.119:3000
+    // 10.30.61.13
+
     private String socket;
     private String url;
     private String requestParam;
@@ -41,7 +43,7 @@ public abstract class AbstractRequest extends AsyncTask <Void, Void, Void> {
         this.url = url;
         this.requestParam = requestParam;
         this.requestMethod = requestMethod;
-        this.socket = "http://192.168.0.119:3000";
+        this.socket = "http://10.30.61.13:3000";
     }
 
     @Override

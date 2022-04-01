@@ -61,7 +61,7 @@ public class Camera extends AppCompatActivity {
                 wardrobeRequest.put("uNickname", user.getNickname());
                 wardrobeRequest.put("uPassword", user.getPassword());
                 wardrobeRequest.put("originalWardrobeId", originalWardrobeId);
-                
+
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 image.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 wardrobeRequest.put("image", Base64.encodeToString(stream.toByteArray(), 1));
@@ -73,7 +73,7 @@ public class Camera extends AppCompatActivity {
             URL wardrobeUrl = null;
 
             try {
-                wardrobeUrl = new URL("http://192.168.0.119:3000/clothes/register");
+                wardrobeUrl = new URL("http://10.30.61.13:3000/clothes/register");
 
                 try {
 
@@ -243,7 +243,7 @@ public class Camera extends AppCompatActivity {
         if(requestCode==101){
             clotheImage = (Bitmap) data.getExtras().get("data");
             Bitmap bitmap= clotheImage;
-            bitmap = reduceBitmapSize(bitmap, 4000);
+//            bitmap = reduceBitmapSize(bitmap, 4000);
             img.setImageBitmap(bitmap);
         }
     }

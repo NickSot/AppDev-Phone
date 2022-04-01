@@ -63,15 +63,15 @@ public class GetClothesRequest extends AbstractRequest {
                 try {
                     JSONObject obj = clotheObjectArray.getJSONObject(i);
 
-                    Long ogId = Long.valueOf(obj.get("OriginalWardrobeId").toString());
-                    String clotheType = obj.get("ClothType").toString();
+                    Long ogId = Long.valueOf(obj.get("originalWardrobeId").toString());
+                    String clotheType = obj.get("clothType").toString();
 
                     if (!clotheType.equals(this.clotheType))
                         continue;
 
                     Long cId = Long.valueOf(obj.get("cId").toString());
 
-                    byte[] imageBytes = Base64.decode(obj.get("Image").toString(), 1);
+                    byte[] imageBytes = Base64.decode(obj.get("image").toString(), 1);
                     Bitmap image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
 
                     Clothe c = new Clothe(cId, clotheType, image, ogId);
