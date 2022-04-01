@@ -2,6 +2,7 @@ package com.example.ourwardrobe;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,8 +28,10 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.stream.Collectors;
 
 import outwardrobemodels.User;
+import outwardrobemodels.Wardrobe;
 
 public class wardrobesettings extends AppCompatActivity {
 
@@ -241,6 +245,7 @@ public class wardrobesettings extends AppCompatActivity {
     private ImageView backBtn;
     RecyclerView recyclerView;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -262,57 +267,69 @@ public class wardrobesettings extends AppCompatActivity {
         recyclerView = findViewById(R.id.familyRecycler);
         List<userModel> userModelList = new ArrayList<>();
 
-        String[] names = {"Jessica", "Amy", "Chantal", "Emily", "Christie", "Annabelle", "Joan"};
-        RecyclerViewAdapter usersAdapter;
+        GetUsersOfWardrobeRequest req = new GetUsersOfWardrobeRequest(ApplicationContext.getInstance().getWardrobe().getwId());
+        req.execute(() -> {
+            ArrayList<String> names = new ArrayList<>();
 
-        submitBtnJoin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.println(Log.ERROR, "debug", editJoinText.getText().toString());
-                JoinWardrobeRequest request = new JoinWardrobeRequest(Integer.valueOf(editJoinText.getText().toString()));
-                request.execute();
+            Wardrobe w = ApplicationContext.getInstance().getWardrobe();
+            if (w != null)
+                names = (ArrayList<String>) w.getUsers().stream()
+                        .map(
+                                p -> p.getId() == ApplicationContext.getInstance().getWardrobe().getAdminId()
+                                        ? p.getNickname() + " [Admin]" : p.getNickname())
+                        .collect(Collectors.toList());
+
+            RecyclerViewAdapter usersAdapter;
+
+            submitBtnJoin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.println(Log.ERROR, "debug", editJoinText.getText().toString());
+                    JoinWardrobeRequest request = new JoinWardrobeRequest(Integer.valueOf(editJoinText.getText().toString()));
+                    request.execute();
+                }
+            });
+
+            submitBtnInit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    createFamily.setText("ID: " + editCreateText.getText());
+
+                    CreateWardrobeRequest request = new CreateWardrobeRequest(editCreateText.getText().toString());
+                    request.execute();
+                }
+            });
+
+            leaveBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    LeaveWardrobeRequest request = new LeaveWardrobeRequest(ApplicationContext.getInstance().getWardrobe().getwId());
+                    request.execute();
+                }
+            });
+
+            backBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(wardrobesettings.this, MainActivity.class );
+                    startActivity(intent);
+                }
+            });
+
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+            recyclerView.setLayoutManager(linearLayoutManager);
+            recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+            for (String s:names) {
+                userModel userModel = new userModel(s);
+
+                userModelList.add(userModel);
             }
+
+            usersAdapter = new RecyclerViewAdapter(userModelList);
+            recyclerView.setAdapter(usersAdapter);
         });
-
-        submitBtnInit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createFamily.setText("ID: " + editCreateText.getText());
-
-                CreateWardrobeRequest request = new CreateWardrobeRequest(editCreateText.getText().toString());
-                request.execute();
-            }
-        });
-
-        leaveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LeaveWardrobeRequest request = new LeaveWardrobeRequest(ApplicationContext.getInstance().getWardrobe().getwId());
-                request.execute();
-            }
-        });
-
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(wardrobesettings.this, MainActivity.class );
-                startActivity(intent);
-            }
-        });
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-
-        for (String s:names) {
-            userModel userModel = new userModel(s);
-
-            userModelList.add(userModel);
-        }
-
-        usersAdapter = new RecyclerViewAdapter(userModelList);
-        recyclerView.setAdapter(usersAdapter);
     }
 }

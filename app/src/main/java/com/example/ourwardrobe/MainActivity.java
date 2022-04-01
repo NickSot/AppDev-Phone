@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import outwardrobemodels.User;
 import outwardrobemodels.Wardrobe;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     String[] wardrobeFamilies = {"Personal Wardrobe", "Wardrobe Family 1", "Wardrobe Family 2", "Wardrobe Family 3"};
     RecyclerView recyclerView;
 
-    @SuppressLint("NewApi")
+    @SuppressLint({"NewApi", "WrongThread"})
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,15 +87,32 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.color_spinner_layout, wardrobeFamilies);
         arrayAdapter.setDropDownViewResource(R.layout.color_spinner_dropdown);
         spin.setAdapter(arrayAdapter);
-        if (spin.isSelected())
+
+        spin.setSelection(0);
+        spin.setSelected(true);
+
+        if (spin.isSelected()) {
             ApplicationContext.getInstance().setWardrobe(Long.valueOf(spin.getSelectedItem().toString().split("ID: ")[1]));
 
-        Wardrobe w = ApplicationContext.getInstance().getWardrobe();
+            GetUsersOfWardrobeRequest usersOfWardrobeRequest = new GetUsersOfWardrobeRequest(ApplicationContext.getInstance().getWardrobe().getwId());
+
+            usersOfWardrobeRequest.doInBackground(null);
+            usersOfWardrobeRequest.onPostExecute(null);
+        }
 
         recyclerView = findViewById(R.id.familyRecycler);
         List<userModel> userModelList = new ArrayList<>();
 
-        String[] names = {"Jessica", "Amy", "Chantal", "Emily", "Christie", "Annabelle", "Joan"};
+        ArrayList<String> names = new ArrayList<>();
+
+        Wardrobe w = ApplicationContext.getInstance().getWardrobe();
+        if (w != null)
+            names = (ArrayList<String>) w.getUsers().stream()
+                    .map(
+                        p -> p.getId() == ApplicationContext.getInstance().getWardrobe().getAdminId()
+                            ? p.getNickname() + " [Admin]" : p.getNickname())
+                    .collect(Collectors.toList());
+
         RecyclerViewAdapter usersAdapter;
 
         camera.setOnClickListener(new View.OnClickListener() {
@@ -172,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
-        for (String s:names) {
+        for (String s: names) {
             userModel userModel = new userModel(s);
 
             userModelList.add(userModel);
@@ -228,8 +246,39 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         final Intent intent;
 
         ApplicationContext.getInstance().setWardrobe(Long.valueOf(adapterView.getSelectedItem().toString().split("ID: ")[1]));
-        Wardrobe w = ApplicationContext.getInstance().getWardrobe();
+        GetUsersOfWardrobeRequest req = new GetUsersOfWardrobeRequest(ApplicationContext.getInstance().getWardrobe().getwId());
+        req.doInBackground();
+        req.onPostExecute(null);
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+        recyclerView = findViewById(R.id.familyRecycler);
+
+        List<userModel> userModelList = new ArrayList<>();
+        ArrayList<String> names = new ArrayList<>();
+
+        Wardrobe w = ApplicationContext.getInstance().getWardrobe();
+        if (w != null)
+            names = (ArrayList<String>) w.getUsers().stream()
+                    .map(
+                            p -> p.getId() == ApplicationContext.getInstance().getWardrobe().getAdminId()
+                                    ? p.getNickname() + " [Admin]" : p.getNickname())
+                    .collect(Collectors.toList());
+
+        RecyclerViewAdapter usersAdapter;
+
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+        for (String s: names) {
+            userModel userModel = new userModel(s);
+
+            userModelList.add(userModel);
+        }
+
+        usersAdapter = new RecyclerViewAdapter(userModelList);
+        recyclerView.setAdapter(usersAdapter);
 //        switch (position){
 //            case 1:
 //                intent = new Intent(MainActivity.this, MainActivity.class);

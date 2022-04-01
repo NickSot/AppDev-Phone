@@ -3,8 +3,8 @@ package com.example.ourwardrobe;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.telecom.Call;
 import android.util.Base64;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,18 +17,20 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 
 import outwardrobemodels.Clothe;
+import outwardrobemodels.User;
+import outwardrobemodels.Wardrobe;
 
-public class GetClothesRequest extends AsyncTask<Void, Void, Void> {
-    private Long wId;
-    private String clotheType;
-
+public class GetUsersOfWardrobeRequest extends AsyncTask<Void, Void, Void> {
     private int responseCode;
     private String responseMessage;
 
-    private ArrayList<Clothe> clothes = new ArrayList<>();
+    private Long wId;
+
+    public GetUsersOfWardrobeRequest(Long wId) {
+        this.wId = wId;
+    }
 
     private Callback cb;
 
@@ -36,15 +38,8 @@ public class GetClothesRequest extends AsyncTask<Void, Void, Void> {
         this.cb = cb;
     }
 
-    public GetClothesRequest(Long wId, String clotheType) {
-        this.wId = wId;
-        this.clotheType = clotheType;
-    }
-
     @Override
     protected Void doInBackground(Void... voids) {
-        // Send the request to retrieve the clothes of that particular wardrobe
-
         JSONObject request = new JSONObject();
 
         try {
@@ -88,7 +83,6 @@ public class GetClothesRequest extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPostExecute(Void unused) {
-        // Set the image array
         if (responseCode == 200) {
             JSONObject wardrobeObject = null;
 
@@ -98,41 +92,31 @@ public class GetClothesRequest extends AsyncTask<Void, Void, Void> {
                 e.printStackTrace();
             }
 
-            JSONArray clotheObjectArray = null;
+            JSONArray usersObjectArray = null;
 
             try {
-                clotheObjectArray = wardrobeObject.getJSONArray("clothList");
+                usersObjectArray = wardrobeObject.getJSONArray("userList");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            for (int i = 0; i < clotheObjectArray.length(); i++) {
+            ApplicationContext.getInstance().getWardrobe().getUsers().clear();
 
+            for (int i = 0; i < usersObjectArray.length(); i++) {
                 try {
-                    JSONObject obj = clotheObjectArray.getJSONObject(i);
+                    JSONObject obj = usersObjectArray.getJSONObject(i);
 
-                    Long ogId = Long.valueOf(obj.get("OriginalWardrobeId").toString());
-                    String clotheType = obj.get("ClothType").toString();
+                    Long uId = Long.valueOf(obj.get("uId").toString());
+                    String nickname = obj.get("Nickname").toString();
 
-                    if (!clotheType.equals(this.clotheType))
-                        continue;
-
-                    Long cId = Long.valueOf(obj.get("cId").toString());
-
-                    byte[] imageBytes = Base64.decode(obj.get("Image").toString(), 1);
-                    Bitmap image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-
-                    Clothe c = new Clothe(cId, clotheType, image, ogId);
-                    clothes.add(c);
+                    ApplicationContext.getInstance().getWardrobe().addUser(uId, nickname);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
 
-            ApplicationContext.getInstance().getWardrobe().getClothes().clear();
-            ApplicationContext.getInstance().getWardrobe().getClothes().addAll(clothes);
-
-            cb.function();
+            if (cb != null)
+                cb.function();
         }
     }
 }
