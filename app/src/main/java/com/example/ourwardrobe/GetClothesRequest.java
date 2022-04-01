@@ -21,73 +21,25 @@ import java.util.ArrayList;
 
 import outwardrobemodels.Clothe;
 
-public class GetClothesRequest extends AsyncTask<Void, Void, Void> {
+public class GetClothesRequest extends AbstractRequest {
     private Long wId;
     private String clotheType;
 
-    private int responseCode;
-    private String responseMessage;
-
     private ArrayList<Clothe> clothes = new ArrayList<>();
-
-    private Callback cb;
 
     public void setCallback(Callback cb) {
         this.cb = cb;
     }
 
     public GetClothesRequest(Long wId, String clotheType) {
+        super("wardrobes/", String.valueOf(wId), "POST");
+
         this.wId = wId;
         this.clotheType = clotheType;
     }
 
     @Override
-    protected Void doInBackground(Void... voids) {
-        // Send the request to retrieve the clothes of that particular wardrobe
-
-        JSONObject request = new JSONObject();
-
-        try {
-            request.put("uNickname", ApplicationContext.getInstance().getUser().getNickname());
-            request.put("uPassword", ApplicationContext.getInstance().getUser().getPassword());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        URL url = null;
-
-        try {
-            url = new URL("http://192.168.56.1:3000/wardrobes/" + String.valueOf(wId));
-
-            try {
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestProperty("User-Agent", "Chrome");
-                connection.setRequestProperty("Content-type", "application/json");
-                connection.setRequestMethod("POST");
-                connection.setDoOutput(true);
-                connection.setConnectTimeout(15000);
-                connection.setReadTimeout(15000);
-
-                DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-                wr.writeBytes(request.toString());
-                wr.flush();
-                wr.close();
-
-                responseCode = connection.getResponseCode();
-                responseMessage = new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine();
-            } catch (IOException e) {
-//                    Toast.makeText(loginscreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-
-        } catch (MalformedURLException e) {
-//                Toast.makeText(loginscreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-
-        return null;
-    }
-
-    @Override
-    protected void onPostExecute(Void unused) {
+    protected void afterRequestSend() {
         // Set the image array
         if (responseCode == 200) {
             JSONObject wardrobeObject = null;
@@ -132,7 +84,8 @@ public class GetClothesRequest extends AsyncTask<Void, Void, Void> {
             ApplicationContext.getInstance().getWardrobe().getClothes().clear();
             ApplicationContext.getInstance().getWardrobe().getClothes().addAll(clothes);
 
-            cb.function();
+            if (cb != null)
+                cb.function();
         }
     }
 }

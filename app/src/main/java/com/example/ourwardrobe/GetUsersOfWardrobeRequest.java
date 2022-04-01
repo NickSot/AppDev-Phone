@@ -22,67 +22,16 @@ import outwardrobemodels.Clothe;
 import outwardrobemodels.User;
 import outwardrobemodels.Wardrobe;
 
-public class GetUsersOfWardrobeRequest extends AsyncTask<Void, Void, Void> {
-    private int responseCode;
-    private String responseMessage;
-
+public class GetUsersOfWardrobeRequest extends AbstractRequest {
     private Long wId;
 
     public GetUsersOfWardrobeRequest(Long wId) {
+        super("wardrobes/", String.valueOf(wId), "POST");
         this.wId = wId;
     }
 
-    private Callback cb;
-
-    public void setCallback(Callback cb) {
-        this.cb = cb;
-    }
-
     @Override
-    protected Void doInBackground(Void... voids) {
-        JSONObject request = new JSONObject();
-
-        try {
-            request.put("uNickname", ApplicationContext.getInstance().getUser().getNickname());
-            request.put("uPassword", ApplicationContext.getInstance().getUser().getPassword());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        URL url = null;
-
-        try {
-            url = new URL("http://192.168.56.1:3000/wardrobes/" + String.valueOf(wId));
-
-            try {
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestProperty("User-Agent", "Chrome");
-                connection.setRequestProperty("Content-type", "application/json");
-                connection.setRequestMethod("POST");
-                connection.setDoOutput(true);
-                connection.setConnectTimeout(15000);
-                connection.setReadTimeout(15000);
-
-                DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-                wr.writeBytes(request.toString());
-                wr.flush();
-                wr.close();
-
-                responseCode = connection.getResponseCode();
-                responseMessage = new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine();
-            } catch (IOException e) {
-//                    Toast.makeText(loginscreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-
-        } catch (MalformedURLException e) {
-//                Toast.makeText(loginscreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-
-        return null;
-    }
-
-    @Override
-    protected void onPostExecute(Void unused) {
+    protected void afterRequestSend() {
         if (responseCode == 200) {
             JSONObject wardrobeObject = null;
 

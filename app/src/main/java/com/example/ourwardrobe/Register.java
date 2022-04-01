@@ -75,8 +75,10 @@ public class Register extends AppCompatActivity {
                     return null;
                 }
 
-                url = new URL("http://192.168.56.1:3000/users/register");
-                wardrobeUrl = new URL("http://192.168.56.1:3000/wardrobes/register");
+//                url = new URL("http://192.168.56.1:3000/users/register");
+//                wardrobeUrl = new URL("http://192.168.56.1:3000/wardrobes/register");
+                url = new URL("http://192.168.0.119:3000/users/register");
+                wardrobeUrl = new URL("http://192.168.0.119:3000/wardrobes/register");
 
                 try {
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();

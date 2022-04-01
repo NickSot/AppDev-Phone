@@ -19,6 +19,9 @@ import androidx.annotation.RequiresApi;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import outwardrobemodels.Clothe;
+import outwardrobemodels.Wardrobe;
+
 public abstract class AbstractClothActivity extends Activity {
     private String clothType;
 
@@ -56,6 +59,7 @@ public abstract class AbstractClothActivity extends Activity {
         request.execute();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void ShowDialogBox(Bitmap item_pos){
         Dialog dialog = new Dialog(this);
 
@@ -66,11 +70,12 @@ public abstract class AbstractClothActivity extends Activity {
         ToggleButton btnAdd = dialog.findViewById(R.id.btnadd);
         Button close = dialog.findViewById(R.id.close);
 
-        String title = "empty for now";
+        Wardrobe w = ApplicationContext.getInstance().getWardrobe();
+        Long wId = w.getClothes().stream().filter(p -> p.getImage().equals(item_pos)).map(p -> p.getOgId()).collect(Collectors.toList()).get(0);
 
-        int index = title.indexOf("/");
-        String name = title.substring(index+1,title.length());
-        userID.setText(name);
+        String title = String.format("Belongs to wardrobe with ID: %s", String.valueOf(wId));
+
+        userID.setText(title);
 
         image.setImageBitmap(item_pos);
 

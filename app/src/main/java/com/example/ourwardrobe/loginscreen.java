@@ -79,7 +79,8 @@ private Button RegisterButton;
             URL url = null;
 
             try {
-                url = new URL("http://192.168.56.1:3000/users/login");
+//                url = new URL("http://192.168.56.1:3000/users/login");
+                url = new URL("http://192.168.0.119:3000/users/login");
 
                 try {
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();

@@ -76,7 +76,7 @@ public class Gallery extends AppCompatActivity {
             URL wardrobeUrl = null;
 
             try {
-                wardrobeUrl = new URL("http://192.168.56.1:3000/clothes/register");
+                wardrobeUrl = new URL("http://192.168.0.119:3000/clothes/register");
 
                 try {
 
@@ -97,6 +97,7 @@ public class Gallery extends AppCompatActivity {
 
                     responseCode = connection.getResponseCode();
 
+                    Log.println(Log.ERROR, "", "");
                 } catch (IOException e) {
 //                    Toast.makeText(Register.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
                 }
@@ -200,7 +201,6 @@ public class Gallery extends AppCompatActivity {
                         request = new CreateClotheRequest(clotheImage, "Dress", ApplicationContext.getInstance().getWardrobe().getwId());
                         break;
                     case "Shoes":
-                        Wardrobe w = ApplicationContext.getInstance().getWardrobe();
                         request = new CreateClotheRequest(clotheImage, "Shoe", ApplicationContext.getInstance().getWardrobe().getwId());
                         break;
                     case "Pants":

@@ -61,6 +61,7 @@ public class Camera extends AppCompatActivity {
                 wardrobeRequest.put("uNickname", user.getNickname());
                 wardrobeRequest.put("uPassword", user.getPassword());
                 wardrobeRequest.put("originalWardrobeId", originalWardrobeId);
+                
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 image.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 wardrobeRequest.put("image", Base64.encodeToString(stream.toByteArray(), 1));
@@ -72,7 +73,7 @@ public class Camera extends AppCompatActivity {
             URL wardrobeUrl = null;
 
             try {
-                wardrobeUrl = new URL("http://192.168.56.1:3000/clothes/register");
+                wardrobeUrl = new URL("http://192.168.0.119:3000/clothes/register");
 
                 try {
 
@@ -112,6 +113,24 @@ public class Camera extends AppCompatActivity {
                 Log.println(Log.ERROR, "important!", String.valueOf(responseCode));
             }
         }
+    }
+
+    private static Bitmap reduceBitmapSize(Bitmap bitmap, int MAX_SIZE) {
+        double ratioSquare;
+        int bitmapHeight, bitmapWidth;
+
+        bitmapHeight = bitmap.getHeight();
+        bitmapWidth = bitmap.getWidth();
+        ratioSquare = (bitmapHeight * bitmapWidth) / MAX_SIZE;
+
+        if (ratioSquare <= 1)
+            return bitmap;
+        double ratio = Math.sqrt(ratioSquare);
+
+        int requiredHeight = (int) Math.round(bitmapHeight / ratio);
+        int requiredWidth = (int) Math.round(bitmapWidth / ratio);
+
+        return Bitmap.createScaledBitmap(bitmap, requiredWidth, requiredHeight, true);
     }
 
 
@@ -224,7 +243,7 @@ public class Camera extends AppCompatActivity {
         if(requestCode==101){
             clotheImage = (Bitmap) data.getExtras().get("data");
             Bitmap bitmap= clotheImage;
-
+            bitmap = reduceBitmapSize(bitmap, 4000);
             img.setImageBitmap(bitmap);
         }
     }
