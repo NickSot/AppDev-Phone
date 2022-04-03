@@ -16,6 +16,8 @@ import android.widget.ToggleButton;
 
 import androidx.annotation.RequiresApi;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -34,7 +36,13 @@ public abstract class AbstractClothActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        GetClothesRequest request = new GetClothesRequest(ApplicationContext.getInstance().getWardrobe().getwId(), clothType);
+        GetClothesRequest request = null;
+
+        try {
+            request = new GetClothesRequest(ApplicationContext.getInstance().getWardrobe().getwId(), clothType);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         request.setCallback(() -> {
             setContentView(R.layout.shirts);

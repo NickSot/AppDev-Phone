@@ -35,136 +35,30 @@ import outwardrobemodels.Wardrobe;
 
 public class wardrobesettings extends AppCompatActivity {
 
-    private class LeaveWardrobeRequest extends AsyncTask<Void, Void, Void> {
-        private int responseCode;
-        private Long wId;
-
-        public LeaveWardrobeRequest(Long wId) {
-            this.wId = wId;
+    private class LeaveWardrobeRequest extends AbstractRequest {
+        public LeaveWardrobeRequest(Long wId) throws JSONException {
+            super("users/register/delWardrobe", "", "DELETE", new JSONObject().put("wId", wId));
         }
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-            if (ApplicationContext.getInstance().getWardrobe().getWardrobeType().equals("Personal"))
-                return null;
-
-            JSONObject wardrobeRequest = new JSONObject();
-
-            try {
-                User user = ApplicationContext.getInstance().getUser();
-
-                wardrobeRequest.put("uNickname", user.getNickname());
-                wardrobeRequest.put("uPassword", user.getPassword());
-                wardrobeRequest.put("wId", wId);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            URL wardrobeUrl = null;
-
-            try {
-                wardrobeUrl = new URL("http://192.168.56.1:3000/users/register/delWardrobe");
-
-                try {
-
-                    HttpURLConnection connection = (HttpURLConnection) wardrobeUrl.openConnection();
-
-                    connection.setRequestProperty("Accept", "*");
-                    connection.setRequestProperty("User-Agent", "Chrome");
-                    connection.setRequestProperty("Content-Type", "application/json");
-                    connection.setDoOutput(true);
-                    connection.setRequestMethod("DELETE");
-                    connection.setConnectTimeout(15000);
-                    connection.setReadTimeout(15000);
-
-                    DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-                    wr.writeBytes(wardrobeRequest.toString());
-                    wr.flush();
-                    wr.close();
-
-                    responseCode = connection.getResponseCode();
-
-                } catch (IOException e) {
-//                    Toast.makeText(Register.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
-                }
-            } catch (MalformedURLException e) {
-//                Toast.makeText(Register.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
-            }
-
-            return null;
-        }
 
         @Override
-        protected void onPostExecute(Void unused) {
+        protected void afterRequestSend() {
             if (responseCode == 200) {
                 Toast.makeText(wardrobesettings.this, "Family Left", Toast.LENGTH_SHORT).show();
                 wardrobesettings.this.startActivity(new Intent(wardrobesettings.this, MainActivity.class));
             }
         }
-
-
     }
 
-    private class CreateWardrobeRequest extends AsyncTask<Void, Void, Void> {
-        private String wardrobeName;
-        private int responseCode;
-
-        public CreateWardrobeRequest(String wardrobeName) {
-            this.wardrobeName = wardrobeName;
+    private class CreateWardrobeRequest extends AbstractRequest {
+        public CreateWardrobeRequest(String wardrobeName) throws JSONException {
+            super("wardrobes/register", "", "POST",
+                    new JSONObject().put("nickname", wardrobeName).put("creationTime", null)
+                        .put("wardrobeType", "Shared"));
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
-            JSONObject wardrobeRequest = new JSONObject();
-
-            try {
-                User user = ApplicationContext.getInstance().getUser();
-
-                wardrobeRequest.put("uNickname", user.getNickname());
-                wardrobeRequest.put("uPassword", user.getPassword());
-                wardrobeRequest.put("nickname", wardrobeName);
-                wardrobeRequest.put("creationTime", null);
-                wardrobeRequest.put("wardrobeType", "Shared");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            URL wardrobeUrl = null;
-
-            try {
-                wardrobeUrl = new URL("http://192.168.56.1:3000/wardrobes/register");
-
-                try {
-
-                    HttpURLConnection connection = (HttpURLConnection) wardrobeUrl.openConnection();
-
-                    connection.setRequestProperty("Accept", "*");
-                    connection.setRequestProperty("User-Agent", "Chrome");
-                    connection.setRequestProperty("Content-Type", "application/json");
-                    connection.setDoOutput(true);
-                    connection.setRequestMethod("POST");
-                    connection.setConnectTimeout(15000);
-                    connection.setReadTimeout(15000);
-
-                    DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-                    wr.writeBytes(wardrobeRequest.toString());
-                    wr.flush();
-                    wr.close();
-
-                    responseCode = connection.getResponseCode();
-
-                } catch (IOException e) {
-//                    Toast.makeText(Register.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
-                }
-            } catch (MalformedURLException e) {
-//                Toast.makeText(Register.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void unused) {
+        protected void afterRequestSend() {
             if (responseCode == 201) {
                 Toast.makeText(wardrobesettings.this, "Family Created", Toast.LENGTH_SHORT).show();
 
@@ -173,65 +67,15 @@ public class wardrobesettings extends AppCompatActivity {
         }
     }
 
-    private class JoinWardrobeRequest extends AsyncTask<Void, Void, Void>{
-        private int responseCode;
-        private int wId;
-
-        public JoinWardrobeRequest(int wId) {
-            this.wId = wId;
+    private class JoinWardrobeRequest extends AbstractRequest{
+        public JoinWardrobeRequest(int wId) throws JSONException {
+            super("users/register/addWardrobe", "",
+                    "POST", new JSONObject().put("wId", wId));
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
-            JSONObject wardrobeRequest = new JSONObject();
-
-            try {
-                User user = ApplicationContext.getInstance().getUser();
-
-                wardrobeRequest.put("uNickname", user.getNickname());
-                wardrobeRequest.put("uPassword", user.getPassword());
-                wardrobeRequest.put("wId", wId);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            URL wardrobeUrl = null;
-
-            try {
-                wardrobeUrl = new URL("http://192.168.56.1:3000/users/register/addWardrobe");
-
-                try {
-
-                    HttpURLConnection connection = (HttpURLConnection) wardrobeUrl.openConnection();
-
-                    connection.setRequestProperty("Accept", "*");
-                    connection.setRequestProperty("User-Agent", "Chrome");
-                    connection.setRequestProperty("Content-Type", "application/json");
-                    connection.setDoOutput(true);
-                    connection.setRequestMethod("POST");
-                    connection.setConnectTimeout(15000);
-                    connection.setReadTimeout(15000);
-
-                    DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-                    wr.writeBytes(wardrobeRequest.toString());
-                    wr.flush();
-                    wr.close();
-
-                    responseCode = connection.getResponseCode();
-
-                } catch (IOException e) {
-//                    Toast.makeText(Register.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
-                }
-            } catch (MalformedURLException e) {
-//                Toast.makeText(Register.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void unused) {
-            if (responseCode == 201) {
+        protected void afterRequestSend() {
+            if (responseCode == 200) {
                 Toast.makeText(wardrobesettings.this, "Family Joined", Toast.LENGTH_SHORT).show();
                 wardrobesettings.this.startActivity(new Intent(wardrobesettings.this, MainActivity.class));
             }
@@ -267,7 +111,14 @@ public class wardrobesettings extends AppCompatActivity {
         recyclerView = findViewById(R.id.familyRecycler);
         List<userModel> userModelList = new ArrayList<>();
 
-        GetUsersOfWardrobeRequest req = new GetUsersOfWardrobeRequest(ApplicationContext.getInstance().getWardrobe().getwId());
+        GetUsersOfWardrobeRequest req = null;
+
+        try {
+            req = new GetUsersOfWardrobeRequest(ApplicationContext.getInstance().getWardrobe().getwId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         req.execute(() -> {
             ArrayList<String> names = new ArrayList<>();
 
@@ -285,7 +136,14 @@ public class wardrobesettings extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Log.println(Log.ERROR, "debug", editJoinText.getText().toString());
-                    JoinWardrobeRequest request = new JoinWardrobeRequest(Integer.valueOf(editJoinText.getText().toString()));
+                    JoinWardrobeRequest request = null;
+
+                    try {
+                        request = new JoinWardrobeRequest(Integer.valueOf(editJoinText.getText().toString()));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                     request.execute();
                 }
             });
@@ -295,7 +153,13 @@ public class wardrobesettings extends AppCompatActivity {
                 public void onClick(View view) {
                     createFamily.setText("ID: " + editCreateText.getText());
 
-                    CreateWardrobeRequest request = new CreateWardrobeRequest(editCreateText.getText().toString());
+                    CreateWardrobeRequest request = null;
+                    try {
+                        request = new CreateWardrobeRequest(editCreateText.getText().toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                     request.execute();
                 }
             });
@@ -303,7 +167,14 @@ public class wardrobesettings extends AppCompatActivity {
             leaveBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    LeaveWardrobeRequest request = new LeaveWardrobeRequest(ApplicationContext.getInstance().getWardrobe().getwId());
+                    LeaveWardrobeRequest request = null;
+
+                    try {
+                        request = new LeaveWardrobeRequest(ApplicationContext.getInstance().getWardrobe().getwId());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                     request.execute();
                 }
             });

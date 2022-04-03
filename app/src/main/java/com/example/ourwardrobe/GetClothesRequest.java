@@ -27,11 +27,7 @@ public class GetClothesRequest extends AbstractRequest {
 
     private ArrayList<Clothe> clothes = new ArrayList<>();
 
-    public void setCallback(Callback cb) {
-        this.cb = cb;
-    }
-
-    public GetClothesRequest(Long wId, String clotheType) {
+    public GetClothesRequest(Long wId, String clotheType) throws JSONException {
         super("wardrobes/", String.valueOf(wId), "POST");
 
         this.wId = wId;

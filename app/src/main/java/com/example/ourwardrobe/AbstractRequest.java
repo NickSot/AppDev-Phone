@@ -13,17 +13,19 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Map;
 
 public abstract class AbstractRequest extends AsyncTask <Void, Void, Void> {
 //    192.168.56.1:3000
 //    192.168.0.119:3000
     // 10.30.61.13
 
-    private String socket;
+    protected String socket;
     private String url;
     private String requestParam;
     private String requestMethod;
     protected Callback cb;
+    JSONObject request = new JSONObject();
 
     public void setCallback(Callback cb) {
         this.cb = cb;
@@ -32,31 +34,53 @@ public abstract class AbstractRequest extends AsyncTask <Void, Void, Void> {
     protected int responseCode;
     protected String responseMessage;
 
-    public AbstractRequest(String socket, String url, String requestParam, String requestMethod) {
+    public AbstractRequest() {
+        this.socket = "http://10.30.61.13:3000";
+    }
+
+    public AbstractRequest(String socket, String url, String requestParam, String requestMethod) throws JSONException {
         this.socket = socket;
         this.url = url;
         this.requestParam = requestParam;
         this.requestMethod = requestMethod;
+
+        if (!(request.has("uNickname") & request.has("uPassword"))){
+            request.put("uNickname", ApplicationContext.getInstance().getUser().getNickname());
+            request.put("uPassword", ApplicationContext.getInstance().getUser().getPassword());
+        }
     }
 
-    public AbstractRequest(String url, String requestParam, String requestMethod) {
+    public AbstractRequest(String url, String requestParam, String requestMethod) throws JSONException {
+        this();
+
+        this.url = url;
+        this.requestParam = requestParam;
+        this.requestMethod = requestMethod;
+
+        if (!(request.has("uNickname") & request.has("uPassword"))){
+            request.put("uNickname", ApplicationContext.getInstance().getUser().getNickname());
+            request.put("uPassword", ApplicationContext.getInstance().getUser().getPassword());
+        }
+    }
+
+    public AbstractRequest(String url, String requestParam, String requestMethod, JSONObject request) throws JSONException {
+        this();
+
         this.url = url;
         this.requestParam = requestParam;
         this.requestMethod = requestMethod;
         this.socket = "http://10.30.61.13:3000";
+
+        this.request = request;
+
+        if (!(request.has("uNickname") & request.has("uPassword"))){
+            request.put("uNickname", ApplicationContext.getInstance().getUser().getNickname());
+            request.put("uPassword", ApplicationContext.getInstance().getUser().getPassword());
+        }
     }
 
     @Override
     protected Void doInBackground(Void... voids) {
-        JSONObject request = new JSONObject();
-
-        try {
-            request.put("uNickname", ApplicationContext.getInstance().getUser().getNickname());
-            request.put("uPassword", ApplicationContext.getInstance().getUser().getPassword());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
         URL url = null;
 
         try {
@@ -92,6 +116,8 @@ public abstract class AbstractRequest extends AsyncTask <Void, Void, Void> {
     @Override
     protected void onPostExecute(Void unused) {
         afterRequestSend();
+        if (cb != null)
+            cb.function();
     }
 
     protected abstract void afterRequestSend();

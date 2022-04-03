@@ -39,82 +39,6 @@ import java.net.URL;
 import outwardrobemodels.User;
 
 public class Camera extends AppCompatActivity {
-    private class CreateClotheRequest extends AsyncTask<Void, Void, Void> {
-        private int responseCode;
-        private Bitmap image;
-        private String clotheType;
-        private Long originalWardrobeId;
-
-        public CreateClotheRequest(Bitmap image, String clotheType, Long originalWardrobeId) {
-            this.image = image;
-            this.clotheType = clotheType;
-            this.originalWardrobeId = originalWardrobeId;
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            JSONObject wardrobeRequest = new JSONObject();
-
-            try {
-                User user = ApplicationContext.getInstance().getUser();
-
-                wardrobeRequest.put("uNickname", user.getNickname());
-                wardrobeRequest.put("uPassword", user.getPassword());
-                wardrobeRequest.put("originalWardrobeId", originalWardrobeId);
-
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                image.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                wardrobeRequest.put("image", Base64.encodeToString(stream.toByteArray(), 1));
-                wardrobeRequest.put("clothType", clotheType);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            URL wardrobeUrl = null;
-
-            try {
-                wardrobeUrl = new URL("http://10.30.61.13:3000/clothes/register");
-
-                try {
-
-                    HttpURLConnection connection = (HttpURLConnection) wardrobeUrl.openConnection();
-
-                    connection.setRequestProperty("Accept", "*");
-                    connection.setRequestProperty("User-Agent", "Chrome");
-                    connection.setRequestProperty("Content-Type", "application/json");
-                    connection.setDoOutput(true);
-                    connection.setRequestMethod("POST");
-                    connection.setConnectTimeout(15000);
-                    connection.setReadTimeout(15000);
-
-                    DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-                    wr.writeBytes(wardrobeRequest.toString());
-                    wr.flush();
-                    wr.close();
-
-                    responseCode = connection.getResponseCode();
-
-                } catch (IOException e) {
-//                    Toast.makeText(Register.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
-                }
-            } catch (MalformedURLException e) {
-//                Toast.makeText(Register.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void unused) {
-            if (responseCode == 201) {
-                Toast.makeText(Camera.this,"Successfully Submitted ", Toast.LENGTH_SHORT).show();
-            }
-            else{
-                Log.println(Log.ERROR, "important!", String.valueOf(responseCode));
-            }
-        }
-    }
-
     private static Bitmap reduceBitmapSize(Bitmap bitmap, int MAX_SIZE) {
         double ratioSquare;
         int bitmapHeight, bitmapWidth;
@@ -206,29 +130,46 @@ public class Camera extends AppCompatActivity {
             public void onClick(View view) {
                 CreateClotheRequest request = null;
 
-                switch (spinner.getSelectedItem().toString()) {
-                    case "Shirts":
-                        request = new CreateClotheRequest(clotheImage, "Shirt", ApplicationContext.getInstance().getWardrobe().getwId());
-                        break;
-                    case "Skirts":
-                        request = new CreateClotheRequest(clotheImage, "Skirt", ApplicationContext.getInstance().getWardrobe().getwId());
-                        break;
-                    case "Dresses":
-                        request = new CreateClotheRequest(clotheImage, "Dress", ApplicationContext.getInstance().getWardrobe().getwId());
-                        break;
-                    case "Shoes":
-                        request = new CreateClotheRequest(clotheImage, "Shoe", ApplicationContext.getInstance().getWardrobe().getwId());
-                        break;
-                    case "Pants":
-                        request = new CreateClotheRequest(clotheImage, "Pants", ApplicationContext.getInstance().getWardrobe().getwId());
-                        break;
-                    case "Jackets":
-                        request = new CreateClotheRequest(clotheImage, "Jacket", ApplicationContext.getInstance().getWardrobe().getwId());
-                        break;
-                    default:
-                        Toast.makeText(Camera.this, "Choose a cloth type, please!", Toast.LENGTH_SHORT).show();
-                        return;
+                ByteArrayOutputStream streamBytes = new ByteArrayOutputStream();
+                clotheImage.compress(Bitmap.CompressFormat.PNG, 100, streamBytes);
+
+                String stream = Base64.encodeToString(streamBytes.toByteArray(), 1);
+
+                try {
+                    switch (spinner.getSelectedItem().toString()) {
+                        case "Shirts":
+                            request = new CreateClotheRequest(stream, "Shirt", ApplicationContext.getInstance().getWardrobe().getwId());
+                            break;
+                        case "Skirts":
+                            request = new CreateClotheRequest(stream, "Skirt", ApplicationContext.getInstance().getWardrobe().getwId());
+                            break;
+                        case "Dresses":
+                            request = new CreateClotheRequest(stream, "Dress", ApplicationContext.getInstance().getWardrobe().getwId());
+                            break;
+                        case "Shoes":
+                            request = new CreateClotheRequest(stream, "Shoe", ApplicationContext.getInstance().getWardrobe().getwId());
+                            break;
+                        case "Pants":
+                            request = new CreateClotheRequest(stream, "Pants", ApplicationContext.getInstance().getWardrobe().getwId());
+                            break;
+                        case "Jackets":
+                            request = new CreateClotheRequest(stream, "Jacket", ApplicationContext.getInstance().getWardrobe().getwId());
+                            break;
+                        default:
+                            Toast.makeText(Camera.this, "Choose a cloth type, please!", Toast.LENGTH_SHORT).show();
+                            return;
+                    }
                 }
+                catch(Exception ex) {
+                    ex.printStackTrace();
+                }
+
+                request.setRequestCallback(() -> {
+                    Toast.makeText(Camera.this,"Successfully Submitted ", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(Camera.this, MainActivity.class);
+                    startActivity(intent);
+                });
 
                 request.execute();
             }

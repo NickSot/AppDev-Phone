@@ -34,6 +34,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,7 +96,13 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         if (spin.isSelected()) {
             ApplicationContext.getInstance().setWardrobe(Long.valueOf(spin.getSelectedItem().toString().split("ID: ")[1]));
 
-            GetUsersOfWardrobeRequest usersOfWardrobeRequest = new GetUsersOfWardrobeRequest(ApplicationContext.getInstance().getWardrobe().getwId());
+            GetUsersOfWardrobeRequest usersOfWardrobeRequest = null;
+
+            try {
+                usersOfWardrobeRequest = new GetUsersOfWardrobeRequest(ApplicationContext.getInstance().getWardrobe().getwId());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
             usersOfWardrobeRequest.doInBackground(null);
             usersOfWardrobeRequest.onPostExecute(null);
@@ -246,7 +254,14 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         final Intent intent;
 
         ApplicationContext.getInstance().setWardrobe(Long.valueOf(adapterView.getSelectedItem().toString().split("ID: ")[1]));
-        GetUsersOfWardrobeRequest req = new GetUsersOfWardrobeRequest(ApplicationContext.getInstance().getWardrobe().getwId());
+
+        GetUsersOfWardrobeRequest req = null;
+        try {
+            req = new GetUsersOfWardrobeRequest(ApplicationContext.getInstance().getWardrobe().getwId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         req.doInBackground();
         req.onPostExecute(null);
 

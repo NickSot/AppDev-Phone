@@ -23,16 +23,17 @@ import java.net.URL;
 
 public class Register extends AppCompatActivity {
 
-    private class RegisterRequest extends AsyncTask<Void, Void, Void> {
+    private class RegisterRequest extends AbstractRequest {
         private String Password;
         private String Nickname;
         private String Email;
         private String RePassword;
 
-        private int responseCode;
         private int responseCodeWardrobe;
 
         public RegisterRequest(String nickname,  String email, String password, String rePassword) {
+            super();
+
             Password = password;
             Nickname = nickname;
             Email = email;
@@ -73,6 +74,7 @@ public class Register extends AppCompatActivity {
                 if (!Password.equals(RePassword)) {
                     responseCode = -1;
                     return null;
+
                 }
 
 //                url = new URL("http://192.168.56.1:3000/users/register");
@@ -126,7 +128,7 @@ public class Register extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(Void _) {
+        protected void afterRequestSend() {
             if (responseCode == 201 && responseCodeWardrobe == 201) {
                 Toast.makeText(Register.this, "Successfully Registered" ,Toast.LENGTH_SHORT).show();
                 Register.this.Login();
@@ -135,7 +137,9 @@ public class Register extends AppCompatActivity {
                 Toast.makeText(Register.this, "Passwords don't match..." ,Toast.LENGTH_SHORT).show();
             }
             else if (responseCode == 404){
-                Toast.makeText(Register.this, "Email does not exist." ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(Register.this, "The email you provided does not exist." ,Toast.LENGTH_SHORT).show();
+            }else if(responseCode == 409){
+                Toast.makeText(Register.this, "Email/Username already exists." ,Toast.LENGTH_SHORT).show();
             }
             else {
                 Toast.makeText(Register.this, "Could not register, something wrong with the server: " + responseCode ,Toast.LENGTH_SHORT).show();

@@ -25,7 +25,7 @@ import outwardrobemodels.Wardrobe;
 public class GetUsersOfWardrobeRequest extends AbstractRequest {
     private Long wId;
 
-    public GetUsersOfWardrobeRequest(Long wId) {
+    public GetUsersOfWardrobeRequest(Long wId) throws JSONException {
         super("wardrobes/", String.valueOf(wId), "POST");
         this.wId = wId;
     }
