@@ -7,12 +7,18 @@ public class Clothe {
     private String clotheType;
     private Bitmap image;
     private Long ogId;
+    private String originalUser;
 
-    public Clothe(Long cId, String clotheType, Bitmap image, Long ogId) {
+    public String getOriginalUser() {
+        return originalUser;
+    }
+
+    public Clothe(Long cId, String clotheType, Bitmap image, Long ogId, String ogUser) {
         this.cId = cId;
         this.clotheType = clotheType;
         this.image = image;
         this.ogId = ogId;
+        this.originalUser = ogUser;
     }
 
     public void setClotheType(String clotheType) {

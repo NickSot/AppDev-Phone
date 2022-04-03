@@ -2,6 +2,7 @@ package com.example.ourwardrobe;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -104,6 +105,8 @@ private Button RegisterButton;
 //
                 Toast.makeText(loginscreen.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
                 openCategory();
+            } else if (responseCode == 404) {
+                Toast.makeText(loginscreen.this, "Wrong username or password", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(loginscreen.this, responseMessage + " "
                         + responseCode, Toast.LENGTH_SHORT).show();

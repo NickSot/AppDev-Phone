@@ -34,66 +34,16 @@ public class accountSettings extends AppCompatActivity {
     private Button deleteBtn, changePassword;
     private ImageView backBtn;
 
-    private class DeleteAccountRequest extends AsyncTask<Void, Void, Void> {
-        int responseCode;
-        String responseMessage;
+    private class DeleteAccountRequest extends AbstractRequest {
 
-        private String Email;
-        private String Password;
-
-        DeleteAccountRequest(String Email, String Password) {
-            this.Email = Email;
-            this.Password = Password;
+        DeleteAccountRequest(String Email, String Password) throws JSONException {
+            super("users/delUser", "", "DELETE", new JSONObject()
+                .put("uNickname", Email)
+                .put("uPassword", Password));
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
-            JSONObject request = new JSONObject();
-
-            try {
-                request.put("uNickname", Email);
-                request.put("uPassword", Password);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            URL url = null;
-
-            try {
-                url = new URL("http://192.168.56.1:3000/users/delUser");
-
-                try {
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestProperty("User-Agent", "Chrome");
-                    connection.setRequestProperty("Content-type", "application/json");
-                    connection.setRequestMethod("DELETE");
-                    connection.setDoOutput(true);
-                    connection.setConnectTimeout(15000);
-                    connection.setReadTimeout(15000);
-
-                    DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-                    wr.writeBytes(request.toString());
-                    wr.flush();
-                    wr.close();
-
-                    Log.println(Log.DEBUG, "req", request.toString());
-
-                    responseCode = connection.getResponseCode();
-                    responseMessage = new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine();
-
-                } catch (IOException e) {
-//                    Toast.makeText(loginscreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-
-            } catch (MalformedURLException e) {
-//                Toast.makeText(loginscreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-
-            return null;
-        }
-
-        @RequiresApi(api = Build.VERSION_CODES.O)
-        protected void onPostExecute(Void param) {
+        protected void afterRequestSend() {
             if (responseCode == 200) {
                 Toast.makeText(accountSettings.this, "Successfully deleted account", Toast.LENGTH_SHORT).show();
                 ApplicationContext.getInstance().setUser(null);
@@ -140,7 +90,14 @@ public class accountSettings extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         User user = ApplicationContext.getInstance().getUser();
-                        DeleteAccountRequest request = new DeleteAccountRequest(user.getNickname(), user.getPassword());
+                        DeleteAccountRequest request = null;
+
+                        try {
+                            request = new DeleteAccountRequest(user.getNickname(), user.getPassword());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                         request.execute();
                         Intent intent = new Intent(accountSettings.this, loginscreen.class);
                         startActivity(intent);

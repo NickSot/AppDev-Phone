@@ -147,7 +147,7 @@ public class Gallery extends AppCompatActivity {
                     ex.printStackTrace();
                 }
 
-                request.setRequestCallback(() -> {
+                request.setCallback(() -> {
                     Toast.makeText(Gallery.this,"Successfully Submitted ", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(Gallery.this, MainActivity.class);

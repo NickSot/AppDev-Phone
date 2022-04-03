@@ -25,6 +25,70 @@ import outwardrobemodels.User;
 import outwardrobemodels.Wardrobe;
 
 public class ApplicationContext {
+    private class GetUserInfoRequest extends AbstractRequest {
+        public GetUserInfoRequest() throws JSONException {
+            super("users/getInfo", "", "POST");
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        @Override
+        protected void afterRequestSend() {
+            if (responseCode == 200) {
+                JSONObject userObject = null;
+
+                try {
+                    userObject = new JSONObject(responseMessage);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                User user = null;
+
+                JSONArray wardrobesObject = null;
+
+                try {
+                    wardrobesObject = userObject.getJSONArray("wardList");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                ArrayList<Wardrobe> wardrobes = new ArrayList<Wardrobe>();
+
+                for (int i = 0; i < wardrobesObject.length(); i++) {
+                    JSONObject obj = null;
+
+                    try {
+                        obj = wardrobesObject.getJSONObject(i);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    Wardrobe w = null;
+
+                    try {
+                        w = new Wardrobe(Long.valueOf(obj.get("wId").toString()), obj.get("Nickname").toString(), obj.get("CreationTime").toString(), obj.get("WardrobeType").toString(), Long.valueOf(obj.get("AdminId").toString()));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    wardrobes.add(w);
+                }
+
+                try {
+                    byte[] bytes = Base64.getDecoder().decode(userObject.get("avatar").toString());
+
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+                    user = new User(Long.valueOf(userObject.get("uId").toString()), userObject.get("nickname").toString(), userObject.get("password").toString(), bitmap, userObject.get("oauthToken").toString(), userObject.get("gender").toString());
+                    user.setWardrobes(wardrobes);
+
+                    ApplicationContext.this.user = user;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     private static ApplicationContext instance;
     private User user;
     private Wardrobe currentWardrobe;
@@ -32,102 +96,17 @@ public class ApplicationContext {
     private ArrayList<Bitmap> outfitCreatorImages = new ArrayList<>();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void getUserInfo() {
-        int responseCode = -1;
-        String responseMessage = "";
-
-        JSONObject request = new JSONObject();
+    public void getUserInfo(Callback cb) {
+        GetUserInfoRequest request = null;
 
         try {
-            request.put("uNickname", user.getNickname());
-            request.put("uPassword", user.getPassword());
+            request = new GetUserInfoRequest();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        URL url = null;
-
-        try {
-            url = new URL("http://192.168.56.1:3000/users/getInfo");
-
-            try {
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestProperty("User-Agent", "Chrome");
-                connection.setRequestProperty("Content-type", "application/json");
-                connection.setRequestMethod("POST");
-                connection.setDoOutput(true);
-                connection.setConnectTimeout(15000);
-                connection.setReadTimeout(15000);
-
-                DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-                wr.writeBytes(request.toString());
-                wr.flush();
-                wr.close();
-
-                responseCode = connection.getResponseCode();
-                responseMessage = new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine();
-
-            } catch (IOException e) {
-//                    Toast.makeText(loginscreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-
-        } catch (MalformedURLException e) {
-//                Toast.makeText(loginscreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-
-        if (responseCode == 200) {
-            JSONObject userObject = null;
-
-            try {
-                userObject = new JSONObject(responseMessage);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            User user = null;
-
-            JSONArray wardrobesObject = null;
-
-            try {
-                wardrobesObject = userObject.getJSONArray("wardList");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            ArrayList<Wardrobe> wardrobes = new ArrayList<Wardrobe>();
-
-            for (int i = 0; i < wardrobesObject.length(); i++) {
-                JSONObject obj = null;
-
-                try {
-                    obj = wardrobesObject.getJSONObject(i);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                Wardrobe w = null;
-
-                try {
-                    w = new Wardrobe(Long.valueOf(obj.get("wId").toString()), obj.get("Nickname").toString(), obj.get("CreationTime").toString(), obj.get("WardrobeType").toString(), Long.valueOf(obj.get("AdminId").toString()));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                wardrobes.add(w);
-            }
-
-            try {
-                byte[] bytes = Base64.getDecoder().decode(userObject.get("avatar").toString());
-
-                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-
-                user = new User(Long.valueOf(userObject.get("uId").toString()), userObject.get("nickname").toString(), userObject.get("password").toString(), bitmap, userObject.get("oauthToken").toString(), userObject.get("gender").toString());
-                user.setWardrobes(wardrobes);
-
-                ApplicationContext.this.user = user;
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+        request.setCallback(cb);
+        request.execute();
     }
 
     private ApplicationContext() {
@@ -164,7 +143,9 @@ public class ApplicationContext {
     }
 
     public void removeImageFromOutfit(Bitmap image) {
-        outfitCreatorImages.remove(image);
+        for (Bitmap img: outfitCreatorImages)
+            if (img.sameAs(image))
+                outfitCreatorImages.remove(img);
     }
 
     public ArrayList<Bitmap> getOutfitImages() {

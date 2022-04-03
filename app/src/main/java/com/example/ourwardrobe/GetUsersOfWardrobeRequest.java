@@ -63,9 +63,6 @@ public class GetUsersOfWardrobeRequest extends AbstractRequest {
                     e.printStackTrace();
                 }
             }
-
-            if (cb != null)
-                cb.function();
         }
     }
 }

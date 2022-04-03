@@ -35,7 +35,7 @@ public abstract class AbstractRequest extends AsyncTask <Void, Void, Void> {
     protected String responseMessage;
 
     public AbstractRequest() {
-        this.socket = "http://10.30.61.13:3000";
+        this.socket = "http://10.30.61.13:3000/";
     }
 
     public AbstractRequest(String socket, String url, String requestParam, String requestMethod) throws JSONException {
@@ -69,7 +69,6 @@ public abstract class AbstractRequest extends AsyncTask <Void, Void, Void> {
         this.url = url;
         this.requestParam = requestParam;
         this.requestMethod = requestMethod;
-        this.socket = "http://10.30.61.13:3000";
 
         this.request = request;
 
@@ -84,7 +83,7 @@ public abstract class AbstractRequest extends AsyncTask <Void, Void, Void> {
         URL url = null;
 
         try {
-            url = new URL(this.socket + "/" + this.url + requestParam);
+            url = new URL(this.socket + this.url + requestParam);
 
             try {
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -116,6 +115,7 @@ public abstract class AbstractRequest extends AsyncTask <Void, Void, Void> {
     @Override
     protected void onPostExecute(Void unused) {
         afterRequestSend();
+
         if (cb != null)
             cb.function();
     }

@@ -164,7 +164,7 @@ public class Camera extends AppCompatActivity {
                     ex.printStackTrace();
                 }
 
-                request.setRequestCallback(() -> {
+                request.setCallback(() -> {
                     Toast.makeText(Camera.this,"Successfully Submitted ", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(Camera.this, MainActivity.class);

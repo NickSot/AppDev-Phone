@@ -79,9 +79,9 @@ public abstract class AbstractClothActivity extends Activity {
         Button close = dialog.findViewById(R.id.close);
 
         Wardrobe w = ApplicationContext.getInstance().getWardrobe();
-        Long wId = w.getClothes().stream().filter(p -> p.getImage().equals(item_pos)).map(p -> p.getOgId()).collect(Collectors.toList()).get(0);
+        String ogUser = w.getClothes().stream().filter(p -> p.getImage().equals(item_pos)).map(p -> p.getOriginalUser()).collect(Collectors.toList()).get(0);
 
-        String title = String.format("Belongs to wardrobe with ID: %s", String.valueOf(wId));
+        String title = String.format("Belongs to user: %s", ogUser);
 
         userID.setText(title);
 
@@ -94,10 +94,14 @@ public abstract class AbstractClothActivity extends Activity {
             }
         });
 
-        if (ApplicationContext.getInstance().getOutfitImages().contains(item_pos))
-            btnAdd.setChecked(true);
-        else
-            btnAdd.setChecked(false);
+        for (Bitmap img: ApplicationContext.getInstance().getOutfitImages()) {
+            if (item_pos.sameAs(img)) {
+                btnAdd.setChecked(true);
+                break;
+            }
+            else
+                btnAdd.setChecked(false);
+        }
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override

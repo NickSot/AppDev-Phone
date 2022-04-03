@@ -8,14 +8,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class CreateClotheRequest extends AbstractRequest {
-    private Callback requestCallback;
-
-    public void setRequestCallback(Callback requestCallback) {
-        this.requestCallback = requestCallback;
-    }
-
     public CreateClotheRequest(String stream, String clotheType, Long originalWardrobeId) throws JSONException {
-        super("/clothes/register", "", "POST", new JSONObject()
+        super("clothes/register/", "", "POST", new JSONObject()
                 .put("uNickname", ApplicationContext.getInstance().getUser().getNickname())
                 .put("uPassword", ApplicationContext.getInstance().getUser().getPassword())
                 .put("originalWardrobeId", originalWardrobeId)
@@ -25,10 +19,7 @@ public class CreateClotheRequest extends AbstractRequest {
 
     @Override
     protected void afterRequestSend() {
-        if (responseCode == 201) {
-            requestCallback.function();
-        }
-        else{
+        if (responseCode != 200){
             Log.println(Log.ERROR, "important!", String.valueOf(responseCode));
         }
     }

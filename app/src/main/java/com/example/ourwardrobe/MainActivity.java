@@ -56,156 +56,157 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        ApplicationContext.getInstance().getUserInfo();
-
-        User user = ApplicationContext.getInstance().getUser();
-
-        Object [] wardrobeNicknames = user.getWardrobes().stream().map(w -> w.getNickname() + ", ID: " + w.getwId().toString()).toArray();
-
-        wardrobeFamilies = (Arrays.copyOf(wardrobeNicknames, wardrobeNicknames.length, String[].class));
-
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.categoryinterface);
+//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+//        StrictMode.setThreadPolicy(policy);
 
-        camera = findViewById(R.id.fabcamera);
-        gallery = findViewById(R.id.fabgallery);
-        camera.bringToFront();
-        gallery.bringToFront();
+        ApplicationContext.getInstance().getUserInfo(() -> {
+            User user = ApplicationContext.getInstance().getUser();
 
-        shirts=findViewById(R.id.shirts);
-        pants=findViewById(R.id.pants);
-        dresses=findViewById(R.id.dresses);
-        shoes=findViewById(R.id.shoes);
-        jackets=findViewById(R.id.jackets);
-        skirts=findViewById(R.id.skirts);
+            Object [] wardrobeNicknames = user.getWardrobes().stream().map(w -> w.getNickname() + ", ID: " + w.getwId().toString()).toArray();
 
-        Spinner spin = (Spinner) findViewById(R.id.wardrobespinner);
-        spin.setOnItemSelectedListener(this);
+            wardrobeFamilies = (Arrays.copyOf(wardrobeNicknames, wardrobeNicknames.length, String[].class));
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.color_spinner_layout, wardrobeFamilies);
-        arrayAdapter.setDropDownViewResource(R.layout.color_spinner_dropdown);
-        spin.setAdapter(arrayAdapter);
+            setContentView(R.layout.categoryinterface);
 
-        spin.setSelection(0);
-        spin.setSelected(true);
+            camera = findViewById(R.id.fabcamera);
+            gallery = findViewById(R.id.fabgallery);
+            camera.bringToFront();
+            gallery.bringToFront();
 
-        if (spin.isSelected()) {
-            ApplicationContext.getInstance().setWardrobe(Long.valueOf(spin.getSelectedItem().toString().split("ID: ")[1]));
+            shirts=findViewById(R.id.shirts);
+            pants=findViewById(R.id.pants);
+            dresses=findViewById(R.id.dresses);
+            shoes=findViewById(R.id.shoes);
+            jackets=findViewById(R.id.jackets);
+            skirts=findViewById(R.id.skirts);
 
-            GetUsersOfWardrobeRequest usersOfWardrobeRequest = null;
+            Spinner spin = (Spinner) findViewById(R.id.wardrobespinner);
+            spin.setOnItemSelectedListener(this);
 
-            try {
-                usersOfWardrobeRequest = new GetUsersOfWardrobeRequest(ApplicationContext.getInstance().getWardrobe().getwId());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.color_spinner_layout, wardrobeFamilies);
+            arrayAdapter.setDropDownViewResource(R.layout.color_spinner_dropdown);
+            spin.setAdapter(arrayAdapter);
 
-            usersOfWardrobeRequest.doInBackground(null);
-            usersOfWardrobeRequest.onPostExecute(null);
-        }
+            spin.setSelection(0);
+            spin.setSelected(true);
 
-        recyclerView = findViewById(R.id.familyRecycler);
-        List<userModel> userModelList = new ArrayList<>();
+            if (spin.isSelected()) {
+                ApplicationContext.getInstance().setWardrobe(Long.valueOf(spin.getSelectedItem().toString().split("ID: ")[1]));
 
-        ArrayList<String> names = new ArrayList<>();
+                GetUsersOfWardrobeRequest usersOfWardrobeRequest = null;
 
-        Wardrobe w = ApplicationContext.getInstance().getWardrobe();
-        if (w != null)
-            names = (ArrayList<String>) w.getUsers().stream()
-                    .map(
-                        p -> p.getId() == ApplicationContext.getInstance().getWardrobe().getAdminId()
-                            ? p.getNickname() + " [Admin]" : p.getNickname())
-                    .collect(Collectors.toList());
+                try {
+                    usersOfWardrobeRequest = new GetUsersOfWardrobeRequest(ApplicationContext.getInstance().getWardrobe().getwId());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-        RecyclerViewAdapter usersAdapter;
+                usersOfWardrobeRequest.setCallback(() -> {
+                    recyclerView = findViewById(R.id.familyRecycler);
+                    List<userModel> userModelList = new ArrayList<>();
 
-        camera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Camera.class);
-                startActivity(intent);
+                    ArrayList<String> names = new ArrayList<>();
+
+                    Wardrobe w = ApplicationContext.getInstance().getWardrobe();
+                    if (w != null)
+                        names = (ArrayList<String>) w.getUsers().stream()
+                                .map(
+                                        p -> p.getId() == ApplicationContext.getInstance().getWardrobe().getAdminId()
+                                                ? p.getNickname() + " [Admin]" : p.getNickname())
+                                .collect(Collectors.toList());
+
+                    RecyclerViewAdapter usersAdapter;
+
+                    camera.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(MainActivity.this, Camera.class);
+                            startActivity(intent);
+                        }
+                    });
+
+                    gallery.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(MainActivity.this, SpinnerNew.class);
+                            startActivity(intent);
+                        }
+                    });
+
+                    shirts.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(MainActivity.this, shirts.class);
+                            startActivity(intent);
+                        }
+                    });
+
+                    pants.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(MainActivity.this, pants.class);
+                            startActivity(intent);
+                        }
+                    });
+
+                    skirts.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(MainActivity.this, skirts.class);
+                            startActivity(intent);
+                        }
+                    });
+
+                    dresses.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(MainActivity.this, dresses.class);
+                            startActivity(intent);
+                        }
+                    });
+
+                    shoes.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(MainActivity.this, shoes.class);
+                            startActivity(intent);
+                        }
+                    });
+
+                    jackets.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(MainActivity.this, jackets.class);
+                            startActivity(intent);
+                        }
+                    });
+
+                    ImageButton oButton = (ImageButton) findViewById(R.id.outfit_creator_button);
+
+                    oButton.setOnClickListener(view -> startActivity
+                            (new Intent(this, OutfitCreator.class)));
+
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+                    linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+                    recyclerView.setLayoutManager(linearLayoutManager);
+                    recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+                    for (String s: names) {
+                        userModel userModel = new userModel(s);
+
+                        userModelList.add(userModel);
+                    }
+
+                    usersAdapter = new RecyclerViewAdapter(userModelList);
+                    recyclerView.setAdapter(usersAdapter);
+                });
+
+                usersOfWardrobeRequest.execute();
             }
         });
-
-        gallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SpinnerNew.class);
-                startActivity(intent);
-            }
-        });
-
-        shirts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, shirts.class);
-                startActivity(intent);
-            }
-        });
-
-        pants.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, pants.class);
-                startActivity(intent);
-            }
-        });
-
-        skirts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, skirts.class);
-                startActivity(intent);
-            }
-        });
-
-        dresses.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, dresses.class);
-                startActivity(intent);
-            }
-        });
-
-        shoes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, shoes.class);
-                startActivity(intent);
-            }
-        });
-
-        jackets.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, jackets.class);
-                startActivity(intent);
-            }
-        });
-
-        ImageButton oButton = (ImageButton) findViewById(R.id.outfit_creator_button);
-
-        oButton.setOnClickListener(view -> startActivity
-                (new Intent(this, OutfitCreator.class)));
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-
-        for (String s: names) {
-            userModel userModel = new userModel(s);
-
-            userModelList.add(userModel);
-        }
-
-        usersAdapter = new RecyclerViewAdapter(userModelList);
-        recyclerView.setAdapter(usersAdapter);
     }
 
     public void showPopup(View v) {
@@ -262,44 +263,39 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             e.printStackTrace();
         }
 
-        req.doInBackground();
-        req.onPostExecute(null);
+        req.setCallback(() -> {
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            recyclerView = findViewById(R.id.familyRecycler);
 
-        recyclerView = findViewById(R.id.familyRecycler);
+            List<userModel> userModelList = new ArrayList<>();
+            ArrayList<String> names = new ArrayList<>();
 
-        List<userModel> userModelList = new ArrayList<>();
-        ArrayList<String> names = new ArrayList<>();
+            Wardrobe w = ApplicationContext.getInstance().getWardrobe();
+            if (w != null)
+                names = (ArrayList<String>) w.getUsers().stream()
+                        .map(
+                                p -> p.getId() == ApplicationContext.getInstance().getWardrobe().getAdminId()
+                                        ? p.getNickname() + " [Admin]" : p.getNickname())
+                        .collect(Collectors.toList());
 
-        Wardrobe w = ApplicationContext.getInstance().getWardrobe();
-        if (w != null)
-            names = (ArrayList<String>) w.getUsers().stream()
-                    .map(
-                            p -> p.getId() == ApplicationContext.getInstance().getWardrobe().getAdminId()
-                                    ? p.getNickname() + " [Admin]" : p.getNickname())
-                    .collect(Collectors.toList());
+            RecyclerViewAdapter usersAdapter;
 
-        RecyclerViewAdapter usersAdapter;
+            recyclerView.setLayoutManager(linearLayoutManager);
+            recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+            for (String s: names) {
+                userModel userModel = new userModel(s);
 
-        for (String s: names) {
-            userModel userModel = new userModel(s);
+                userModelList.add(userModel);
+            }
 
-            userModelList.add(userModel);
-        }
+            usersAdapter = new RecyclerViewAdapter(userModelList);
+            recyclerView.setAdapter(usersAdapter);
+        });
 
-        usersAdapter = new RecyclerViewAdapter(userModelList);
-        recyclerView.setAdapter(usersAdapter);
-//        switch (position){
-//            case 1:
-//                intent = new Intent(MainActivity.this, MainActivity.class);
-//                startActivity(intent);
-//                break;
-//        }
+        req.execute();
     }
 
     @Override

@@ -70,7 +70,9 @@ public class GetClothesRequest extends AbstractRequest {
                     byte[] imageBytes = Base64.decode(obj.get("image").toString(), 1);
                     Bitmap image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
 
-                    Clothe c = new Clothe(cId, clotheType, image, ogId);
+                    String originalUser = obj.get("originalUserName").toString();
+
+                    Clothe c = new Clothe(cId, clotheType, image, ogId, originalUser);
                     clothes.add(c);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -79,9 +81,6 @@ public class GetClothesRequest extends AbstractRequest {
 
             ApplicationContext.getInstance().getWardrobe().getClothes().clear();
             ApplicationContext.getInstance().getWardrobe().getClothes().addAll(clothes);
-
-            if (cb != null)
-                cb.function();
         }
     }
 }
