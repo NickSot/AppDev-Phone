@@ -35,7 +35,7 @@ public abstract class AbstractRequest extends AsyncTask <Void, Void, Void> {
     protected String responseMessage;
 
     public AbstractRequest() {
-        this.socket = "http://10.30.61.13:3000/";
+        this.socket = "http://192.168.233.101:3000/";
     }
 
     public AbstractRequest(String socket, String url, String requestParam, String requestMethod) throws JSONException {

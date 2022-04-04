@@ -1,11 +1,13 @@
 package com.example.ourwardrobe;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -47,6 +49,7 @@ private Button RegisterButton;
             super("users/login", "", "POST", new JSONObject().put("uNickname", Email).put("uPassword", Password));
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         protected void afterRequestSend() {
             if (responseCode == 200) {

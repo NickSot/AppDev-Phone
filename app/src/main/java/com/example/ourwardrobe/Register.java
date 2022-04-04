@@ -79,8 +79,8 @@ public class Register extends AppCompatActivity {
 
 //                url = new URL("http://192.168.56.1:3000/users/register");
 //                wardrobeUrl = new URL("http://192.168.56.1:3000/wardrobes/register");
-                url = new URL("http://10.30.61.13:3000/users/register");
-                wardrobeUrl = new URL("http://10.30.61.13:3000/wardrobes/register");
+                url = new URL(this.socket + "/users/register");
+                wardrobeUrl = new URL(this.socket + "/wardrobes/register");
 
                 try {
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -100,22 +100,27 @@ public class Register extends AppCompatActivity {
 
                     responseCode = connection.getResponseCode();
 
-                    connection = (HttpURLConnection) wardrobeUrl.openConnection();
+                    if (responseCode == 201) {
+                        connection = (HttpURLConnection) wardrobeUrl.openConnection();
 
-                    connection.setRequestProperty("Accept", "*");
-                    connection.setRequestProperty("User-Agent", "Chrome");
-                    connection.setRequestProperty("Content-Type", "application/json");
-                    connection.setDoOutput(true);
-                    connection.setRequestMethod("POST");
-                    connection.setConnectTimeout(15000);
-                    connection.setReadTimeout(15000);
+                        connection.setRequestProperty("Accept", "*");
+                        connection.setRequestProperty("User-Agent", "Chrome");
+                        connection.setRequestProperty("Content-Type", "application/json");
+                        connection.setDoOutput(true);
+                        connection.setRequestMethod("POST");
+                        connection.setConnectTimeout(15000);
+                        connection.setReadTimeout(15000);
 
-                    wr = new DataOutputStream(connection.getOutputStream());
-                    wr.writeBytes(wardrobeRequest.toString());
-                    wr.flush();
-                    wr.close();
+                        wr = new DataOutputStream(connection.getOutputStream());
+                        wr.writeBytes(wardrobeRequest.toString());
+                        wr.flush();
+                        wr.close();
 
-                    responseCodeWardrobe = connection.getResponseCode();
+                        responseCodeWardrobe = connection.getResponseCode();
+                    }
+                    else{
+                        responseCodeWardrobe = 0;
+                    }
 
                 } catch (IOException e) {
 //                    Toast.makeText(Register.this, e.getMessage() ,Toast.LENGTH_SHORT).show();
