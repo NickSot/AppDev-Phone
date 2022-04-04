@@ -82,9 +82,9 @@ public class wardrobesettings extends AppCompatActivity {
         }
     }
 
-    EditText editCreateText, editJoinText;
-    TextView textView, createFamily;
-    Button leaveBtn, submitBtnJoin, submitBtnInit;
+    EditText editCreateText, editJoinText, editLeaveText;
+    TextView textView, createFamily, textLeave;
+    Button leaveBtn, submitBtnJoin, submitBtnInit, submitBtnLeave;
     protected Button deleteBtn;
     private ImageView backBtn;
     RecyclerView recyclerView;
@@ -103,8 +103,12 @@ public class wardrobesettings extends AppCompatActivity {
         submitBtnInit = (Button) findViewById(R.id.submitBtnInit);
         backBtn = (ImageView) findViewById(R.id.backBtn);
         createFamily = (TextView) findViewById(R.id.textCreate);
-        deleteBtn = (Button) findViewById(R.id.deleteFamily);
 
+        textLeave = (TextView) findViewById(R.id.textLeave);
+        submitBtnLeave = (Button) findViewById(R.id.submitBtnLeave);
+        editLeaveText = (EditText) findViewById(R.id.leaveWard);
+
+        deleteBtn = (Button) findViewById(R.id.deleteFamily);
         deleteBtn.setVisibility(View.INVISIBLE);
         deleteBtn.setEnabled(false);
 
@@ -175,6 +179,10 @@ public class wardrobesettings extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
+                    request.setCallback(() -> {
+                        startActivity(new Intent(wardrobesettings.this, MainActivity.class));
+                    });
+
                     request.execute();
                 }
             });
@@ -182,8 +190,29 @@ public class wardrobesettings extends AppCompatActivity {
             backBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(wardrobesettings.this, MainActivity.class );
+                    Intent intent = new Intent(wardrobesettings.this, MainActivity.class);
                     startActivity(intent);
+                }
+            });
+
+            submitBtnLeave.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    LeaveWardrobeRequest request = null;
+
+                    try {
+                        request = new LeaveWardrobeRequest(Long.valueOf(editLeaveText.getText().toString()));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    request.setCallback(() -> {
+                        Intent intent = new Intent(wardrobesettings.this, MainActivity.class );
+                        startActivity(intent);
+                    });
+
+                    request.execute();
                 }
             });
 

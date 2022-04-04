@@ -52,15 +52,17 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/changePassword"
                 android:layout_centerInParent="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/delete_button"
                 android:fontFamily="@font/nexaregular"
                 android:text="Delete Account"
                 android:textColor="@color/whitesmoke"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_margin="20dp"
-                app:layout_constraintVertical_chainStyle="packed">
-            </androidx.appcompat.widget.AppCompatButton>
+                app:layout_constraintVertical_chainStyle="packed"></androidx.appcompat.widget.AppCompatButton>
         </RelativeLayout>
     </ScrollView>
 

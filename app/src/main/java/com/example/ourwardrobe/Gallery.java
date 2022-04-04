@@ -195,7 +195,7 @@ public class Gallery extends AppCompatActivity {
 
                     mImageUri = data.getData();
                     clotheImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), mImageUri);
-//                    clotheImage = reduceBitmapSize(clotheImage, 16000);
+                    clotheImage = reduceBitmapSize(clotheImage, 4000);
                     mArrayUri.add(mImageUri);
                     galleryAdapter = new gv_item(getApplicationContext(), mArrayUri);
                     gvGallery.setAdapter(galleryAdapter);
@@ -214,7 +214,7 @@ public class Gallery extends AppCompatActivity {
                             Uri uri = item.getUri();
 
                             clotheImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-                            clotheImage = reduceBitmapSize(clotheImage, 16000);
+                            clotheImage = reduceBitmapSize(clotheImage, 4000);
                             imagesEncodedList.add(clotheImage);
 
                             galleryAdapter = new gv_item(getApplicationContext(), mArrayUri);

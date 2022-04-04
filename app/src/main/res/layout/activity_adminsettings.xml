@@ -156,6 +156,60 @@
                 </androidx.appcompat.widget.AppCompatButton>
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/leaveFamilyWithID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/joinFamily"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bluegradient"
+                android:elevation="3dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textLeave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/rosmatika"
+                    android:text="Leave family"
+                    android:textColor="@color/whitesmoke"
+                    android:textSize="30sp"
+                    android:textStyle="bold"></TextView>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/editLeaveText"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:endIconMode="clear_text">
+
+                    <EditText
+                        android:id="@+id/leaveWard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:hint="Enter Wardrobe ID"
+                        android:inputType="number"></EditText>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/submitBtnLeave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/submitbtn"
+                    android:fontFamily="@font/nexaregular"
+                    android:text="SUBMIT"
+                    android:textColor="@color/sapphire"
+                    android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
+            </LinearLayout>
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/leaveFamily"
                 android:layout_width="match_parent"
