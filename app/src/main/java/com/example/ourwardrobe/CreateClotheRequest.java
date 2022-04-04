@@ -19,7 +19,7 @@ public class CreateClotheRequest extends AbstractRequest {
 
     @Override
     protected void afterRequestSend() {
-        if (responseCode != 200){
+        if (responseCode != 201){
             Log.println(Log.ERROR, "important!", String.valueOf(responseCode));
         }
     }

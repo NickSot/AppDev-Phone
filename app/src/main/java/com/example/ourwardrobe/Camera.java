@@ -184,7 +184,7 @@ public class Camera extends AppCompatActivity {
         if(requestCode==101){
             clotheImage = (Bitmap) data.getExtras().get("data");
             Bitmap bitmap= clotheImage;
-//            bitmap = reduceBitmapSize(bitmap, 4000);
+            bitmap = reduceBitmapSize(bitmap, 4000);
             img.setImageBitmap(bitmap);
         }
     }

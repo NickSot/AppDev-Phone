@@ -45,13 +45,38 @@ public abstract class AbstractClothActivity extends Activity {
         }
 
         request.setCallback(() -> {
-            setContentView(R.layout.shirts);
+            GridView gridView = findViewById(R.id.shirts);
+
+            if (this.clothType == "Shirt"){
+                setContentView(R.layout.shirts);
+                gridView = findViewById(R.id.gridshirts);
+            }
+            else if (this.clothType == "Pants") {
+                setContentView(R.layout.activity_pants);
+                gridView = findViewById(R.id.gridpants);
+            }
+            else if (this.clothType == "Skirt") {
+                setContentView(R.layout.activity_skirts);
+                gridView = findViewById(R.id.gridskirts);
+            }
+            else if (this.clothType == "Dress") {
+                setContentView(R.layout.activity_dresses);
+                gridView = findViewById(R.id.griddresses);
+            }
+            else if (this.clothType == "Shoe") {
+                setContentView(R.layout.activity_shoes);
+                gridView = findViewById(R.id.gridshoes);
+            }
+            else {
+                setContentView(R.layout.activity_jackets);
+                gridView = findViewById(R.id.gridjackets);
+            }
+
 
             ArrayList<Bitmap> mImageIds = (ArrayList<Bitmap>) ApplicationContext.getInstance()
                     .getWardrobe().getClothes()
                     .stream().map(p -> p.getImage()).collect(Collectors.toList());
 
-            GridView gridView = findViewById(R.id.gridshirts);
             gridView.setAdapter(new ImageAdapter(mImageIds,this, 525, 650));
 
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
