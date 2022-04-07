@@ -155,6 +155,11 @@ public class wardrobesettings extends AppCompatActivity {
             submitBtnInit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if (editCreateText.getText().toString().equals("")) {
+                        Toast.makeText(wardrobesettings.this, "Please insert a nickname of the wardrobe!", Toast.LENGTH_SHORT);
+                        return;
+                    }
+
                     createFamily.setText("ID: " + editCreateText.getText());
 
                     CreateWardrobeRequest request = null;
@@ -199,6 +204,11 @@ public class wardrobesettings extends AppCompatActivity {
 
                 @Override
                 public void onClick(View view) {
+                    if (editLeaveText.getText().toString().equals("")) {
+                        Toast.makeText(wardrobesettings.this, "Please insert an ID of the family you want to leave!", Toast.LENGTH_SHORT);
+                        return;
+                    }
+
                     LeaveWardrobeRequest request = null;
 
                     try {

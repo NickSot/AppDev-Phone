@@ -143,9 +143,12 @@ public class ApplicationContext {
     }
 
     public void removeImageFromOutfit(Bitmap image) {
-        for (Bitmap img: outfitCreatorImages)
-            if (img.sameAs(image))
+        for (Bitmap img: outfitCreatorImages) {
+            if (img.sameAs(image)) {
                 outfitCreatorImages.remove(img);
+                break;
+            }
+        }
     }
 
     public ArrayList<Bitmap> getOutfitImages() {
