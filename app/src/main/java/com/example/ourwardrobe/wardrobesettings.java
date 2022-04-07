@@ -139,7 +139,11 @@ public class wardrobesettings extends AppCompatActivity {
             submitBtnJoin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.println(Log.ERROR, "debug", editJoinText.getText().toString());
+                    if (editJoinText.getText().toString().equals("")) {
+                        Toast.makeText(wardrobesettings.this, "Please insert a ID of the wardrobe family to join!", Toast.LENGTH_SHORT);
+                        return;
+                    }
+
                     JoinWardrobeRequest request = null;
 
                     try {
