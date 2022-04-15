@@ -12,13 +12,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
-public class gv_item extends BaseAdapter {
+public class GalleryImageAdapter extends BaseAdapter {
     private Context ctx;
     private int pos;
     private LayoutInflater inflater;
     private ImageView ivGallery;
     ArrayList<Uri> mArrayUri;
-    public gv_item(Context ctx, ArrayList<Uri> mArrayUri) {
+
+    public GalleryImageAdapter(Context ctx, ArrayList<Uri> mArrayUri) {
 
         this.ctx = ctx;
         this.mArrayUri = mArrayUri;

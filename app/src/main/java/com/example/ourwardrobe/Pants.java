@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class pants extends AbstractClothActivity {
-    public pants() {
+public class Pants extends AbstractClothActivity {
+    public Pants() {
         super("Pants");
     }
 }

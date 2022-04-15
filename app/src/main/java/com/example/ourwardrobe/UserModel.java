@@ -1,6 +1,6 @@
 package com.example.ourwardrobe;
 
-public class userModel {
+public class UserModel {
 
     private String userName;
 
@@ -12,7 +12,7 @@ public class userModel {
         return userName;
     }
 
-    public userModel(String userName) {
+    public UserModel(String userName) {
         this.userName = userName;
     }
 }

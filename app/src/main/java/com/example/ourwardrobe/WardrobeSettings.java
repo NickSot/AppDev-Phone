@@ -1,10 +1,8 @@
 package com.example.ourwardrobe;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,17 +21,11 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.stream.Collectors;
 
-import outwardrobemodels.User;
 import outwardrobemodels.Wardrobe;
 
-public class wardrobesettings extends AppCompatActivity {
+public class WardrobeSettings extends AppCompatActivity {
 
     private class LeaveWardrobeRequest extends AbstractRequest {
         public LeaveWardrobeRequest(Long wId) throws JSONException {
@@ -44,8 +36,8 @@ public class wardrobesettings extends AppCompatActivity {
         @Override
         protected void afterRequestSend() {
             if (responseCode == 200) {
-                Toast.makeText(wardrobesettings.this, "Family Left", Toast.LENGTH_SHORT).show();
-                wardrobesettings.this.startActivity(new Intent(wardrobesettings.this, MainActivity.class));
+                Toast.makeText(WardrobeSettings.this, "Family Left", Toast.LENGTH_SHORT).show();
+                WardrobeSettings.this.startActivity(new Intent(WardrobeSettings.this, MainActivity.class));
             }
         }
     }
@@ -60,9 +52,9 @@ public class wardrobesettings extends AppCompatActivity {
         @Override
         protected void afterRequestSend() {
             if (responseCode == 201) {
-                Toast.makeText(wardrobesettings.this, "Family Created", Toast.LENGTH_SHORT).show();
+                Toast.makeText(WardrobeSettings.this, "Family Created", Toast.LENGTH_SHORT).show();
                 
-                wardrobesettings.this.startActivity(new Intent(wardrobesettings.this, MainActivity.class));
+                WardrobeSettings.this.startActivity(new Intent(WardrobeSettings.this, MainActivity.class));
             }
         }
     }
@@ -76,8 +68,8 @@ public class wardrobesettings extends AppCompatActivity {
         @Override
         protected void afterRequestSend() {
             if (responseCode == 200) {
-                Toast.makeText(wardrobesettings.this, "Family Joined", Toast.LENGTH_SHORT).show();
-                wardrobesettings.this.startActivity(new Intent(wardrobesettings.this, MainActivity.class));
+                Toast.makeText(WardrobeSettings.this, "Family Joined", Toast.LENGTH_SHORT).show();
+                WardrobeSettings.this.startActivity(new Intent(WardrobeSettings.this, MainActivity.class));
             }
         }
     }
@@ -113,7 +105,7 @@ public class wardrobesettings extends AppCompatActivity {
         deleteBtn.setEnabled(false);
 
         recyclerView = findViewById(R.id.familyRecycler);
-        List<userModel> userModelList = new ArrayList<>();
+        List<UserModel> userModelList = new ArrayList<>();
 
         GetUsersOfWardrobeRequest req = null;
 
@@ -140,7 +132,7 @@ public class wardrobesettings extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if (editJoinText.getText().toString().equals("")) {
-                        Toast.makeText(wardrobesettings.this, "Please insert a ID of the wardrobe family to join!", Toast.LENGTH_SHORT);
+                        Toast.makeText(WardrobeSettings.this, "Please insert a ID of the wardrobe family to join!", Toast.LENGTH_SHORT);
                         return;
                     }
 
@@ -160,7 +152,7 @@ public class wardrobesettings extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if (editCreateText.getText().toString().equals("")) {
-                        Toast.makeText(wardrobesettings.this, "Please insert a nickname of the wardrobe!", Toast.LENGTH_SHORT);
+                        Toast.makeText(WardrobeSettings.this, "Please insert a nickname of the wardrobe!", Toast.LENGTH_SHORT);
                         return;
                     }
 
@@ -189,7 +181,7 @@ public class wardrobesettings extends AppCompatActivity {
                     }
 
                     request.setCallback(() -> {
-                        startActivity(new Intent(wardrobesettings.this, MainActivity.class));
+                        startActivity(new Intent(WardrobeSettings.this, MainActivity.class));
                     });
 
                     request.execute();
@@ -199,7 +191,7 @@ public class wardrobesettings extends AppCompatActivity {
             backBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(wardrobesettings.this, MainActivity.class);
+                    Intent intent = new Intent(WardrobeSettings.this, MainActivity.class);
                     startActivity(intent);
                 }
             });
@@ -209,7 +201,7 @@ public class wardrobesettings extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if (editLeaveText.getText().toString().equals("")) {
-                        Toast.makeText(wardrobesettings.this, "Please insert an ID of the family you want to leave!", Toast.LENGTH_SHORT);
+                        Toast.makeText(WardrobeSettings.this, "Please insert an ID of the family you want to leave!", Toast.LENGTH_SHORT);
                         return;
                     }
 
@@ -222,7 +214,7 @@ public class wardrobesettings extends AppCompatActivity {
                     }
 
                     request.setCallback(() -> {
-                        Intent intent = new Intent(wardrobesettings.this, MainActivity.class );
+                        Intent intent = new Intent(WardrobeSettings.this, MainActivity.class );
                         startActivity(intent);
                     });
 
@@ -237,7 +229,7 @@ public class wardrobesettings extends AppCompatActivity {
             recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
             for (String s:names) {
-                userModel userModel = new userModel(s);
+                UserModel userModel = new UserModel(s);
 
                 userModelList.add(userModel);
             }

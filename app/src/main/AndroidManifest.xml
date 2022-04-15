@@ -18,37 +18,34 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".jackets"
+            android:name=".Jackets"
             android:exported="false" />
         <activity
-            android:name=".shoes"
+            android:name=".Shoes"
             android:exported="false" />
         <activity
-            android:name=".dresses"
+            android:name=".Dresses"
             android:exported="false" />
         <activity
-            android:name=".skirts"
+            android:name=".Skirts"
             android:exported="false" />
         <activity
-            android:name=".pants"
+            android:name=".Pants"
             android:exported="false" />
         <activity
-            android:name=".adminsettings"
+            android:name=".AdminSettings"
             android:exported="false" />
         <activity
-            android:name=".solocategory"
+            android:name=".Spinner"
             android:exported="false" />
         <activity
-            android:name=".SpinnerNew"
+            android:name=".WardrobeSettings"
             android:exported="false" />
         <activity
-            android:name=".wardrobesettings"
+            android:name=".AccountSettings"
             android:exported="false" />
         <activity
-            android:name=".accountSettings"
-            android:exported="false" />
-        <activity
-            android:name=".gv_item"
+            android:name=".GalleryImageAdapter"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
@@ -60,7 +57,7 @@
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
-            android:name=".shirts"
+            android:name=".Shirts"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
@@ -81,7 +78,7 @@
             android:exported="false"
             android:theme="@style/Theme.OurWardrobe.NoActionBar" />
         <activity
-            android:name=".loginscreen"
+            android:name=".Login"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="false" />
         <activity

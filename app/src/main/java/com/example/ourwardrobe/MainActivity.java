@@ -2,34 +2,22 @@ package com.example.ourwardrobe;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.navigation.ui.AppBarConfiguration;
 
 import android.annotation.SuppressLint;
-import android.app.Application;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.PopupMenu;
-import android.widget.Spinner;
-import android.widget.Toast;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,7 +25,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import java.util.Arrays;
@@ -83,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             jackets=findViewById(R.id.jackets);
             skirts=findViewById(R.id.skirts);
 
-            Spinner spin = (Spinner) findViewById(R.id.wardrobespinner);
+            android.widget.Spinner spin = (android.widget.Spinner) findViewById(R.id.wardrobespinner);
             spin.setOnItemSelectedListener(this);
 
             ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.color_spinner_layout, wardrobeFamilies);
@@ -106,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
                 usersOfWardrobeRequest.setCallback(() -> {
                     recyclerView = findViewById(R.id.familyRecycler);
-                    List<userModel> userModelList = new ArrayList<>();
+                    List<UserModel> userModelList = new ArrayList<>();
 
                     ArrayList<String> names = new ArrayList<>();
 
@@ -131,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     gallery.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(MainActivity.this, SpinnerNew.class);
+                            Intent intent = new Intent(MainActivity.this, Spinner.class);
                             startActivity(intent);
                         }
                     });
@@ -139,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     shirts.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(MainActivity.this, shirts.class);
+                            Intent intent = new Intent(MainActivity.this, Shirts.class);
                             startActivity(intent);
                         }
                     });
@@ -147,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     pants.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(MainActivity.this, pants.class);
+                            Intent intent = new Intent(MainActivity.this, Pants.class);
                             startActivity(intent);
                         }
                     });
@@ -155,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     skirts.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(MainActivity.this, skirts.class);
+                            Intent intent = new Intent(MainActivity.this, Skirts.class);
                             startActivity(intent);
                         }
                     });
@@ -163,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     dresses.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(MainActivity.this, dresses.class);
+                            Intent intent = new Intent(MainActivity.this, Dresses.class);
                             startActivity(intent);
                         }
                     });
@@ -171,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     shoes.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(MainActivity.this, shoes.class);
+                            Intent intent = new Intent(MainActivity.this, Shoes.class);
                             startActivity(intent);
                         }
                     });
@@ -179,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     jackets.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(MainActivity.this, jackets.class);
+                            Intent intent = new Intent(MainActivity.this, Jackets.class);
                             startActivity(intent);
                         }
                     });
@@ -196,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
                     for (String s: names) {
-                        userModel userModel = new userModel(s);
+                        UserModel userModel = new UserModel(s);
 
                         userModelList.add(userModel);
                     }
@@ -222,25 +209,25 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         switch (menuItem.getItemId()) {
 
             case R.id.accset:
-                Intent a = new Intent(this, accountSettings.class);
+                Intent a = new Intent(this, AccountSettings.class);
 
                 this.startActivity(a);
                 return true;
 
             case R.id.wardset:
-                Intent b = new Intent(this, wardrobesettings.class);
+                Intent b = new Intent(this, WardrobeSettings.class);
 
                 User user = ApplicationContext.getInstance().getUser();
                 Wardrobe currWardrobe = ApplicationContext.getInstance().getWardrobe();
 
                 if (currWardrobe.getAdminId() == user.getId() && !currWardrobe.getWardrobeType().equals("Personal"))
-                    b = new Intent(this, adminsettings.class);
+                    b = new Intent(this, AdminSettings.class);
 
                 this.startActivity(b);
                 return true;
 
             case R.id.logout:
-                Intent c = new Intent(this, loginscreen.class);
+                Intent c = new Intent(this, Login.class);
 
                 this.startActivity(c);
                 return true;
@@ -270,7 +257,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
             recyclerView = findViewById(R.id.familyRecycler);
 
-            List<userModel> userModelList = new ArrayList<>();
+            List<UserModel> userModelList = new ArrayList<>();
             ArrayList<String> names = new ArrayList<>();
 
             Wardrobe w = ApplicationContext.getInstance().getWardrobe();
@@ -287,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
             for (String s: names) {
-                userModel userModel = new userModel(s);
+                UserModel userModel = new UserModel(s);
 
                 userModelList.add(userModel);
             }

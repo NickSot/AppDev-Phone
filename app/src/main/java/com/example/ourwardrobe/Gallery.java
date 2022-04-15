@@ -2,12 +2,8 @@ package com.example.ourwardrobe;
 
 import android.content.ClipData;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.PersistableBundle;
 import android.provider.MediaStore;
 
 import android.os.Bundle;
@@ -22,24 +18,11 @@ import android.widget.GridView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
-import outwardrobemodels.User;
-import outwardrobemodels.Wardrobe;
 
 public class Gallery extends AppCompatActivity {
     private static Bitmap reduceBitmapSize(Bitmap bitmap, int MAX_SIZE) {
@@ -66,7 +49,7 @@ public class Gallery extends AppCompatActivity {
     Bitmap clotheImage;
     List<Bitmap> imagesEncodedList;
     private GridView gvGallery;
-    private gv_item galleryAdapter;
+    private GalleryImageAdapter galleryAdapter;
     ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
     Uri mImageUri;
 
@@ -197,7 +180,7 @@ public class Gallery extends AppCompatActivity {
                     clotheImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), mImageUri);
                     clotheImage = reduceBitmapSize(clotheImage, 4000);
                     mArrayUri.add(mImageUri);
-                    galleryAdapter = new gv_item(getApplicationContext(), mArrayUri);
+                    galleryAdapter = new GalleryImageAdapter(getApplicationContext(), mArrayUri);
                     gvGallery.setAdapter(galleryAdapter);
                     gvGallery.setVerticalSpacing(gvGallery.getHorizontalSpacing());
                     ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) gvGallery
@@ -217,7 +200,7 @@ public class Gallery extends AppCompatActivity {
                             clotheImage = reduceBitmapSize(clotheImage, 4000);
                             imagesEncodedList.add(clotheImage);
 
-                            galleryAdapter = new gv_item(getApplicationContext(), mArrayUri);
+                            galleryAdapter = new GalleryImageAdapter(getApplicationContext(), mArrayUri);
                             gvGallery.setAdapter(galleryAdapter);
                             gvGallery.setVerticalSpacing(gvGallery.getHorizontalSpacing());
                             ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) gvGallery

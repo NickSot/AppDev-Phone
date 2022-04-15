@@ -3,7 +3,6 @@ package com.example.ourwardrobe;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,7 +24,7 @@ import java.util.Base64;
 import outwardrobemodels.User;
 import outwardrobemodels.Wardrobe;
 
-public class loginscreen extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
 private Button RegisterButton;
 
@@ -106,12 +105,12 @@ private Button RegisterButton;
                     e.printStackTrace();
                 }
 //
-                Toast.makeText(loginscreen.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
                 openCategory();
             } else if (responseCode == 404) {
-                Toast.makeText(loginscreen.this, "Wrong username or password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "Wrong username or password", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(loginscreen.this, responseMessage + " "
+                Toast.makeText(Login.this, responseMessage + " "
                         + responseCode, Toast.LENGTH_SHORT).show();
             }
         }

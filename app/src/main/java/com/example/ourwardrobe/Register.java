@@ -3,7 +3,6 @@ package com.example.ourwardrobe;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -183,7 +182,7 @@ public class Register extends AppCompatActivity {
         });
     }
     public void Login(){
-        Intent intent = new Intent(this, loginscreen.class );
+        Intent intent = new Intent(this, Login.class );
         startActivity(intent);
     }
 }
