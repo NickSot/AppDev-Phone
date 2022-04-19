@@ -43,7 +43,7 @@ public class ApplicationContext {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                ArrayList<Wardrobe> wardrobes = new ArrayList<Wardrobe>();
+                ArrayList<Wardrobe> wardrobes = new ArrayList<>();
 
                 for (int i = 0; i < wardrobesObject.length(); i++) {
                     JSONObject obj = null;

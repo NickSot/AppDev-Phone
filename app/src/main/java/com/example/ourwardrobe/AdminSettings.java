@@ -12,9 +12,6 @@ import org.json.JSONException;
 public class AdminSettings extends WardrobeSettings {
 
     private class DeleteWardrobeRequest extends AbstractRequest {
-        private int responseCode;
-        private String responseMessage;
-
         public DeleteWardrobeRequest() throws JSONException {
             super("wardrobes/", String.valueOf(ApplicationContext.getInstance().getWardrobe().getwId()), "DELETE");
         }

@@ -103,14 +103,6 @@ public class Camera extends AppCompatActivity {
 
         bt2.setOnClickListener(new View.OnClickListener() {
 
-//            <item>Choose</item>
-//        <item>Shirts</item>
-//        <item>Dresses</item>
-//        <item>Pants</item>
-//        <item>Skirts</item>
-//        <item>Shoes</item>
-//        <item>Jackets</item>
-
             @Override
             public void onClick(View view) {
                 CreateClotheRequest request = null;
