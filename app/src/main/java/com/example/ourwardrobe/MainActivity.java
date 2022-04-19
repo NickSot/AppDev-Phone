@@ -30,8 +30,8 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import outwardrobemodels.User;
-import outwardrobemodels.Wardrobe;
+import ourwardrobemodels.User;
+import ourwardrobemodels.Wardrobe;
 
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener, AdapterView.OnItemSelectedListener {
 

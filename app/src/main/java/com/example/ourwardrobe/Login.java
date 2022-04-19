@@ -21,8 +21,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Base64;
 
-import outwardrobemodels.User;
-import outwardrobemodels.Wardrobe;
+import ourwardrobemodels.User;
+import ourwardrobemodels.Wardrobe;
 
 public class Login extends AppCompatActivity {
 

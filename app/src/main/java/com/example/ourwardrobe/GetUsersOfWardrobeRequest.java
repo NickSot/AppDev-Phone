@@ -1,26 +1,8 @@
 package com.example.ourwardrobe;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.telecom.Call;
-import android.util.Base64;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import outwardrobemodels.Clothe;
-import outwardrobemodels.User;
-import outwardrobemodels.Wardrobe;
 
 public class GetUsersOfWardrobeRequest extends AbstractRequest {
     private Long wId;

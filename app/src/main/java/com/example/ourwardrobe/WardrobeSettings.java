@@ -23,7 +23,7 @@ import org.json.JSONObject;
 
 import java.util.stream.Collectors;
 
-import outwardrobemodels.Wardrobe;
+import ourwardrobemodels.Wardrobe;
 
 public class WardrobeSettings extends AppCompatActivity {
 

@@ -21,8 +21,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import outwardrobemodels.Clothe;
-import outwardrobemodels.Wardrobe;
+import ourwardrobemodels.Wardrobe;
 
 public abstract class AbstractClothActivity extends Activity {
     private String clothType;

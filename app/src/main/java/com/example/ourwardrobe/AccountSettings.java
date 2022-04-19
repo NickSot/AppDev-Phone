@@ -14,7 +14,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import outwardrobemodels.User;
+import ourwardrobemodels.User;
 
 public class AccountSettings extends AppCompatActivity {
 

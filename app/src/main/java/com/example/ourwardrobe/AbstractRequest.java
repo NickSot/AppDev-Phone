@@ -34,10 +34,12 @@ public abstract class AbstractRequest extends AsyncTask <Void, Void, Void> {
     protected int responseCode;
     protected String responseMessage;
 
+    // initialization of socket connection string
     public AbstractRequest() {
         this.socket = "http://10.30.58.231:3000/";
     }
 
+    // A generic request constructor with socket and url specified
     public AbstractRequest(String socket, String url, String requestParam, String requestMethod) throws JSONException {
         this.socket = socket;
         this.url = url;
@@ -50,6 +52,7 @@ public abstract class AbstractRequest extends AsyncTask <Void, Void, Void> {
         }
     }
 
+    // Generic request constructor with only url specified
     public AbstractRequest(String url, String requestParam, String requestMethod) throws JSONException {
         this();
 
@@ -63,6 +66,7 @@ public abstract class AbstractRequest extends AsyncTask <Void, Void, Void> {
         }
     }
 
+    // Request with custom request body items
     public AbstractRequest(String url, String requestParam, String requestMethod, JSONObject request) throws JSONException {
         this();
 
@@ -78,6 +82,8 @@ public abstract class AbstractRequest extends AsyncTask <Void, Void, Void> {
         }
     }
 
+    // Each request is processed in a background thread, so that the GUI does not get affected
+    // in case of latency
     @Override
     protected Void doInBackground(Void... voids) {
         URL url = null;
